@@ -97,7 +97,7 @@ h1 { font-family: var(--site-font-heading); font-size: calc(28px * var(--site-he
 .post-stats { display: flex; justify-content: space-between; color: var(--muted); font-size: 10px; padding: 11px 2px 8px; border-bottom: 1px solid #F0F0E9; }
 .post-actions { display: flex; justify-content: space-between; padding-top: 9px; gap: 5px; }
 .action-btn { border: 0; background: transparent; color: #667169; border-radius: 8px; padding: 7px 9px; font-size: 10px; font-weight: 750; }
-.action-btn:hover, .action-btn.liked { background: #FBECE9; color: var(--danger); }
+.action-btn:hover { background: #F0F2EB; }\n.action-btn.approved { background: var(--green-soft); color: var(--site-primary); }\n.action-btn.disapproved { background: #FBECE9; color: var(--danger); }
 .right-col { position: sticky; top: 86px; display: grid; gap: 14px; }
 .panel { padding: 16px; }
 .panel-title { display: flex; justify-content: space-between; align-items: center; margin-bottom: 13px; }
@@ -115,8 +115,8 @@ h1 { font-family: var(--site-font-heading); font-size: calc(28px * var(--site-he
 .follow-info { flex: 1; min-width: 0; }
 .follow-info strong { display: block; font-size: 10px; }
 .follow-info span { display: block; color: var(--muted); font-size: 9px; margin-top: 2px; }
-.follow-btn { border: 1px solid #CBD8CC; border-radius: 999px; color: var(--site-primary); background: white; font-size: 9px; padding: 6px 9px; font-weight: 800; }
-.follow-btn.following { background: var(--green-soft); }
+.socialize-btn { border: 1px solid #CBD8CC; border-radius: 999px; color: var(--site-primary); background: white; font-size: 9px; padding: 6px 9px; font-weight: 800; }
+.socialize-btn.socializing { background: var(--green-soft); }
 .note { background: var(--site-primary); color: white; border-radius: 17px; padding: 17px; position: relative; overflow: hidden; }
 .note small { color: var(--site-secondary); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 900; font-size: 9px; }
 .note h3 { font-size: 17px; letter-spacing: -.5px; margin: 8px 0 6px; line-height: 1.15; }
@@ -173,8 +173,8 @@ h1 { font-family: var(--site-font-heading); font-size: calc(28px * var(--site-he
         <div class="brand-mark">je</div>
         <div><div class="brand-name">je<span>Social</span></div><div class="tagline">The world, in your conversation.</div></div>
       </div>
-      <label class="searchbox"><span class="search-icon">⌕</span><input id="searchInput" type="search" placeholder="Search conversations, people and topics" aria-label="Search"></label>
-      <div class="top-actions"><button class="icon-btn" id="searchToggle" aria-label="Search">⌕</button><button class="icon-btn" id="notifyBtn" aria-label="Notifications">♧</button><div class="avatar" title="Your demo profile">JG</div></div>
+      <label class="searchbox"><span class="search-icon">⌕</span><input id="searchInput" type="search" placeholder="Search publications, people and topics" aria-label="Search"></label>
+      <div class="top-actions"><button class="icon-btn" id="searchToggle" aria-label="Search">⌕</button><button class="icon-btn" id="notifyBtn" aria-label="The Signal">♧</button><div class="avatar" title="Your demo profile">JG</div></div>
     </div>
   </header>
 
@@ -199,14 +199,14 @@ h1 { font-family: var(--site-font-heading); font-size: calc(28px * var(--site-he
 
       <div class="feed-tabs" role="tablist" aria-label="Feed filters">
         <button class="active" data-filter="for-you">For you</button>
-        <button data-filter="following">Following</button>
+        <button data-filter="socializing">Socializing</button>
         <button data-filter="news">News & ideas</button>
         <button data-filter="community">Community</button>
       </div>
 
-      <section class="composer" aria-label="Create a post">
-        <div class="composer-top"><div class="composer-avatar">JG</div><textarea id="composerText" placeholder="What would you like the world to hear?" aria-label="Write a post"></textarea></div>
-        <div class="composer-bottom"><div class="compose-tools"><button class="tool-chip" data-tool="Photo">▧ &nbsp;Photo</button><button class="tool-chip" data-tool="Link">↗ &nbsp;Link</button><button class="tool-chip" data-tool="Topic"># &nbsp;Topic</button></div><button class="primary-btn" id="publishBtn">Share a thought</button></div>
+      <section class="composer" aria-label="Create a publication">
+        <div class="composer-top"><div class="composer-avatar">JG</div><textarea id="composerText" placeholder="What would you like to publish?" aria-label="Write a publication"></textarea></div>
+        <div class="composer-bottom"><div class="compose-tools"><button class="tool-chip" data-tool="Photo">▧ &nbsp;Photo</button><button class="tool-chip" data-tool="Link">↗ &nbsp;Link</button><button class="tool-chip" data-tool="Topic"># &nbsp;Topic</button></div><button class="primary-btn" id="publishBtn">Publish</button></div>
       </section>
 
       <section class="feed-list" id="feedList" aria-live="polite"></section>
@@ -214,16 +214,16 @@ h1 { font-family: var(--site-font-heading); font-size: calc(28px * var(--site-he
 
     <aside class="right-col">
       <section class="panel">
-        <div class="panel-title"><strong>Conversations to follow</strong><a href="#" id="allTopics">Explore</a></div>
+        <div class="panel-title"><strong>Topics to explore</strong><a href="#" id="allTopics">Explore</a></div>
         <div class="topic"><div class="topic-num">01</div><div class="topic-info"><strong>Africa's digital future</strong><span>12.8k conversations</span></div></div>
         <div class="topic"><div class="topic-num">02</div><div class="topic-info"><strong>Business & ownership</strong><span>8.4k conversations</span></div></div>
         <div class="topic"><div class="topic-num">03</div><div class="topic-info"><strong>Culture without borders</strong><span>6.1k conversations</span></div></div>
       </section>
       <section class="panel">
-        <div class="panel-title"><strong>People you may know</strong><a href="#" id="morePeople">See all</a></div>
-        <div class="follow-row"><div class="mini-avatar" style="background:#B16C4E">AM</div><div class="follow-info"><strong>Amina Mwangi</strong><span>Technology · Nairobi</span></div><button class="follow-btn">Follow</button></div>
-        <div class="follow-row"><div class="mini-avatar" style="background:#597C91">KO</div><div class="follow-info"><strong>Kofi Owusu</strong><span>Culture · Accra</span></div><button class="follow-btn">Follow</button></div>
-        <div class="follow-row"><div class="mini-avatar" style="background:#8B7650">ZN</div><div class="follow-info"><strong>Zanele Nkosi</strong><span>Business · Johannesburg</span></div><button class="follow-btn">Follow</button></div>
+        <div class="panel-title"><strong>People you may want to socialize with</strong><a href="#" id="morePeople">See all</a></div>
+        <div class="follow-row"><div class="mini-avatar" style="background:#B16C4E">AM</div><div class="follow-info"><strong>Amina Mwangi</strong><span>Technology · Nairobi</span></div><button class="socialize-btn">Socialize</button></div>
+        <div class="follow-row"><div class="mini-avatar" style="background:#597C91">KO</div><div class="follow-info"><strong>Kofi Owusu</strong><span>Culture · Accra</span></div><button class="socialize-btn">Socialize</button></div>
+        <div class="follow-row"><div class="mini-avatar" style="background:#8B7650">ZN</div><div class="follow-info"><strong>Zanele Nkosi</strong><span>Business · Johannesburg</span></div><button class="socialize-btn">Socialize</button></div>
       </section>
       <section class="note"><small>A note from jeSocial</small><h3>Many voices.<br>One shared world.</h3><p>A space for meaningful news, everyday perspectives and conversations that move us forward.</p><div class="note-dot"></div></section>
     </aside>
@@ -237,47 +237,47 @@ h1 { font-family: var(--site-font-heading); font-size: calc(28px * var(--site-he
     <button data-view="space"><span>◌</span>My Space</button>
   </nav>
   <div class="toast" id="toast" role="status"></div>
-  <div class="modal-backdrop" id="commentModal" role="dialog" aria-modal="true" aria-labelledby="commentTitle">
-    <div class="modal"><h2 id="commentTitle">Join the conversation</h2><p>This is a local interaction in the prototype. Your comment will not be sent to a server.</p><textarea id="commentText" placeholder="Add a thoughtful reply…"></textarea><div class="modal-actions"><button class="secondary-btn" id="cancelComment">Cancel</button><button class="primary-btn" id="sendComment">Add reply</button></div></div>
+  <div class="modal-backdrop" id="responseModal" role="dialog" aria-modal="true" aria-labelledby="responseTitle">
+    <div class="modal"><h2 id="responseTitle">Respond to this publication</h2><p>This is a local interaction in the prototype. Your response will not be sent to a server.</p><textarea id="responseText" placeholder="Write your response…"></textarea><div class="modal-actions"><button class="secondary-btn" id="cancelResponse">Cancel</button><button class="primary-btn" id="sendResponse">Send response</button></div></div>
   </div>
 </div>
 <script>
 const demoPosts = [
-  {id:1, name:"Amina Mwangi", initials:"AM", location:"Nairobi, Kenya", time:"18 min", color:"#B16C4E", category:"news", source:"Technology & society", text:"Africa's digital future won't be built by technology alone. It will be shaped by the people who get to design it, access it and benefit from it. The next chapter needs builders, teachers, entrepreneurs and communities at the same table.", art:{bg:"linear-gradient(120deg,#174B37,#28745A)", kicker:"Ideas shaping tomorrow", title:"THE NEXT CHAPTER\nIS OURS TO BUILD", foot:"A conversation about Africa's digital future"}, likes:128, comments:24, shares:17, following:true},
-  {id:2, name:"Kofi Owusu", initials:"KO", location:"Accra, Ghana", time:"42 min", color:"#597C91", category:"community", source:"Community perspective", text:"A question for founders and creators across the continent: what is one everyday problem in your city that technology could solve better? Not the biggest idea. The most useful one.", likes:86, comments:39, shares:11, following:true},
-  {id:3, name:"Zanele Nkosi", initials:"ZN", location:"Johannesburg, South Africa", time:"1 hr", color:"#8B7650", category:"news", source:"Business & ideas", text:"When we talk about African growth, let's also talk about ownership: who builds the companies, who holds the equity, where profits are reinvested and how opportunity spreads.", art:{bg:"linear-gradient(120deg,#6C5527,#B58C3C)", kicker:"Ownership matters", title:"WHO OWNS\nTHE FUTURE?", foot:"Business · Capital · Opportunity"}, likes:214, comments:31, shares:42, following:false},
-  {id:4, name:"Musa Diallo", initials:"MD", location:"Dakar, Senegal", time:"2 hr", color:"#6B8064", category:"community", source:"Culture without borders", text:"Music, food, language and stories travel further than passports. What is one cultural tradition from where you grew up that you wish more people understood?", likes:63, comments:18, shares:9, following:false}
+  {id:1, name:"Amina Mwangi", initials:"AM", location:"Nairobi, Kenya", time:"18 min", color:"#B16C4E", category:"news", source:"Technology & society", text:"Africa's digital future won't be built by technology alone. It will be shaped by the people who get to design it, access it and benefit from it. The next chapter needs builders, teachers, entrepreneurs and communities at the same table.", art:{bg:"linear-gradient(120deg,#174B37,#28745A)", kicker:"Ideas shaping tomorrow", title:"THE NEXT CHAPTER\nIS OURS TO BUILD", foot:"A conversation about Africa's digital future"}, approvals:128, disapprovals:0, responses:24, amplifications:17, socializing:true},
+  {id:2, name:"Kofi Owusu", initials:"KO", location:"Accra, Ghana", time:"42 min", color:"#597C91", category:"community", source:"Community perspective", text:"A question for founders and creators across the continent: what is one everyday problem in your city that technology could solve better? Not the biggest idea. The most useful one.", approvals:86, disapprovals:0, responses:39, amplifications:11, socializing:true},
+  {id:3, name:"Zanele Nkosi", initials:"ZN", location:"Johannesburg, South Africa", time:"1 hr", color:"#8B7650", category:"news", source:"Business & ideas", text:"When we talk about African growth, let's also talk about ownership: who builds the companies, who holds the equity, where profits are reinvested and how opportunity spreads.", art:{bg:"linear-gradient(120deg,#6C5527,#B58C3C)", kicker:"Ownership matters", title:"WHO OWNS\nTHE FUTURE?", foot:"Business · Capital · Opportunity"}, approvals:214, disapprovals:0, responses:31, amplifications:42, socializing:false},
+  {id:4, name:"Musa Diallo", initials:"MD", location:"Dakar, Senegal", time:"2 hr", color:"#6B8064", category:"community", source:"Culture without borders", text:"Music, food, language and stories travel further than passports. What is one cultural tradition from where you grew up that you wish more people understood?", approvals:63, disapprovals:0, responses:18, amplifications:9, socializing:false}
 ];
-let posts = demoPosts.map(p => ({...p, liked:false, saved:false, replies:[]}));
+let posts = demoPosts.map(p => ({...p, approved:false, disapproved:false, saved:false, responsesList:[]}));
 let activeFilter = "for-you";
 let activeView = "pulse";
-let commentTarget = null;
+let responseTarget = null;
 const feedList = document.getElementById('feedList');
 const toast = document.getElementById('toast');
 function showToast(message) { toast.textContent = message; toast.classList.add('show'); clearTimeout(showToast.timer); showToast.timer = setTimeout(() => toast.classList.remove('show'), 2300); }
 function renderPosts() {
   const q = document.getElementById('searchInput').value.trim().toLowerCase();
-  let visible = posts.filter(p => activeFilter === 'for-you' || (activeFilter === 'following' ? p.following : activeFilter === 'news' ? p.category === 'news' : p.category === 'community'));
+  let visible = posts.filter(p => activeFilter === 'for-you' || (activeFilter === 'socializing' ? p.socializing : activeFilter === 'news' ? p.category === 'news' : p.category === 'community'));
   if (activeView === 'signal') visible = visible.filter(p => p.category === 'news');
-  if (activeView === 'compass') visible = [...visible].sort((a,b) => b.likes-a.likes);
+  if (activeView === 'compass') visible = [...visible].sort((a,b) => b.approvals-a.approvals);
   if (activeView === 'space') visible = visible.filter(p => p.name === 'You' || p.saved);
   if (q) visible = visible.filter(p => `${p.name} ${p.location} ${p.text} ${p.source}`.toLowerCase().includes(q));
-  if (!visible.length) { feedList.innerHTML = `<div class="empty-state">Nothing here just yet.<br><br>Try another feed, search term or save a post to build your space.</div>`; return; }
+  if (!visible.length) { feedList.innerHTML = `<div class="empty-state">Nothing here just yet.<br><br>Try another feed or search term, or save a publication to The Vault.</div>`; return; }
   feedList.innerHTML = visible.map(p => `
     <article class="post" data-post="${p.id}">
-      <div class="post-head"><div class="post-avatar" style="background:${p.color}">${escapeHtml(p.initials)}</div><div class="post-person"><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.location)} · ${escapeHtml(p.time)} ago</span></div><button class="post-menu" aria-label="More post actions" data-save="${p.id}">${p.saved ? '★' : '···'}</button></div>
+      <div class="post-head"><div class="post-avatar" style="background:${p.color}">${escapeHtml(p.initials)}</div><div class="post-person"><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.location)} · ${escapeHtml(p.time)} ago</span></div><button class="post-menu" aria-label="More publication actions" data-vault="${p.id}">${p.saved ? '★' : '···'}</button></div>
       <div class="source-tag">${escapeHtml(p.source)}</div>
       <p class="post-copy">${escapeHtml(p.text)}</p>
       ${p.art ? `<div class="post-art" style="background:${p.art.bg}"><div class="art-kicker">${escapeHtml(p.art.kicker)}</div><div class="art-title">${escapeHtml(p.art.title).replaceAll('\\n','<br>')}</div><div class="art-foot">${escapeHtml(p.art.foot)}</div></div>` : ''}
-      <div class="post-stats"><span>${p.likes + (p.liked ? 1 : 0)} appreciations</span><span>${p.comments + p.replies.length} replies · ${p.shares} shares</span></div>
-      <div class="post-actions"><button class="action-btn ${p.liked ? 'liked' : ''}" data-like="${p.id}">${p.liked ? '♥ Appreciated' : '♡ Appreciate'}</button><button class="action-btn" data-comment="${p.id}">▢ Reply</button><button class="action-btn" data-share="${p.id}">↗ Share</button><button class="action-btn" data-bookmark="${p.id}">${p.saved ? '★ Saved' : '☆ Save'}</button></div>
+      <div class="post-stats"><span>${p.approvals + (p.approved ? 1 : 0)} approvals · ${p.disapprovals + (p.disapproved ? 1 : 0)} disapprovals</span><span>${p.responses + p.responsesList.length} responses · ${p.amplifications} amplifications</span></div>
+      <div class="post-actions"><button class="action-btn ${p.approved ? 'approved' : ''}" data-approve="${p.id}">${p.approved ? '♥ Approved' : '♡ Approval'}</button><button class="action-btn ${p.disapproved ? 'disapproved' : ''}" data-disapprove="${p.id}">${p.disapproved ? '▼ Disapproved' : '▽ Disapproval'}</button><button class="action-btn" data-response="${p.id}">▢ Respond</button><button class="action-btn" data-amplify="${p.id}">↗ Amplify</button><button class="action-btn" data-vault="${p.id}">${p.saved ? '★ In The Vault' : '☆ Save to The Vault'}</button></div>
     </article>`).join('');
 }
 function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function setView(view) {
   activeView = view;
   document.querySelectorAll('[data-view]').forEach(b => b.classList.toggle('active', b.dataset.view === view));
-  const titles = {pulse:['A wider view','The Pulse','What matters, from voices across the world.'], compass:['Find your direction','The Compass','Discover ideas, people and conversations worth your time.'], studio:['Make something matter','The Studio','Share a perspective and add your voice to the world.'], signal:['Stay informed','The Signal','News, context and ideas from across the community.'], space:['Your corner of the world','My Space','Your saved conversations and personal activity.']};
+  const titles = {pulse:['A wider view','The Pulse','What matters, from voices across the world.'], compass:['Find your direction','The Compass','Discover ideas, people and conversations worth your time.'], studio:['Make something matter','The Studio','Publish a perspective and add your voice to the world.'], signal:['Stay informed','The Signal','News, context and ideas from across the community.'], space:['Your corner of the world','My Space','Your publications in The Vault and personal activity.']};
   const t = titles[view]; document.getElementById('sectionEyebrow').textContent=t[0]; document.getElementById('sectionTitle').textContent=t[1]; document.getElementById('sectionSubtitle').textContent=t[2];
   if (view === 'studio') { document.getElementById('composerText').focus(); showToast('Your writing space is ready.'); }
   renderPosts();
@@ -285,24 +285,29 @@ function setView(view) {
 document.querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
 document.querySelectorAll('[data-filter]').forEach(b => b.addEventListener('click', () => { activeFilter=b.dataset.filter; document.querySelectorAll('[data-filter]').forEach(x=>x.classList.toggle('active',x===b)); renderPosts(); }));
 feedList.addEventListener('click', e => {
-  const like=e.target.closest('[data-like]'); const comment=e.target.closest('[data-comment]'); const share=e.target.closest('[data-share]'); const save=e.target.closest('[data-bookmark], [data-save]');
-  if (like) { const p=posts.find(x=>x.id===Number(like.dataset.like)); p.liked=!p.liked; renderPosts(); }
-  if (comment) { commentTarget=Number(comment.dataset.comment); document.getElementById('commentText').value=''; document.getElementById('commentModal').classList.add('open'); document.getElementById('commentText').focus(); }
-  if (share) { const p=posts.find(x=>x.id===Number(share.dataset.share)); p.shares++; renderPosts(); showToast('Demo share link copied to your local preview.'); }
-  if (save) { const id=Number(save.dataset.bookmark || save.dataset.save); const p=posts.find(x=>x.id===id); p.saved=!p.saved; renderPosts(); showToast(p.saved ? 'Saved to My Space.' : 'Removed from My Space.'); }
+  const approve=e.target.closest('[data-approve]');
+  const disapprove=e.target.closest('[data-disapprove]');
+  const response=e.target.closest('[data-response]');
+  const amplify=e.target.closest('[data-amplify]');
+  const vault=e.target.closest('[data-vault]');
+  if (approve) { const p=posts.find(x=>x.id===Number(approve.dataset.approve)); const was=p.approved; p.approved=!was; p.disapproved=false; renderPosts(); }
+  if (disapprove) { const p=posts.find(x=>x.id===Number(disapprove.dataset.disapprove)); const was=p.disapproved; p.disapproved=!was; p.approved=false; renderPosts(); }
+  if (response) { responseTarget=Number(response.dataset.response); document.getElementById('responseText').value=''; document.getElementById('responseModal').classList.add('open'); document.getElementById('responseText').focus(); }
+  if (amplify) { const p=posts.find(x=>x.id===Number(amplify.dataset.amplify)); p.amplifications++; renderPosts(); showToast('Demo amplification recorded in your local preview.'); }
+  if (vault) { const p=posts.find(x=>x.id===Number(vault.dataset.vault)); p.saved=!p.saved; renderPosts(); showToast(p.saved ? 'Saved to The Vault.' : 'Removed from The Vault.'); }
 });
 document.getElementById('publishBtn').addEventListener('click', () => {
   const box=document.getElementById('composerText'); const text=box.value.trim();
-  if (!text) { showToast('Write a thought before sharing.'); box.focus(); return; }
-  posts.unshift({id:Date.now(), name:'You', initials:'JG', location:'Your space', time:'just now', color:'#123B2C', category:'community', source:'Your perspective', text, likes:0, comments:0, shares:0, following:true, liked:false, saved:false, replies:[]});
-  box.value=''; activeView='pulse'; activeFilter='for-you'; document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view==='pulse')); document.querySelectorAll('[data-filter]').forEach(b=>b.classList.toggle('active',b.dataset.filter==='for-you')); setView('pulse'); showToast('Your post has been added to this demo feed.');
+  if (!text) { showToast('Write a publication before publishing.'); box.focus(); return; }
+  posts.unshift({id:Date.now(), name:'You', initials:'JG', location:'Your space', time:'just now', color:'#123B2C', category:'community', source:'Your perspective', text, approvals:0, disapprovals:0, responses:0, amplifications:0, socializing:true, approved:false, disapproved:false, saved:false, responsesList:[]});
+  box.value=''; activeView='pulse'; activeFilter='for-you'; document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view==='pulse')); document.querySelectorAll('[data-filter]').forEach(b=>b.classList.toggle('active',b.dataset.filter==='for-you')); setView('pulse'); showToast('Your publication has been added to this demo feed.');
 });
-document.getElementById('cancelComment').addEventListener('click', () => document.getElementById('commentModal').classList.remove('open'));
-document.getElementById('sendComment').addEventListener('click', () => { const text=document.getElementById('commentText').value.trim(); if (!text) { showToast('Write a reply first.'); return; } const p=posts.find(x=>x.id===commentTarget); p.replies.push(text); document.getElementById('commentModal').classList.remove('open'); renderPosts(); showToast('Reply added to this local demo.'); });
+document.getElementById('cancelResponse').addEventListener('click', () => document.getElementById('responseModal').classList.remove('open'));
+document.getElementById('sendResponse').addEventListener('click', () => { const text=document.getElementById('responseText').value.trim(); if (!text) { showToast('Write a response first.'); return; } const p=posts.find(x=>x.id===responseTarget); if (!p) return; p.responsesList.push(text); document.getElementById('responseModal').classList.remove('open'); renderPosts(); showToast('Response added to this local demo.'); });
 document.getElementById('searchInput').addEventListener('input', renderPosts);
 document.getElementById('searchToggle').addEventListener('click', () => { const s=document.getElementById('searchInput'); s.focus(); s.scrollIntoView({behavior:'smooth',block:'center'}); });
-document.getElementById('notifyBtn').addEventListener('click', () => showToast('You’re all caught up. Notifications will arrive here.'));
-document.querySelectorAll('.follow-btn').forEach(b => b.addEventListener('click', () => { const following=b.classList.toggle('following'); b.textContent=following?'Following':'Follow'; showToast(following?'You are now following this person.':'You unfollowed this person.'); }));
+document.getElementById('notifyBtn').addEventListener('click', () => showToast('You’re all caught up. The Signal will appear here.'));
+document.querySelectorAll('.socialize-btn').forEach(b => b.addEventListener('click', () => { const socializing=b.classList.toggle('socializing'); b.textContent=socializing?'Socializing':'Socialize'; showToast(socializing?'You are now socializing with this person.':'You stopped socializing with this person.'); }));
 document.querySelectorAll('.tool-chip').forEach(b => b.addEventListener('click', () => showToast(`${b.dataset.tool} attachments will be connected in a later build.`)));
 document.getElementById('allTopics').addEventListener('click', e => { e.preventDefault(); setView('compass'); });
 document.getElementById('morePeople').addEventListener('click', e => { e.preventDefault(); showToast('More people discovery is planned for the next build.'); });
