@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#123b2c">
+<title>jeSocial — The world, in your conversation</title>
+<style>
+
+:root{--green:#123b2c;--gold:#e8b84b;--cream:#f4f2ea;--ink:#17251e;--muted:#68736b;--paper:#fffefa;--line:#e4e4d9;--soft:#e7efe8;--red:#b94b42;--shadow:0 8px 24px #182b2010}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,textarea{font:inherit}button{cursor:pointer}#app{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;background:var(--green);color:white}.topbar-inner{max-width:1240px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:18px}.brand{display:flex;align-items:center;gap:10px;min-width:190px}.brand-mark{width:38px;height:38px;border-radius:12px;background:var(--gold);color:var(--green);display:grid;place-items:center;font-weight:900}.brand-name{font-size:21px;font-weight:850}.brand-name span{color:var(--gold)}.tagline{font-size:10px;color:#ffffffa8}.searchbox{flex:1;max-width:470px}.searchbox input{width:100%;padding:10px 15px;border-radius:30px;border:1px solid #ffffff33;background:#ffffff12;color:white}.searchbox input::placeholder{color:#ffffff99}.top-actions{margin-left:auto;display:flex;align-items:center;gap:8px}.icon-btn{border:1px solid #ffffff33;background:#ffffff12;color:white;border-radius:50%;width:38px;height:38px}.avatar{width:36px;height:36px;border-radius:50%;background:#d6e3d5;color:var(--green);display:grid;place-items:center;font-weight:800;font-size:11px;overflow:hidden}.layout{max-width:1240px;margin:auto;padding:24px 20px 50px;display:grid;grid-template-columns:210px minmax(0,1fr) 260px;gap:22px}.sidebar,.right-col{position:sticky;top:82px;align-self:start}.side-card,.panel,.post,.composer{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.side-card{padding:14px 10px}.side-label{font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase;padding:8px}.nav-item{width:100%;border:0;background:none;text-align:left;padding:12px;border-radius:10px;color:#526057;font-size:13px;font-weight:750}.nav-item.active{background:var(--soft);color:var(--green)}.nav-icon{display:inline-block;width:25px}.side-bottom{border-top:1px solid var(--line);margin-top:12px;padding:12px;font-size:10px;color:var(--muted)}.main{min-width:0}.welcome{display:flex;justify-content:space-between;align-items:end;gap:10px;margin-bottom:16px}.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#9a7625;font-weight:900}h1{font-size:27px;letter-spacing:-1px;margin:5px 0}.welcome p{font-size:12px;color:var(--muted);margin:0}.date-pill{font-size:10px;color:var(--muted);white-space:nowrap}.feed-tabs,.compass-tabs,.topic-filters,.space-tabs{display:flex;gap:5px;overflow:auto;border-bottom:1px solid var(--line);margin-bottom:14px}.feed-tabs button,.compass-tabs button,.topic-filters button,.space-tabs button{border:0;background:none;padding:11px 12px;color:var(--muted);font-size:11px;font-weight:800;white-space:nowrap;border-bottom:2px solid transparent}.feed-tabs button.active,.compass-tabs button.active,.topic-filters button.active,.space-tabs button.active{color:var(--green);border-color:var(--gold)}.composer{padding:14px;margin-bottom:14px}.composer-top{display:flex;gap:10px}.composer-avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--soft);color:var(--green);font-weight:800;overflow:hidden;flex-shrink:0}.composer textarea{flex:1;min-height:48px;border:0;outline:0;resize:vertical;background:transparent}.composer-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:10px;margin-top:8px}.tool-chip{border:0;border-radius:20px;padding:7px 9px;background:#f3f3ed;color:#526057;font-size:10px}.primary-btn{border:0;border-radius:24px;background:var(--green);color:white;padding:9px 16px;font-size:11px;font-weight:800;min-height:38px}.primary-btn:disabled{opacity:.6}.feed-list{display:grid;gap:12px}.post{padding:15px}.post-head{display:flex;align-items:center;gap:10px}.post-avatar,.mini-avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:white;font-size:11px;font-weight:850;flex-shrink:0}.post-person{flex:1;min-width:0}.post-person strong{display:block;font-size:12px}.post-person span{display:block;font-size:10px;color:var(--muted);margin-top:3px}.post-menu{border:0;background:none;color:var(--muted)}.source-tag{display:inline-block;margin-top:11px;padding:5px 8px;background:var(--soft);color:var(--green);font-size:9px;font-weight:900;text-transform:uppercase;border-radius:5px}.post-copy{font-size:13px;line-height:1.65;color:#344139;white-space:pre-wrap;word-break:break-word}.post-art{min-height:135px;border-radius:12px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;color:white}.art-kicker,.art-foot{font-size:9px;opacity:.8}.art-title{font-size:23px;font-weight:900;white-space:pre-line}.post-stats{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid var(--line);font-size:10px;color:var(--muted)}.post-actions{display:flex;justify-content:space-between;gap:4px;padding-top:8px;border-top:1px solid var(--line)}.action-btn{flex:1;min-width:0;min-height:48px;border:0;background:none;color:#667169;border-radius:10px;padding:5px 2px;font-size:10px;font-weight:750;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}.action-btn .ai{font-size:14px;line-height:1}.action-btn .ac{font-size:10px;font-weight:850;min-height:12px}.action-btn.approved,.action-btn.on{background:var(--soft);color:var(--green)}.action-btn.disapproved{background:#fbece9;color:var(--red)}.action-btn:focus-visible,.primary-btn:focus-visible,.secondary-btn:focus-visible{outline:2px solid var(--gold);outline-offset:1px}.right-col{display:grid;gap:13px}.panel{padding:15px}.panel-title{font-size:12px;font-weight:850;margin-bottom:10px}.topic,.follow-row{display:flex;align-items:center;gap:9px;padding:9px 0;border-top:1px solid #f0f0e9}.topic-num{background:#f7ebcb;color:#89671d;border-radius:7px;padding:7px;font-size:10px}.topic-info,.follow-info{flex:1;min-width:0}.topic-info strong,.follow-info strong{display:block;font-size:10px}.topic-info span,.follow-info span{display:block;color:var(--muted);font-size:9px;margin-top:3px}.socialize-btn{border:1px solid #cbd8cc;background:white;color:var(--green);border-radius:20px;padding:6px 9px;font-size:9px;font-weight:800}.socialize-btn.socializing{background:var(--soft)}.note{background:var(--green);color:white;border-radius:16px;padding:17px}.note small{color:var(--gold);font-size:9px;text-transform:uppercase}.note h3{font-size:17px}.note p{font-size:10px;color:#ffffffb8;line-height:1.5}.compass-explorer{display:none}.compass-explorer.visible{display:block}.compass-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.compass-topic-card{display:flex;align-items:center;gap:10px;text-align:left;padding:12px;border:1px solid var(--line);border-radius:13px;background:var(--paper);color:var(--ink)}.compass-topic-icon{font-size:20px}.compass-topic-copy strong,.compass-topic-copy span{display:block}.compass-topic-copy strong{font-size:11px}.compass-topic-copy span{font-size:9px;color:var(--muted);margin-top:4px}.compass-heading h2{font-size:18px;margin:5px 0}.compass-heading p{font-size:11px;color:var(--muted)}.compass-person{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:12px;margin:8px 0;background:white}.topic-detail-head{background:var(--green);color:white;border-radius:15px;padding:16px;margin:12px 0}.topic-detail-title h2{font-size:19px;margin:0 0 5px}.topic-detail-title p{font-size:10px;color:#ffffffbd}.topic-detail-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #ffffff33;padding-top:12px;margin-top:12px}.topic-detail-count{font-size:10px}.topic-detail-count strong{display:block;color:var(--gold);font-size:16px}.compass-back{border:0;background:none;color:var(--green);font-size:11px;font-weight:800;min-height:40px}.empty-state{text-align:center;padding:30px;background:white;border:1px dashed var(--line);border-radius:14px;color:var(--muted);font-size:12px}.mobile-nav{display:none}.toast{position:fixed;z-index:50;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:white;border-radius:25px;padding:11px 16px;font-size:11px;display:none;max-width:92vw;text-align:center}.toast.show{display:block}.modal-backdrop{display:none;position:fixed;inset:0;z-index:40;background:#0c181177;align-items:center;justify-content:center;padding:16px}.modal-backdrop.open{display:flex}.modal{background:var(--paper);border-radius:17px;padding:20px;width:min(460px,100%);max-height:90vh;overflow:auto}.modal h2{font-size:19px;margin:0 0 7px}.modal p{font-size:11px;color:var(--muted);line-height:1.5}.modal input,.modal textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;margin:5px 0;background:white;color:var(--ink)}.modal textarea{min-height:100px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}.secondary-btn{border:1px solid var(--line);background:white;border-radius:20px;padding:9px 14px;font-size:11px;min-height:38px}.secondary-btn:disabled{opacity:.6}.auth-switch{font-size:11px;color:var(--green);font-weight:800;border:0;background:none;padding:8px 0}.interest-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0}.interest-option{display:flex;gap:7px;align-items:center;padding:8px;border:1px solid var(--line);border-radius:9px;font-size:10px;background:white}.interest-option input{width:auto;margin:0}.account-strip{display:flex;align-items:center;gap:9px;margin-left:6px}.account-strip button{border:0;background:none;color:white;font-size:10px;min-height:36px}.profile-box{padding:16px;background:white;border:1px solid var(--line);border-radius:14px;margin-bottom:12px}.profile-box label{display:block;font-size:10px;color:var(--muted);margin-top:9px}.profile-box input,.profile-box textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;margin-top:4px}
+/* Phase 4 additions */
+.av{border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:850;object-fit:cover;flex-shrink:0;background:var(--green);overflow:hidden}
+.post-person time{display:inline}
+.thread{display:grid;gap:8px;margin:12px 0;max-height:42vh;overflow:auto}.thread-item{display:flex;gap:9px;padding:9px;border:1px solid var(--line);border-radius:11px;background:#fff}.thread-item .ti-body{min-width:0;flex:1}.thread-item strong{font-size:11px}.thread-item time{font-size:9px;color:var(--muted);margin-left:5px}.modal .thread-item p{margin:3px 0 0;font-size:12px;line-height:1.5;color:var(--ink);white-space:pre-wrap;word-break:break-word}.thread-ref{font-size:11px;color:var(--muted);border-left:3px solid var(--gold);padding-left:9px;margin:6px 0;word-break:break-word}
+.space-head{display:grid;gap:12px;margin-bottom:0}.space-top{display:flex;gap:14px;align-items:center}.space-id{min-width:0}.space-id h2{font-size:18px;margin:0;word-break:break-word}.space-id .handle{font-size:11px;color:var(--muted)}.space-id .bio{font-size:12px;line-height:1.5;margin:6px 0 0;color:#344139;word-break:break-word;white-space:pre-wrap}.space-btns{display:flex;flex-wrap:wrap;gap:8px}.space-btns button{min-height:40px}.edit-details summary{cursor:pointer;font-size:12px;font-weight:800;color:var(--green);padding:8px 0;min-height:40px}.edit-details .primary-btn{margin-top:12px}.danger{color:var(--red)}
+@media(max-width:980px){.layout{grid-template-columns:185px minmax(0,1fr)}.right-col{display:none}}@media(max-width:680px){.topbar-inner{padding:9px 12px;gap:8px}.brand{min-width:0}.brand-mark{width:34px;height:34px}.brand-name{font-size:18px}.tagline,.searchbox,.top-actions .icon-btn:first-child{display:none}.layout{display:block;padding:18px 11px 85px}.sidebar{display:none}.welcome{align-items:flex-start}h1{font-size:24px}.date-pill{font-size:9px}.compass-grid{grid-template-columns:1fr}.mobile-nav{display:flex;position:fixed;z-index:25;bottom:0;left:0;right:0;padding:8px 5px calc(8px + env(safe-area-inset-bottom));background:#fffefaed;border-top:1px solid var(--line);justify-content:space-around}.mobile-nav button{border:0;background:none;color:#778078;font-size:9px;display:flex;flex-direction:column;align-items:center;gap:3px;min-height:44px}.mobile-nav button span{font-size:18px}.mobile-nav button.active{color:var(--green)}.post{padding:12px}.action-btn{font-size:9px;padding:5px 1px}.toast{bottom:80px}.space-top{gap:11px}}
+
+
+.compass-people-tabs{display:flex;gap:5px;overflow:auto;border-bottom:1px solid var(--line);margin:12px 0}
+.compass-people-tabs button{border:0;background:none;padding:10px 12px;color:var(--muted);font-size:11px;font-weight:800;white-space:nowrap;border-bottom:2px solid transparent}
+.compass-people-tabs button.active{color:var(--green);border-color:var(--gold)}
+.people-search{margin:10px 0}
+.people-search input{width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:24px;background:white;outline:0}
+.people-search input:focus{border-color:var(--green)}
+.compass-person{display:flex;align-items:center;gap:10px;padding:10px 12px;background:white;border:1px solid var(--line);border-radius:12px;margin-bottom:8px}
+.compass-person .person-avatar{flex-shrink:0}
+.people-section-title{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;color:var(--green);margin:18px 0 8px}
+
+.compass-person{flex-wrap:wrap}.compass-person .follow-info{min-width:120px}.person-actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-left:auto}.person-actions .secondary-btn,.person-actions .primary-btn,.person-actions .socialize-btn{min-height:36px;font-size:10px}.socialize-btn{min-height:34px}.socialize-btn:disabled{opacity:.7;cursor:default}.badge-mutual{font-size:10px;font-weight:800;color:var(--green);background:var(--soft);border-radius:12px;padding:4px 8px;display:inline-block}.suggest-empty{font-size:10px;color:var(--muted);padding:8px 0}.follow-row .av{flex-shrink:0}
+</style>
+</head>
+<body>
+<div id="app">
+<header class="topbar"><div class="topbar-inner">
+  <div class="brand"><div class="brand-mark">je</div><div><div class="brand-name">je<span>Social</span></div><div class="tagline">The world, in your conversation.</div></div></div>
+  <label class="searchbox"><input id="searchInput" type="search" placeholder="Search publications, people and topics"></label>
+  <div class="top-actions"><button class="icon-btn" id="searchToggle" aria-label="Search">⌕</button><button class="icon-btn" id="notifyBtn" aria-label="The Signal">♧</button><div class="avatar" id="headerAvatar">GU</div><div class="account-strip"><button id="accountButton">Log in</button></div></div>
+</div></header>
+<div class="layout">
+<aside class="sidebar"><div class="side-card"><div class="side-label">Your space</div>
+<button class="nav-item active" data-view="pulse"><span class="nav-icon">◉</span>The Pulse</button><button class="nav-item" data-view="compass"><span class="nav-icon">⌖</span>The Compass</button><button class="nav-item" data-view="studio"><span class="nav-icon">✎</span>The Studio</button><button class="nav-item" data-view="signal"><span class="nav-icon">⌁</span>The Signal</button><button class="nav-item" data-view="space"><span class="nav-icon">◌</span>My Space</button><div class="side-bottom"><strong>jeSocial preview</strong><br>Public browsing is open. An account is needed to participate.</div></div></aside>
+<main class="main">
+<div class="welcome"><div><div class="eyebrow" id="sectionEyebrow">A wider view</div><h1 id="sectionTitle">The Pulse</h1><p id="sectionSubtitle">What matters, from voices across the world.</p></div><div class="date-pill">✦ Africa-first. Open to the world.</div></div>
+<section class="compass-explorer" id="compassExplorer"><div class="compass-tabs"><button data-compass-tab="trending">Trending</button><button data-compass-tab="news">News</button><button data-compass-tab="people">People</button><button class="active" data-compass-tab="topics">Topics</button><button data-compass-tab="popular">Popular</button></div><div id="compassContent"></div></section>
+<div class="feed-tabs" id="mainFeedTabs" role="tablist"><button class="active" data-filter="for-you">For you</button><button data-filter="socializing">Socializing</button><button data-filter="news">News &amp; ideas</button><button data-filter="community">Community</button></div>
+<section class="composer"><div class="composer-top"><div class="composer-avatar" id="composerAvatar">GU</div><textarea id="composerText" placeholder="What would you like to publish?"></textarea></div><div class="composer-bottom"><div><button class="tool-chip" data-tool="Photo">▧ Photo</button> <button class="tool-chip" data-tool="Link">↗ Link</button> <button class="tool-chip" data-tool="Topic"># Topic</button></div><button class="primary-btn" id="publishBtn">Publish</button></div></section>
+<section class="feed-list" id="feedList"></section>
+</main>
+<aside class="right-col"><section class="panel"><div class="panel-title">Topics to explore</div><div class="topic"><div class="topic-num">01</div><div class="topic-info"><strong>Africa's digital future</strong><span>Explore in The Compass</span></div></div><div class="topic"><div class="topic-num">02</div><div class="topic-info"><strong>Business &amp; ownership</strong><span>Explore in The Compass</span></div></div><div class="topic"><div class="topic-num">03</div><div class="topic-info"><strong>Culture without borders</strong><span>Explore in The Compass</span></div></div></section>
+<section class="panel"><div class="panel-title">People you may want to socialize with</div><div id="suggestList"><div class="suggest-empty">Loading…</div></div></section>
+<section class="note"><small>A note from jeSocial</small><h3>Many voices.<br>One shared world.</h3><p>A space for meaningful news, everyday perspectives and conversations that move us forward.</p></section></aside>
+</div>
+<nav class="mobile-nav"><button class="active" data-view="pulse"><span>◉</span>Pulse</button><button data-view="compass"><span>⌖</span>Compass</button><button data-view="studio"><span>✎</span>Studio</button><button data-view="signal"><span>⌁</span>Signal</button><button data-view="space"><span>◌</span>My Space</button></nav>
+<div class="toast" id="toast" role="status"></div>
+
+<div class="modal-backdrop" id="responseModal" role="dialog" aria-modal="true" aria-labelledby="threadTitle"><div class="modal"><h2 id="threadTitle">Responses</h2><div class="thread-ref" id="threadRef"></div><div class="thread" id="responseList"></div><textarea id="responseText" maxlength="1000" placeholder="Write your response…"></textarea><div class="modal-actions"><button class="secondary-btn" id="cancelResponse">Close</button><button class="primary-btn" id="sendResponse">Send response</button></div></div></div>
+
+<div class="modal-backdrop" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle"><div class="modal"><h2 id="authTitle">Join jeSocial</h2><p id="authIntro">Create an account to publish, respond and socialize.</p><div id="authFields"></div><div id="authError" style="color:#b94b42;font-size:11px" role="alert"></div><div class="modal-actions"><button class="secondary-btn" id="closeAuth">Cancel</button><button class="primary-btn" id="authSubmit">Continue</button></div><button class="auth-switch" id="authSwitch">Already have an account? Log in</button><button class="auth-switch" id="forgotPassword">Forgot password?</button></div></div>
+<div class="modal-backdrop" id="interestModal" role="dialog" aria-modal="true"><div class="modal"><h2>Choose your interests</h2><p>Select as many topics as you like. You can change them later in My Space.</p><div id="interestChoices" class="interest-grid"></div><div class="modal-actions"><button class="secondary-btn" id="skipInterests">Do this later</button><button class="primary-btn" id="saveInterests">Save interests</button></div></div></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* jeSocial Phase 4 — browser client uses publishable key only. */
+const SUPABASE_URL="https://ytliijxsfrfscvkkpemn.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY="sb_publishable_t9QRqkA955Njl9Ow4iYOqA_wYKiUJxi";
+const supabaseClient=window.supabase?.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+
+const TOPICS=["News & Current Affairs","Politics & Governance","Business & Entrepreneurship","Finance & Economics","Technology & Innovation","Science & Research","Sports","Entertainment","Music","Education & Careers","Health & Wellness","Agriculture & Environment","Culture & Society","Lifestyle & Travel","Religion & Spirituality"];
+const PUB_COLS="id,author_id,content,audience,created_at,deleted_at";
+const AVATAR_TYPES={"image/jpeg":"jpg","image/png":"png","image/webp":"webp"};
+const AVATAR_MAX=5*1024*1024;
+const AVATAR_PALETTE=["#B16C4E","#597C91","#8B7650","#6B8064","#7A5C8E","#4F7F7A","#9A6A3A","#5E6E9B"];
+const AVATAR_MARKER="/storage/v1/object/public/avatars/";
+
+/* ---------- State ---------- */
+let currentUser=null,currentProfile=null,authMode="signup",pendingAction=null,appliedUserId=null,applyPromise=null;
+const store=new Map();          // publication id (string) -> publication + engagement
+const profileCache=new Map();   // user id (string) -> {id,username,display_name,avatar_url}
+const busy=new Set();           // in-flight action keys
+let feedIds=[],myIds=[],vaultOrder=[],vaultSet=new Set();
+let feedLoading=true,feedError=null,publishing=false,feedRequest=0;
+let spaceTab="mine",spaceLoading=false,spaceError=null,spaceRequest=0,threadId=null,sendingResponse=false,avatarBusy=false;
+let activeFilter="for-you",activeView="pulse",compassTab="topics",selectedTopicId=null,topicFilter="for-you";
+const socializedTopics=new Set();
+/* ---- jeSocial Socialize Network - Correct Implementation ---- */
+let peopleSubTab="discover"; // discover | requests | socializing | socializers | blocked
+let peopleSearchQuery="";
+let peopleProfilesCache=[];
+let peopleLoading=false,peopleError=null,peopleSearchDebounce=null;
+let socialGraph={following:new Set(),followers:new Set(),outgoingByTarget:new Map(),outgoingById:new Map(),incoming:[],blocked:new Set(),privacyMap:new Map()};
+let socialGraphLoading=false,socialGraphError=null;
+let peopleActionBusy=new Set();
+const compassTopics=[
+["News & Current Affairs","Stories and developments shaping our world.","📰",12800],["Politics & Governance","Leadership, public policy and accountability.","🏛️",9400],["Business & Entrepreneurship","Companies, founders, markets and ideas.","💼",8400],["Finance & Economics","Money, markets, economies and ownership.","📊",7900],["Technology & Innovation","Digital tools, emerging technology and builders.","💡",12800],["Science & Research","Discoveries, evidence and new knowledge.","🔬",3600],["Sports","Sporting stories, teams and communities.","⚽",11200],["Entertainment","Film, television, creators and popular culture.","🎬",6800],["Music","Artists, sounds, scenes and the music business.","🎵",6200],["Education & Careers","Learning, skills, work and opportunity.","🎓",5100],["Health & Wellness","Health information, wellbeing and care.","🌿",4900],["Agriculture & Environment","Food systems, farming, climate and nature.","🌱",5700],["Culture & Society","Identity, communities, traditions and change.","🌍",6100],["Lifestyle & Travel","Places, everyday living and experiences.","🧭",4300],["Religion & Spirituality","Faith, belief and spiritual perspectives.","🕊️",3900]
+].map((x,i)=>({id:i+1,name:x[0],desc:x[1],icon:x[2],count:x[3]}));
+
+/* ---------- Helpers ---------- */
+const $=id=>document.getElementById(id),feedList=$("feedList");
+function toast(s){$("toast").textContent=s;$("toast").classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>$("toast").classList.remove("show"),2800)}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function count(n){return Number(n).toLocaleString("en-US")}
+function errMsg(e){return e?.message||"Please try again."}
+function relTime(iso){
+ const t=new Date(iso).getTime();if(isNaN(t))return"";
+ const s=Math.floor((Date.now()-t)/1000);
+ if(s<45)return"Just now";
+ const m=Math.floor(s/60);if(m<60)return m<=1?"1 min ago":m+" mins ago";
+ const h=Math.floor(s/3600);if(h<24)return h===1?"1 hr ago":h+" hrs ago";
+ const d=Math.floor(s/86400);if(d===1)return"Yesterday";if(d<7)return d+" days ago";
+ return new Date(t).toLocaleDateString(undefined,{day:"numeric",month:"short",year:"numeric"});
+}
+function exactTime(iso){const d=new Date(iso);return isNaN(d)?"":d.toLocaleString(undefined,{dateStyle:"medium",timeStyle:"short"})}
+function refreshTimes(){document.querySelectorAll("time[data-ts]").forEach(el=>{const v=relTime(el.dataset.ts);if(el.textContent!==v)el.textContent=v})}
+setInterval(refreshTimes,30000);
+
+/* ---------- Avatars ---------- */
+function initialsOf(p){
+ const n=(p?.display_name||"").trim();
+ if(n){const parts=n.split(/\s+/);return((parts[0][0]||"")+(parts[1]?parts[1][0]:(parts[0][1]||""))).toUpperCase()}
+ return(p?.username||"JS").slice(0,2).toUpperCase();
+}
+function colorOf(p){const k=String(p?.id||p?.username||"");let h=0;for(let i=0;i<k.length;i++)h=(h*31+k.charCodeAt(i))>>>0;return AVATAR_PALETTE[h%AVATAR_PALETTE.length]}
+function avatarHTML(p,size){
+ const s=size||38,style=`width:${s}px;height:${s}px;font-size:${Math.max(10,Math.round(s*.32))}px`,init=initialsOf(p),col=colorOf(p);
+ if(p?.avatar_url)return`<img class="av av-img" src="${esc(p.avatar_url)}" alt="" loading="lazy" style="${style}" data-initials="${esc(init)}" data-color="${col}">`;
+ return`<div class="av" style="${style};background:${col}">${esc(init)}</div>`;
+}
+document.addEventListener("error",e=>{const t=e.target;if(t&&t.tagName==="IMG"&&t.classList.contains("av-img")){const d=document.createElement("div");d.className="av";d.style.cssText=t.style.cssText+";background:"+t.dataset.color;d.textContent=t.dataset.initials;t.replaceWith(d)}},true);
+function setAvatarEl(el,profile){el.innerHTML=profile?avatarHTML(profile,36):"GU"}
+
+/* ---------- Account UI ---------- */
+function accountProfile(){if(!currentUser)return null;return{id:currentUser.id,...(currentProfile||{}),display_name:currentProfile?.display_name||currentUser.email?.split("@")[0]||"Member"}}
+function setAccountUI(){
+ const p=accountProfile();setAvatarEl($("headerAvatar"),p);setAvatarEl($("composerAvatar"),p);
+ $("accountButton").textContent=currentUser?"Account":"Log in";
+ $("publishBtn").disabled=!currentUser||publishing;$("publishBtn").style.opacity=(!currentUser||publishing)?".65":"1";
+ renderSuggestions();
+}
+
+/* ---------- Authentication ---------- */
+function openAuth(mode="signup",action=null){authMode=mode;pendingAction=action;$("authError").textContent="";$("authTitle").textContent=mode==="signup"?"Create your jeSocial account":mode==="login"?"Welcome back":mode==="reset"?"Reset your password":"Update your password";$("authIntro").textContent=mode==="signup"?"Create an account to participate in the community.":mode==="login"?"Log in to continue.":mode==="reset"?"We'll email you a password reset link.":"Choose a new password.";const fields=$("authFields");fields.innerHTML="";const add=(id,label,type="text",auto="")=>{const l=document.createElement("label");l.style.cssText="display:block;font-size:10px;color:#68736b;margin-top:7px";l.textContent=label;const i=document.createElement("input");i.id=id;i.type=type;i.autocomplete=auto;i.required=true;i.placeholder=label;fields.append(l,i)};
+if(mode==="signup"){add("authDisplay","Display name","text","name");add("authUsername","Username","text","username");add("authEmail","Email","email","email");add("authPassword","Password","password","new-password");add("authConfirm","Confirm password","password","new-password")}
+if(mode==="login"){add("authEmail","Email","email","email");add("authPassword","Password","password","current-password")}
+if(mode==="reset"){add("authEmail","Email","email","email")}
+if(mode==="update"){add("authPassword","New password","password","new-password");add("authConfirm","Confirm new password","password","new-password")}
+$("authSubmit").textContent=mode==="signup"?"Create account":mode==="login"?"Log in":mode==="reset"?"Send reset link":"Update password";
+$("authSwitch").style.display=mode==="signup"||mode==="login"?"block":"none";$("authSwitch").textContent=mode==="signup"?"Already have an account? Log in":"Need an account? Sign up";$("forgotPassword").style.display=mode==="login"?"block":"none";$("authModal").classList.add("open")}
+function closeAuth(){$("authModal").classList.remove("open")}
+function requireAuth(action){if(currentUser){action();return true}openAuth("login",action);return false}
+function runPendingAction(){const fn=pendingAction;pendingAction=null;if(fn)fn()}
+
+async function fetchProfile(){
+ if(!currentUser)return;
+ const [profileResult,detailsResult]=await Promise.all([
+  supabaseClient.from("profiles").select("id,username,display_name,avatar_url").eq("id",currentUser.id).maybeSingle(),
+  supabaseClient.from("profile_details").select("bio").eq("user_id",currentUser.id).maybeSingle()
+ ]);
+ if(profileResult.error){console.error("Profile loading error:",profileResult.error);toast("Could not load your profile.");return}
+ if(detailsResult.error){console.error("Profile details loading error:",detailsResult.error);toast("Could not load your profile details.");return}
+ currentProfile={id:currentUser.id,...(profileResult.data||{}),bio:detailsResult.data?.bio||""};
+ if(profileResult.data)profileCache.set(currentUser.id,{...profileResult.data});
+ setAccountUI();
+}
+
+/* Applies a session once per user; concurrent callers share the same promise. */
+function applySession(user){
+ if(!user){
+  appliedUserId=null;applyPromise=null;currentUser=null;currentProfile=null;vaultOrder=[];vaultSet=new Set();myIds=[];resetSocialState();
+  store.forEach(p=>{p.myReaction=null;p.myAmp=false});
+  setAccountUI();
+  if(activeView==="space")setView("pulse");else rerenderCurrent();
+  return Promise.resolve();
+ }
+ if(appliedUserId&&appliedUserId!==user.id)resetSocialState();
+ currentUser=user;
+ if(appliedUserId===user.id&&applyPromise)return applyPromise;
+ appliedUserId=user.id;
+ applyPromise=(async()=>{
+  await fetchProfile();
+  loadSocialGraph().catch(()=>{});
+  loadPeopleProfiles("").catch(()=>{});
+  await Promise.all([fetchVaultOrder(),refreshEngagement([...store.keys()])]);
+  setAccountUI();rerenderCurrent();
+ })().catch(e=>{console.error("Session setup error:",e)});
+ return applyPromise;
+}
+
+async function handleAuthSubmit(){const val=id=>$(id)?.value.trim()||"",email=val("authEmail"),password=val("authPassword");$("authError").textContent="";
+try{
+if(authMode==="signup"){const display_name=val("authDisplay"),username=val("authUsername").replace(/^@/,"");if(!display_name||!username||!email||!password||!val("authConfirm"))throw Error("Complete all fields.");if(!/^[a-zA-Z0-9_]{3,24}$/.test(username))throw Error("Username must be 3–24 characters: letters, numbers or underscores.");if(password.length<8)throw Error("Use a password with at least 8 characters.");if(password!==val("authConfirm"))throw Error("Passwords do not match.");const {data,error}=await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo:location.origin+location.pathname,data:{username,display_name}}});if(error)throw error;closeAuth();toast(data.session?"Account created.":"Check your email to confirm your account.");if(data.user&&data.session){await applySession(data.user);interestsMarkup([]);$("interestModal").classList.add("open")}}
+else if(authMode==="login"){const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error)throw error;await applySession(data.user);closeAuth();toast("You're logged in.");runPendingAction()}
+else if(authMode==="reset"){if(!email)throw Error("Enter your email address.");const {error}=await supabaseClient.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});if(error)throw error;closeAuth();toast("Password reset link sent. Check your email.")}
+else if(authMode==="update"){if(password.length<8)throw Error("Use at least 8 characters.");if(password!==val("authConfirm"))throw Error("Passwords do not match.");const {error}=await supabaseClient.auth.updateUser({password});if(error)throw error;closeAuth();toast("Password updated.")}
+}catch(e){$("authError").textContent=e.message||"Something went wrong. Please try again."}}
+async function logout(){const {error}=await supabaseClient.auth.signOut();if(error){toast(error.message);return}await applySession(null);toast("You have logged out.")}
+
+/* ---------- Interests ---------- */
+function interestsMarkup(existing=[]){$("interestChoices").innerHTML=TOPICS.map(t=>`<label class="interest-option"><input type="checkbox" value="${esc(t)}" ${existing.includes(t)?"checked":""}> ${esc(t)}</label>`).join("")}
+async function loadInterests(){if(!currentUser)return[];const {data,error}=await supabaseClient.from("user_interests").select("topic").eq("user_id",currentUser.id);if(error){console.error(error);return[]}return(data||[]).map(x=>x.topic)}
+async function saveInterests(){if(!currentUser)return;const topics=[...$("interestChoices").querySelectorAll("input:checked")].map(x=>x.value);try{const {error:delError}=await supabaseClient.from("user_interests").delete().eq("user_id",currentUser.id);if(delError)throw delError;if(topics.length){const {error}=await supabaseClient.from("user_interests").insert(topics.map(topic=>({user_id:currentUser.id,topic})));if(error)throw error}$("interestModal").classList.remove("open");toast("Your interests have been saved.")}catch(e){toast("Could not save interests: "+e.message)}}
+async function editInterests(){const existing=await loadInterests();interestsMarkup(existing);$("interestModal").classList.add("open")}
+
+/* ---------- Data layer: profiles, engagement, vault ---------- */
+async function ensureProfiles(ids,force){
+ const need=[...new Set(ids.filter(Boolean))].filter(id=>force||!profileCache.has(id));
+ if(!need.length)return;
+ const {data,error}=await supabaseClient.from("profiles").select("id,username,display_name,avatar_url").in("id",need);
+ if(error){console.error("Profile lookup error:",error);return}
+ (data||[]).forEach(p=>profileCache.set(p.id,p));
+}
+let engagementWarned=false;
+async function refreshEngagement(ids){
+ ids=[...new Set(ids)].filter(id=>store.has(id));if(!ids.length)return;
+ const uid=currentUser?.id||null;
+ const [r,a,c]=await Promise.all([
+  supabaseClient.from("publication_reactions").select("publication_id,user_id,reaction_type").in("publication_id",ids),
+  supabaseClient.from("publication_amplifications").select("publication_id,user_id").in("publication_id",ids),
+  supabaseClient.from("responses").select("publication_id").in("publication_id",ids)
+ ]);
+ let failed=false;
+ if(r.error){failed=true;console.error("Reactions error:",r.error)}else{
+  const m=new Map(ids.map(id=>[id,{approvals:0,disapprovals:0,mine:null}]));
+  (r.data||[]).forEach(x=>{const e=m.get(x.publication_id);if(!e)return;if(x.reaction_type==="approval")e.approvals++;else if(x.reaction_type==="disapproval")e.disapprovals++;if(uid&&x.user_id===uid)e.mine=x.reaction_type});
+  m.forEach((e,id)=>{const p=store.get(id);p.approvals=e.approvals;p.disapprovals=e.disapprovals;p.myReaction=e.mine})}
+ if(a.error){failed=true;console.error("Amplifications error:",a.error)}else{
+  const m=new Map(ids.map(id=>[id,{n:0,mine:false}]));
+  (a.data||[]).forEach(x=>{const e=m.get(x.publication_id);if(!e)return;e.n++;if(uid&&x.user_id===uid)e.mine=true});
+  m.forEach((e,id)=>{const p=store.get(id);p.amplifications=e.n;p.myAmp=e.mine})}
+ if(c.error){failed=true;console.error("Responses error:",c.error)}else{
+  const m=new Map(ids.map(id=>[id,0]));
+  (c.data||[]).forEach(x=>{if(m.has(x.publication_id))m.set(x.publication_id,m.get(x.publication_id)+1)});
+  m.forEach((n,id)=>{store.get(id).responses=n})}
+ if(failed&&!engagementWarned){engagementWarned=true;toast("Some engagement counts could not be loaded.")}
+}
+async function fetchVaultOrder(){
+ if(!currentUser){vaultOrder=[];vaultSet=new Set();return}
+ const {data,error}=await supabaseClient.from("vault_items").select("publication_id,created_at").eq("user_id",currentUser.id).order("created_at",{ascending:false}).limit(200);
+ if(error){console.error("Vault loading error:",error);toast("Could not load your Vault.");return}
+ vaultOrder=(data||[]).map(x=>x.publication_id);vaultSet=new Set(vaultOrder);
+}
+async function ingest(rows){
+ if(!rows.length)return;
+ rows.forEach(r=>{const prev=store.get(r.id)||{approvals:0,disapprovals:0,responses:0,amplifications:0,myReaction:null,myAmp:false};store.set(r.id,Object.assign(prev,r))});
+ await Promise.all([ensureProfiles(rows.map(r=>r.author_id),true),refreshEngagement(rows.map(r=>r.id))]);
+}
+
+/* ---------- Rendering: publications ---------- */
+function actBtn(act,id,icon,label,n,cls,pressed){return`<button class="action-btn ${cls}" data-act="${act}" data-id="${esc(id)}" aria-pressed="${pressed?"true":"false"}"><span class="ai">${icon}</span><span>${label}</span><span class="ac">${n===null?"":count(n)}</span></button>`}
+function postCard(p){
+ const a=profileCache.get(p.author_id)||{id:p.author_id},name=a.display_name||a.username||"jeSocial member",ts=p.created_at||"";
+ const saved=vaultSet.has(p.id);
+ return`<article class="post" data-post="${esc(p.id)}"><div class="post-head">${avatarHTML(a,38)}<div class="post-person"><strong>${esc(name)}</strong><span>${a.username?"@"+esc(a.username)+" · ":""}<time class="rel" data-ts="${esc(ts)}" datetime="${esc(ts)}" title="${esc(exactTime(ts))}">${esc(relTime(ts))}</time> · <time class="exact" datetime="${esc(ts)}">${esc(exactTime(ts))}</time></span></div></div><p class="post-copy">${esc(p.content)}</p><div class="post-actions">${actBtn("approve",p.id,"▲","Approval",p.approvals,p.myReaction==="approval"?"approved":"",p.myReaction==="approval")}${actBtn("disapprove",p.id,"▼","Disapproval",p.disapprovals,p.myReaction==="disapproval"?"disapproved":"",p.myReaction==="disapproval")}${actBtn("response",p.id,"✎","Response",p.responses,"",false)}${actBtn("amplify",p.id,"↗","Amplify",p.amplifications,p.myAmp?"on":"",p.myAmp)}${actBtn("vault",p.id,"◈",saved?"Saved":"Vault",null,saved?"on":"",saved)}</div></article>`;
+}
+function updateCards(id){
+ const p=store.get(id);if(!p)return;
+ document.querySelectorAll(`[data-post="${CSS.escape(id)}"]`).forEach(el=>{const t=document.createElement("template");t.innerHTML=postCard(p).trim();el.replaceWith(t.content.firstElementChild)});
+}
+function postsFrom(ids){return ids.map(id=>store.get(id)).filter(Boolean)}
+function rerenderCurrent(){if(activeView==="compass")renderCompass();else if(activeView==="space")renderSpaceList();else renderPosts()}
+
+async function loadPublications(){
+ if(!supabaseClient)return;const request=++feedRequest;feedLoading=true;feedError=null;
+ if(!feedIds.length&&activeView!=="space"&&activeView!=="compass")renderPosts();
+ try{
+  const {data,error}=await supabaseClient.from("publications").select(PUB_COLS).is("deleted_at",null).eq("audience","public").order("created_at",{ascending:false}).limit(30);
+  if(error)throw error;
+  const rows=data||[];await ingest(rows);
+  if(request!==feedRequest)return;
+  feedIds=rows.map(r=>r.id);
+ }catch(e){if(request!==feedRequest)return;feedError=e;console.error("Publication feed error:",e);if(feedIds.length)toast("Could not refresh publications.")}
+ finally{if(request===feedRequest){feedLoading=false;rerenderCurrent()}}
+}
+function renderPosts(){
+ if(activeView==="compass"||activeView==="space")return;
+ if(activeView==="signal"){feedList.innerHTML='<div class="empty-state">Nothing new in The Signal yet. Updates and activity will appear here.</div>';return}
+ if(feedLoading&&!feedIds.length){feedList.innerHTML='<div class="empty-state">Loading publications…</div>';return}
+ if(feedError&&!feedIds.length){feedList.innerHTML=`<div class="empty-state">We couldn't load publications. ${esc(errMsg(feedError))}<br><button class="secondary-btn" id="retryFeed" style="margin-top:10px">Try again</button></div>`;$("retryFeed").onclick=loadPublications;return}
+ const q=$("searchInput").value.trim().toLowerCase();
+ let visible=(activeFilter==="for-you"||activeFilter==="community")?postsFrom(feedIds):[];
+ if(q)visible=visible.filter(p=>{const a=profileCache.get(p.author_id)||{};return`${a.display_name||""} ${a.username||""} ${p.content}`.toLowerCase().includes(q)});
+ const empty={"socializing":"Publications from topics and people you socialize with will appear here.","news":"News & ideas will appear here."}[activeFilter]||(q?"No publications match your search.":"No publications yet. Be the first to share a perspective.");
+ feedList.innerHTML=visible.length?visible.map(postCard).join(""):`<div class="empty-state">${empty}</div>`;
+}
+
+/* ---------- Publication actions ---------- */
+function setReaction(p,next){
+ if(p.myReaction==="approval")p.approvals=Math.max(0,p.approvals-1);
+ if(p.myReaction==="disapproval")p.disapprovals=Math.max(0,p.disapprovals-1);
+ if(next==="approval")p.approvals++;if(next==="disapproval")p.disapprovals++;
+ p.myReaction=next;
+}
+async function toggleReaction(id,type){
+ const p=store.get(id);if(!p||!currentUser)return;const key="react:"+id;if(busy.has(key))return;busy.add(key);
+ const old=p.myReaction,next=old===type?null:type;
+ setReaction(p,next);updateCards(id);
+ try{
+  if(next===null){const {error}=await supabaseClient.from("publication_reactions").delete().eq("publication_id",id).eq("user_id",currentUser.id);if(error)throw error}
+  else{const {error}=await supabaseClient.from("publication_reactions").upsert({publication_id:id,user_id:currentUser.id,reaction_type:next,updated_at:new Date().toISOString()},{onConflict:"publication_id,user_id"});if(error)throw error}
+  await refreshEngagement([id]);updateCards(id);
+ }catch(e){console.error("Reaction error:",e);setReaction(p,old);updateCards(id);toast("Could not update your reaction. "+errMsg(e))}
+ finally{busy.delete(key)}
+}
+function setSimple(p,kind,on){
+ if(kind==="amp"){p.myAmp=on;p.amplifications=Math.max(0,p.amplifications+(on?1:-1))}
+ else if(on){vaultSet.add(p.id);vaultOrder=[p.id,...vaultOrder.filter(x=>x!==p.id)]}
+ else{vaultSet.delete(p.id);vaultOrder=vaultOrder.filter(x=>x!==p.id)}
+}
+function afterSimple(id,kind){updateCards(id);if(kind==="vault"&&activeView==="space"&&spaceTab==="vault")renderSpaceList()}
+async function toggleSimple(id,kind){
+ const p=store.get(id);if(!p||!currentUser)return;const key=kind+":"+id;if(busy.has(key))return;busy.add(key);
+ const table=kind==="amp"?"publication_amplifications":"vault_items",was=kind==="amp"?p.myAmp:vaultSet.has(id),next=!was;
+ setSimple(p,kind,next);afterSimple(id,kind);
+ try{
+  if(next){const {error}=await supabaseClient.from(table).insert({publication_id:id,user_id:currentUser.id});if(error&&error.code!=="23505")throw error}
+  else{const {error}=await supabaseClient.from(table).delete().eq("publication_id",id).eq("user_id",currentUser.id);if(error)throw error}
+  if(kind==="amp"){await refreshEngagement([id]);updateCards(id)}
+  else toast(next?"Saved to The Vault.":"Removed from The Vault.");
+ }catch(e){console.error(kind+" error:",e);setSimple(p,kind,was);afterSimple(id,kind);toast("Could not update. "+errMsg(e))}
+ finally{busy.delete(key)}
+}
+/* One delegated handler serves The Pulse, The Compass and My Space. */
+document.addEventListener("click",e=>{
+ const b=e.target.closest("[data-act]");if(!b)return;
+ const id=b.dataset.id,act=b.dataset.act;
+ if(act==="response"){openThread(id);return}
+ requireAuth(()=>{
+  if(act==="approve")toggleReaction(id,"approval");
+  else if(act==="disapprove")toggleReaction(id,"disapproval");
+  else if(act==="amplify")toggleSimple(id,"amp");
+  else if(act==="vault")toggleSimple(id,"vault");
+ });
+});
+
+/* ---------- Responses ---------- */
+function renderThread(items,state){
+ const el=$("responseList");
+ if(state==="loading"){el.innerHTML='<div class="empty-state">Loading responses…</div>';return}
+ if(state==="error"){el.innerHTML='<div class="empty-state">Could not load responses. <button class="secondary-btn" id="retryThread">Try again</button></div>';$("retryThread").onclick=()=>loadThread(threadId);return}
+ el.innerHTML=items.length?items.map(r=>{const a=profileCache.get(r.author_id)||{id:r.author_id},n=a.display_name||a.username||"jeSocial member";return`<div class="thread-item">${avatarHTML(a,30)}<div class="ti-body"><strong>${esc(n)}</strong><time data-ts="${esc(r.created_at)}" datetime="${esc(r.created_at)}" title="${esc(exactTime(r.created_at))}">${esc(relTime(r.created_at))}</time><p>${esc(r.content)}</p></div></div>`}).join(""):'<div class="empty-state">No responses yet. Start the conversation.</div>';
+}
+async function loadThread(id){
+ renderThread([],"loading");
+ try{
+  const {data,error}=await supabaseClient.from("responses").select("id,publication_id,author_id,content,created_at").eq("publication_id",id).order("created_at",{ascending:true}).limit(200);
+  if(error)throw error;if(threadId!==id)return;
+  const rows=data||[];await ensureProfiles(rows.map(r=>r.author_id),false);if(threadId!==id)return;
+  renderThread(rows);const p=store.get(id);if(p&&p.responses!==rows.length&&rows.length<200){p.responses=rows.length;updateCards(id)}
+ }catch(e){console.error("Thread error:",e);if(threadId===id)renderThread([],"error")}
+}
+function openThread(id){
+ const p=store.get(id);if(!p)return;threadId=id;
+ $("threadRef").textContent=p.content.length>140?p.content.slice(0,140)+"…":p.content;
+ $("responseText").value="";$("responseModal").classList.add("open");loadThread(id);
+}
+async function submitResponse(){
+ const id=threadId,text=$("responseText").value.trim();
+ if(!id||!text||sendingResponse||!currentUser)return;
+ sendingResponse=true;$("sendResponse").disabled=true;
+ try{
+  const {error}=await supabaseClient.from("responses").insert({publication_id:id,author_id:currentUser.id,content:text});
+  if(error)throw error;
+  $("responseText").value="";
+  await ensureProfiles([currentUser.id],false);
+  await refreshEngagement([id]);updateCards(id);
+  if(threadId===id)await loadThread(id);
+  toast("Response added.");
+ }catch(e){console.error("Response error:",e);toast("Could not send your response. "+errMsg(e))}
+ finally{sendingResponse=false;$("sendResponse").disabled=false}
+}
+$("sendResponse").onclick=()=>{if(!$("responseText").value.trim()){toast("Write a response first.");return}requireAuth(submitResponse)};
+$("cancelResponse").onclick=()=>{$("responseModal").classList.remove("open");threadId=null};
+$("responseModal").addEventListener("click",e=>{if(e.target===$("responseModal")){$("responseModal").classList.remove("open");threadId=null}});
+
+/* ---------- Profile & avatar ---------- */
+async function updateProfile(){
+ if(!currentUser){toast("Please log in first.");return}
+ const display_name=$("profileDisplay").value.trim(),username=$("profileUsername").value.trim().replace(/^@/,""),bio=$("profileBio").value.trim();
+ if(!display_name||!username){toast("Display name and username are required.");return}
+ if(!/^[a-zA-Z0-9_]{3,24}$/.test(username)){toast("Username must be 3–24 letters, numbers or underscores.");return}
+ const {error:profileError}=await supabaseClient.from("profiles").update({display_name,username,updated_at:new Date().toISOString()}).eq("id",currentUser.id);
+ if(profileError){toast(profileError.code==="23505"?"That username is already taken.":"Could not update profile: "+profileError.message);return}
+ const {error:detailsError}=await supabaseClient.from("profile_details").upsert({user_id:currentUser.id,bio,updated_at:new Date().toISOString()},{onConflict:"user_id"});
+ await fetchProfile();
+  loadSocialGraph().catch(()=>{});
+  loadPeopleProfiles("").catch(()=>{});renderSpace();
+ if(detailsError){toast("Your name and username were saved, but your bio was not: "+detailsError.message);return}
+ toast("Profile updated.");
+}
+function avatarPathFromUrl(url){if(!url)return null;const i=url.indexOf(AVATAR_MARKER);if(i<0)return null;try{return decodeURIComponent(url.slice(i+AVATAR_MARKER.length).split("?")[0])}catch(_){return null}}
+async function removeAvatarFile(url){const path=avatarPathFromUrl(url);if(!path)return;const {error}=await supabaseClient.storage.from("avatars").remove([path]);if(error)console.warn("Could not delete old avatar file:",error)}
+function setAvatarBusy(on,label){avatarBusy=on;["changePic","removePic"].forEach(id=>{const b=$(id);if(b)b.disabled=on});const c=$("changePic");if(c&&label)c.textContent=label}
+function applyAvatarUrl(url){
+ currentProfile={...currentProfile,avatar_url:url};
+ const cached=profileCache.get(currentUser.id)||{id:currentUser.id,username:currentProfile.username,display_name:currentProfile.display_name};
+ profileCache.set(currentUser.id,{...cached,avatar_url:url});
+ setAccountUI();renderSpace();
+}
+async function uploadAvatar(file){
+ if(!currentUser||avatarBusy)return;
+ const ext=AVATAR_TYPES[file.type];
+ if(!ext){toast("Please choose a JPEG, PNG or WebP image.");return}
+ if(file.size>AVATAR_MAX){toast("That image is larger than 5 MB.");return}
+ setAvatarBusy(true,"Uploading…");
+ const oldUrl=currentProfile?.avatar_url||null,path=`${currentUser.id}/avatar-${Date.now()}.${ext}`;
+ try{
+  const {error:upErr}=await supabaseClient.storage.from("avatars").upload(path,file,{contentType:file.type,cacheControl:"3600",upsert:false});
+  if(upErr)throw upErr;
+  const {data:pub}=supabaseClient.storage.from("avatars").getPublicUrl(path);
+  const {error:dbErr}=await supabaseClient.from("profiles").update({avatar_url:pub.publicUrl,updated_at:new Date().toISOString()}).eq("id",currentUser.id);
+  if(dbErr){await supabaseClient.storage.from("avatars").remove([path]);throw dbErr}
+  applyAvatarUrl(pub.publicUrl);
+  if(oldUrl&&oldUrl!==pub.publicUrl)removeAvatarFile(oldUrl);
+  toast("Profile picture updated.");
+ }catch(e){console.error("Avatar upload error:",e);toast("Could not upload picture. Your current picture is unchanged. "+errMsg(e));setAvatarBusy(false,currentProfile?.avatar_url?"Change picture":"Upload picture")}
+ finally{avatarBusy=false}
+}
+async function removeAvatar(){
+ if(!currentUser||avatarBusy||!currentProfile?.avatar_url)return;
+ setAvatarBusy(true);const oldUrl=currentProfile.avatar_url;
+ try{
+  const {error}=await supabaseClient.from("profiles").update({avatar_url:null,updated_at:new Date().toISOString()}).eq("id",currentUser.id);
+  if(error)throw error;
+  applyAvatarUrl(null);removeAvatarFile(oldUrl);toast("Profile picture removed.");
+ }catch(e){console.error("Avatar removal error:",e);toast("Could not remove picture. "+errMsg(e));setAvatarBusy(false)}
+ finally{avatarBusy=false}
+}
+
+/* ---------- My Space ---------- */
+function renderSpace(){
+ if(!currentUser){feedList.innerHTML='<div class="empty-state">Log in to view your profile, publications and The Vault.<br><button class="primary-btn" id="spaceLogin" style="margin-top:10px">Log in</button></div>';$("spaceLogin").onclick=()=>openAuth("login",()=>setView("space"));return}
+ const p=accountProfile();
+ feedList.innerHTML=`<section class="profile-box space-head"><div class="space-top">${avatarHTML(p,72)}<div class="space-id"><h2>${esc(p.display_name||"")}</h2><div class="handle">${p.username?"@"+esc(p.username):""}</div>${p.bio?`<p class="bio">${esc(p.bio)}</p>`:""}</div></div>
+<div class="space-btns"><button class="secondary-btn" id="changePic">${p.avatar_url?"Change picture":"Upload picture"}</button>${p.avatar_url?'<button class="secondary-btn danger" id="removePic">Remove picture</button>':""}<input type="file" id="avatarFile" accept="image/jpeg,image/png,image/webp" hidden></div>
+<details class="edit-details"><summary>Edit profile</summary><label>Display name<input id="profileDisplay" value="${esc(currentProfile?.display_name||"")}"></label><label>Username<input id="profileUsername" value="${esc(currentProfile?.username||"")}" autocapitalize="none"></label><label>Bio<textarea id="profileBio" rows="3">${esc(currentProfile?.bio||"")}</textarea></label><button class="primary-btn" id="saveProfile">Save profile</button></details>
+<div class="space-btns"><button class="secondary-btn" id="editInterestsBtn">Edit interests</button><button class="secondary-btn" id="logoutBtn">Log out</button></div></section>
+<div class="space-tabs"><button data-space-tab="mine" class="${spaceTab==="mine"?"active":""}">My Publications</button><button data-space-tab="vault" class="${spaceTab==="vault"?"active":""}">The Vault</button></div><div id="spaceList" class="feed-list"></div>`;
+ $("changePic").onclick=()=>$("avatarFile").click();
+ $("avatarFile").onchange=e=>{const f=e.target.files[0];e.target.value="";if(f)uploadAvatar(f)};
+ if($("removePic"))$("removePic").onclick=removeAvatar;
+ $("saveProfile").onclick=updateProfile;$("editInterestsBtn").onclick=editInterests;$("logoutBtn").onclick=logout;
+ feedList.querySelectorAll("[data-space-tab]").forEach(b=>b.onclick=()=>{spaceTab=b.dataset.spaceTab;feedList.querySelectorAll("[data-space-tab]").forEach(x=>x.classList.toggle("active",x===b));renderSpaceList()});
+ renderSpaceList();
+}
+function renderSpaceList(){
+ const el=$("spaceList");if(!el||activeView!=="space"||!currentUser)return;
+ if(spaceLoading&&!(spaceTab==="mine"?myIds:vaultOrder).length){el.innerHTML='<div class="empty-state">Loading…</div>';return}
+ if(spaceError){el.innerHTML=`<div class="empty-state">Could not load this section. ${esc(errMsg(spaceError))}<br><button class="secondary-btn" id="retrySpace" style="margin-top:10px">Try again</button></div>`;$("retrySpace").onclick=loadSpaceData;return}
+ const list=postsFrom(spaceTab==="mine"?myIds:vaultOrder);
+ el.innerHTML=list.length?list.map(postCard).join(""):`<div class="empty-state">${spaceTab==="mine"?"You have not published anything yet. Share a perspective from The Studio.":"Your Vault is empty. Tap Vault on any publication to keep it here. Only you can see it."}</div>`;
+}
+async function loadSpaceData(){
+ if(!currentUser)return;const request=++spaceRequest;spaceLoading=true;spaceError=null;renderSpaceList();
+ try{
+  const uid=currentUser.id;
+  await fetchVaultOrder();
+  const vaultIds=vaultOrder.slice(0,100);
+  const [mine,vault]=await Promise.all([
+   supabaseClient.from("publications").select(PUB_COLS).eq("author_id",uid).is("deleted_at",null).order("created_at",{ascending:false}).limit(50),
+   vaultIds.length?supabaseClient.from("publications").select(PUB_COLS).in("id",vaultIds).is("deleted_at",null):Promise.resolve({data:[],error:null})
+  ]);
+  if(mine.error)throw mine.error;if(vault.error)throw vault.error;
+  const rows=[...(mine.data||[]),...(vault.data||[])];
+  await ingest([...new Map(rows.map(r=>[r.id,r])).values()]);
+  if(request!==spaceRequest)return;
+  myIds=(mine.data||[]).map(r=>r.id);
+ }catch(e){if(request!==spaceRequest)return;spaceError=e;console.error("My Space error:",e)}
+ finally{if(request===spaceRequest){spaceLoading=false;renderSpaceList()}}
+}
+
+/* ---------- Views & The Compass ---------- */
+function setView(view){activeView=view;document.querySelectorAll("[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===view));const titles={pulse:["A wider view","The Pulse","What matters, from voices across the world."],compass:["Find your direction","The Compass","Discover ideas, people and conversations worth your time."],studio:["Make something matter","The Studio","Publish a perspective and add your voice to the world."],signal:["Stay informed","The Signal","Updates and activity from across the community."],space:["Your corner of the world","My Space","Your profile, publications and The Vault."]};const t=titles[view];$("sectionEyebrow").textContent=t[0];$("sectionTitle").textContent=t[1];$("sectionSubtitle").textContent=t[2];const c=view==="compass",hideTabs=c||view==="space"||view==="signal";$("compassExplorer").classList.toggle("visible",c);$("mainFeedTabs").style.display=hideTabs?"none":"flex";document.querySelector(".composer").style.display=hideTabs?"none":"block";feedList.style.display=c?"none":"grid";if(c){selectedTopicId=null;renderCompass();if(compassTab==="people")ensurePeopleData()}else if(view==="space"){renderSpace();loadSpaceData()}else renderPosts();if(view==="studio"&&!currentUser)requireAuth(()=>$("composerText").focus())}
+
+/* ---------- Socialize Network ---------- */
+/* Every relationship / request / block change goes through an existing authorised RPC. No direct writes to protected tables.
+   Signatures below were verified against the Supabase function definitions.
+   bool:true = the function returns boolean; false means no row was deleted/changed (nothing matched). */
+const SOCIAL_RPC={
+ send:{fn:"send_social_request",arg:"p_target_id"},
+ accept:{fn:"accept_social_request",arg:"p_request_id"},
+ block:{fn:"block_account",arg:"p_target_id"},
+ decline:{fn:"decline_social_request",arg:"p_request_id",bool:true},
+ cancel:{fn:"cancel_social_request",arg:"p_request_id",bool:true},
+ unsocialize:{fn:"unsocialize",arg:"p_target_id",bool:true},
+ unblock:{fn:"unblock_account",arg:"p_target_id",bool:true}
+};
+let socialEpoch=0,socialGraphReq=0,peopleListReq=0,socialLoadedAt=0,peopleLoadedAt=0,privacyWarned=false;
+let suggestionPool=[];
+const privacyMap=new Map(); // user id -> true when user_settings.is_private_account is true
+function newGraph(){return{following:new Set(),followers:new Set(),outgoingByTarget:new Map(),outgoingById:new Map(),incoming:[],blocked:new Set()}}
+
+/* Clears everything user-specific. Called on logout and when a different account signs in. */
+function resetSocialState(){
+ socialEpoch++;socialGraphReq++;peopleListReq++;
+ socialGraph=newGraph();privacyMap.clear();peopleProfilesCache=[];suggestionPool=[];
+ peopleSearchQuery="";peopleSubTab="discover";peopleLoading=false;peopleError=null;
+ socialGraphLoading=false;socialGraphError=null;socialLoadedAt=0;peopleLoadedAt=0;
+ peopleActionBusy=new Set();clearTimeout(peopleSearchDebounce);
+}
+function personLabel(p){return p?.display_name||p?.username||"jeSocial member"}
+function nameOf(id){return personLabel(profileCache.get(id)||peopleProfilesCache.find(p=>p.id===id))}
+function isPrivateAccount(p){return !!p&&privacyMap.get(p.id)===true}
+function getPersonActionState(id){
+ if(socialGraph.blocked.has(id))return"blocked";
+ if(socialGraph.following.has(id))return"socializing";
+ if(socialGraph.outgoingByTarget.has(id))return"requested";
+ return"none";
+}
+function refreshPeopleUI(){
+ if(activeView==="compass"&&compassTab==="people"&&selectedTopicId===null)renderPeople();
+ renderSuggestions();
+}
+function sanitizeSearch(s){return String(s||"").trim().slice(0,40).replace(/[%,()"\\*]/g," ").replace(/\s+/g," ").trim()}
+function socialErr(key,e){return"Could not complete that: "+errMsg(e)}
+
+/* ---------- Data loading ---------- */
+async function loadPrivacyMap(ids,epoch){
+ const clean=[...new Set((ids||[]).filter(Boolean))];if(!clean.length)return;
+ const {data,error}=await supabaseClient.from("user_settings").select("user_id,is_private_account").in("user_id",clean);
+ if(epoch!==socialEpoch)return;
+ if(error){console.error("Privacy lookup error:",error);if(!privacyWarned){privacyWarned=true;toast("Could not read account privacy settings: "+errMsg(error))}return}
+ (data||[]).forEach(r=>privacyMap.set(r.user_id,r.is_private_account===true));
+}
+async function loadSocialGraph(){
+ if(!currentUser)return false;
+ const epoch=socialEpoch,req=++socialGraphReq,uid=currentUser.id;
+ socialGraphLoading=true;socialGraphError=null;refreshPeopleUI();
+ try{
+  const [outRes,inRes,relRes,blockRes]=await Promise.all([
+   supabaseClient.from("social_requests").select("id,requester_id,target_id,created_at").eq("requester_id",uid),
+   supabaseClient.from("social_requests").select("id,requester_id,target_id,created_at").eq("target_id",uid),
+   supabaseClient.from("social_relationships").select("id,follower_id,followed_id,created_at").or(`follower_id.eq.${uid},followed_id.eq.${uid}`),
+   supabaseClient.from("blocks").select("id,blocker_id,blocked_id,created_at").eq("blocker_id",uid)
+  ]);
+  for(const r of [outRes,inRes,relRes,blockRes])if(r.error)throw r.error;
+  const g=newGraph();
+  (outRes.data||[]).forEach(r=>{g.outgoingByTarget.set(r.target_id,r);g.outgoingById.set(r.id,r)});
+  g.incoming=[...(inRes.data||[])].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+  (relRes.data||[]).forEach(r=>{if(r.follower_id===uid)g.following.add(r.followed_id);if(r.followed_id===uid)g.followers.add(r.follower_id)});
+  (blockRes.data||[]).forEach(r=>{if(r.blocked_id)g.blocked.add(r.blocked_id)});
+  const ids=[...g.following,...g.followers,...g.outgoingByTarget.keys(),...g.incoming.map(r=>r.requester_id),...g.blocked];
+  await Promise.all([loadPrivacyMap(ids,epoch),ensureProfiles(ids,false)]);
+  if(epoch!==socialEpoch||req!==socialGraphReq)return false; // logged out / newer load in flight
+  socialGraph=g;socialLoadedAt=Date.now();
+  return true;
+ }catch(e){
+  if(epoch===socialEpoch&&req===socialGraphReq){console.error("Social graph error:",e);socialGraphError=e;toast("Could not load your Socialize data: "+errMsg(e))}
+  return false;
+ }finally{
+  if(epoch===socialEpoch&&req===socialGraphReq){socialGraphLoading=false;refreshPeopleUI()}
+ }
+}
+async function loadPeopleProfiles(search){
+ if(!currentUser){peopleProfilesCache=[];peopleLoading=false;refreshPeopleUI();return}
+ const epoch=socialEpoch,req=++peopleListReq,s=sanitizeSearch(search);
+ peopleLoading=true;peopleError=null;refreshPeopleUI();
+ try{
+  let q=supabaseClient.from("profiles").select("id,username,display_name,avatar_url").neq("id",currentUser.id).order("username",{ascending:true}).limit(60);
+  if(s)q=q.or(`username.ilike.%${s}%,display_name.ilike.%${s}%`);
+  const {data,error}=await q;
+  if(error)throw error;
+  const rows=(data||[]).filter(p=>p.id!==currentUser.id);
+  await loadPrivacyMap(rows.map(p=>p.id),epoch);
+  if(epoch!==socialEpoch||req!==peopleListReq)return;
+  rows.forEach(p=>profileCache.set(p.id,p));
+  peopleProfilesCache=rows;peopleLoadedAt=Date.now();
+  if(!s)suggestionPool=rows;
+ }catch(e){
+  if(epoch===socialEpoch&&req===peopleListReq){console.error("People load error:",e);peopleError=e}
+ }finally{
+  if(epoch===socialEpoch&&req===peopleListReq){peopleLoading=false;refreshPeopleUI()}
+ }
+}
+/* Refreshes data when the People area is opened, without repeating queries that just ran. */
+function ensurePeopleData(){
+ if(!currentUser)return;
+ if(!socialGraphLoading&&Date.now()-socialLoadedAt>15000)loadSocialGraph();
+ if(!peopleLoading&&(!peopleLoadedAt||Date.now()-peopleLoadedAt>60000))loadPeopleProfiles(peopleSearchQuery);
+}
+
+/* ---------- Actions (RPC only) ---------- */
+async function runSocialAction(busyKey,rpcKey,id,okMsg){
+ if(!currentUser||peopleActionBusy.has(busyKey))return false;
+ const epoch=socialEpoch,d=SOCIAL_RPC[rpcKey];let noop=false;
+ peopleActionBusy.add(busyKey);refreshPeopleUI();
+ try{
+  const {data,error}=await supabaseClient.rpc(d.fn,{[d.arg]:id});
+  if(error)throw error;
+  if(d.bool&&data===false)noop=true; // function ran but matched nothing
+ }catch(e){
+  console.error(d.fn+" failed:",e);
+  if(epoch===socialEpoch){peopleActionBusy.delete(busyKey);toast(socialErr(rpcKey,e));refreshPeopleUI()}
+  return false;
+ }
+ await loadSocialGraph(); // re-read the real state from Supabase
+ if(epoch===socialEpoch){peopleActionBusy.delete(busyKey);if(noop)toast("Nothing was changed. It may already have been removed; your lists have been refreshed.");else if(okMsg)toast(okMsg);refreshPeopleUI()}
+ return !noop;
+}
+async function handleSocializeClick(targetId){
+ if(!currentUser){openAuth("login",()=>handleSocializeClick(targetId));return}
+ if(getPersonActionState(targetId)!=="none")return; // no duplicate requests or relationships
+ const ok=await runSocialAction(targetId,"send",targetId,null);
+ if(!ok)return;
+ const st=getPersonActionState(targetId),n=nameOf(targetId);
+ if(st==="socializing")toast("You are now Socializing with "+n+".");
+ else if(st==="requested")toast("Request sent to "+n+". It stays pending until they approve.");
+ else toast("The request was accepted by the server, but the new state could not be confirmed. Please refresh.");
+}
+function handleBlockClick(id){
+ if(!confirm("Block "+nameOf(id)+"? Existing Socialize relationships and pending requests with them will be handled by the server."))return;
+ runSocialAction("block-"+id,"block",id,"Account blocked.");
+}
+
+/* ---------- Rendering: People ---------- */
+function personRow(p,sub,actions){
+ return`<div class="compass-person"><div class="person-avatar">${avatarHTML(p,38)}</div><div class="follow-info"><strong>${esc(personLabel(p))}</strong><span>${sub}</span></div><div class="person-actions">${actions}</div></div>`;
+}
+function handleOf(p){return p.username?"@"+esc(p.username):""}
+function stateBox(msg,btnAttr,btnLabel){return`<div class="empty-state">${msg}${btnAttr?`<br><button class="secondary-btn" ${btnAttr} style="margin-top:10px">${btnLabel||"Try again"}</button>`:""}</div>`}
+function ensurePeopleShell(root){
+ if(root.querySelector("#peopleShell"))return;
+ root.innerHTML=`<div id="peopleShell"><div class="compass-heading"><h2>People</h2><p>Build your Socialize network. Public accounts connect immediately; private accounts must approve your request.</p></div><div class="compass-people-tabs" id="peopleTabs"></div><div class="people-search" id="peopleSearchWrap"><input id="peopleSearchInput" type="search" placeholder="Search members by name or username" autocomplete="off" spellcheck="false" aria-label="Search members"></div><div id="peopleBody"></div></div>`;
+ const inp=$("peopleSearchInput");inp.value=peopleSearchQuery;
+ /* Created once per shell; the input element is never re-rendered, so it keeps focus while typing. */
+ inp.addEventListener("input",e=>{
+  peopleSearchQuery=e.target.value;
+  clearTimeout(peopleSearchDebounce);
+  peopleSearchDebounce=setTimeout(()=>loadPeopleProfiles(peopleSearchQuery),350);
+ });
+}
+function renderPeople(){
+ const root=$("compassContent");
+ if(!root||activeView!=="compass"||compassTab!=="people"||selectedTopicId!==null)return;
+ if(!currentUser){
+  root.innerHTML=`<div class="compass-heading"><h2>People to discover</h2><p>Meet voices sharing perspectives from different communities.</p></div><div class="empty-state">Log in to discover people and build your Socialize network.<br><button class="primary-btn" id="peopleLoginBtn" style="margin-top:10px">Log in</button></div>`;
+  $("peopleLoginBtn").onclick=()=>openAuth("login",()=>{compassTab="people";setView("compass")});
+  return;
+ }
+ ensurePeopleShell(root);
+ const g=socialGraph;
+ const tabs=[["discover","Discover",0],["requests","Requests",g.incoming.length+g.outgoingByTarget.size],["socializing","Socializing",g.following.size],["socializers","Socializers",g.followers.size],["blocked","Blocked",g.blocked.size]];
+ $("peopleTabs").innerHTML=tabs.map(([id,label,n])=>`<button data-people-tab="${id}" class="${peopleSubTab===id?"active":""}">${label}${n?` (${n})`:""}</button>`).join("");
+ $("peopleSearchWrap").style.display=peopleSubTab==="discover"?"block":"none";
+ const body=$("peopleBody"),firstLoad=socialGraphLoading&&!socialLoadedAt;
+ if(peopleSubTab==="discover")body.innerHTML=discoverHTML();
+ else if(socialGraphError&&!socialLoadedAt)body.innerHTML=stateBox("Could not load your Socialize data. "+esc(errMsg(socialGraphError)),"data-retry-graph");
+ else if(firstLoad)body.innerHTML=stateBox("Loading…");
+ else if(peopleSubTab==="requests")body.innerHTML=requestsHTML();
+ else if(peopleSubTab==="socializing")body.innerHTML=socializingHTML();
+ else if(peopleSubTab==="socializers")body.innerHTML=socializersHTML();
+ else body.innerHTML=blockedHTML();
+}
+function discoverHTML(){
+ if(peopleError&&!peopleProfilesCache.length)return stateBox("Could not load people. "+esc(errMsg(peopleError)),"data-retry-people");
+ if(peopleLoading&&!peopleProfilesCache.length)return stateBox("Loading people…");
+ if(!peopleProfilesCache.length)return stateBox(peopleSearchQuery.trim()?"No members match your search.":"No other members yet.");
+ return peopleProfilesCache.map(p=>{
+  const st=getPersonActionState(p.id),priv=isPrivateAccount(p),b=peopleActionBusy.has(p.id);
+  let label=priv?"Request":"Socialize",cls="",dis=b;
+  if(st==="blocked"){label="Blocked";dis=true}
+  else if(st==="socializing"){label="Socializing";cls="socializing";dis=true}
+  else if(st==="requested"){label="Requested";dis=true}
+  const sub=[handleOf(p),priv?"🔒 Private":"",socialGraph.followers.has(p.id)?"Socializing with you":""].filter(Boolean).join(" · ");
+  const blockBtn=st==="blocked"?"":`<button class="secondary-btn" data-block="${esc(p.id)}" ${peopleActionBusy.has("block-"+p.id)?"disabled":""}>${peopleActionBusy.has("block-"+p.id)?"…":"Block"}</button>`;
+  return personRow(p,sub,`<button class="socialize-btn ${cls}" data-socialize="${esc(p.id)}" ${dis?"disabled":""}>${b?"…":esc(label)}</button>${blockBtn}`);
+ }).join("");
+}
+function requestsHTML(){
+ const g=socialGraph;
+ const out=[...g.outgoingByTarget.values()].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+ const time=r=>`<time data-ts="${esc(r.created_at)}" datetime="${esc(r.created_at)}" title="${esc(exactTime(r.created_at))}">${esc(relTime(r.created_at))}</time>`;
+ let h=`<div class="people-section-title">Incoming requests</div>`;
+ h+=g.incoming.length?g.incoming.map(r=>{
+  const p=profileCache.get(r.requester_id)||{id:r.requester_id},b=peopleActionBusy.has(r.id);
+  return personRow(p,`${handleOf(p)}${p.username?" · ":""}${time(r)}`,`<button class="primary-btn" data-accept="${esc(r.id)}" ${b?"disabled":""}>${b?"…":"Accept"}</button><button class="secondary-btn" data-decline="${esc(r.id)}" ${b?"disabled":""}>Decline</button>`);
+ }).join(""):stateBox("No incoming requests.");
+ h+=`<div class="people-section-title">Outgoing requests</div>`;
+ h+=out.length?out.map(r=>{
+  const p=profileCache.get(r.target_id)||{id:r.target_id},b=peopleActionBusy.has(r.id);
+  return personRow(p,`${handleOf(p)}${p.username?" · ":""}${time(r)}`,`<button class="secondary-btn" data-cancel="${esc(r.id)}" ${b?"disabled":""}>${b?"…":"Cancel"}</button>`);
+ }).join(""):stateBox("No outgoing requests.");
+ return h;
+}
+function sortedIds(set){return[...set].sort((a,b)=>nameOf(a).localeCompare(nameOf(b)))}
+function socializingHTML(){
+ const ids=sortedIds(socialGraph.following);
+ if(!ids.length)return stateBox("You are not Socializing with anyone yet. Use Discover to find people.");
+ return ids.map(id=>{
+  const p=profileCache.get(id)||{id},mutual=socialGraph.followers.has(id);
+  return personRow(p,`${handleOf(p)}${mutual?`${p.username?" · ":""}<span class="badge-mutual">Mutual ✓</span>`:""}`,`<button class="secondary-btn" data-unsocialize="${esc(id)}" ${peopleActionBusy.has(id)?"disabled":""}>${peopleActionBusy.has(id)?"…":"Unsocialize"}</button><button class="secondary-btn" data-block="${esc(id)}" ${peopleActionBusy.has("block-"+id)?"disabled":""}>Block</button>`);
+ }).join("");
+}
+function socializersHTML(){
+ const ids=sortedIds(socialGraph.followers);
+ if(!ids.length)return stateBox("No one is Socializing with you yet.");
+ return ids.map(id=>{
+  const p=profileCache.get(id)||{id},st=getPersonActionState(id),b=peopleActionBusy.has(id),priv=isPrivateAccount(p);
+  let action="";
+  if(st==="socializing")action=`<span class="badge-mutual">Mutual ✓</span>`;
+  else if(st==="requested")action=`<button class="socialize-btn" disabled>Requested</button>`;
+  else if(st==="none")action=`<button class="socialize-btn" data-socialize="${esc(id)}" ${b?"disabled":""}>${b?"…":priv?"Request back":"Socialize back"}</button>`;
+  const blk=st==="blocked"?"":`<button class="secondary-btn" data-block="${esc(id)}" ${peopleActionBusy.has("block-"+id)?"disabled":""}>Block</button>`;
+  return personRow(p,handleOf(p),action+blk);
+ }).join("");
+}
+function blockedHTML(){
+ const ids=sortedIds(socialGraph.blocked);
+ if(!ids.length)return stateBox("You have not blocked any accounts.");
+ return ids.map(id=>{
+  const p=profileCache.get(id)||{id},b=peopleActionBusy.has("unblock-"+id);
+  return personRow(p,handleOf(p),`<button class="secondary-btn" data-unblock="${esc(id)}" ${b?"disabled":""}>${b?"…":"Unblock"}</button>`);
+ }).join("");
+}
+function renderSuggestions(){
+ const el=$("suggestList");if(!el)return;
+ if(!currentUser){el.innerHTML='<div class="suggest-empty">Log in to discover members and build your Socialize network.</div>';return}
+ const list=suggestionPool.filter(p=>getPersonActionState(p.id)==="none").slice(0,3);
+ if(!list.length){el.innerHTML=`<div class="suggest-empty">${peopleLoading&&!suggestionPool.length?"Loading members…":"No new members to suggest right now."}</div>`;return}
+ el.innerHTML=list.map(p=>{const b=peopleActionBusy.has(p.id);return`<div class="follow-row">${avatarHTML(p,36)}<div class="follow-info"><strong>${esc(personLabel(p))}</strong><span>${handleOf(p)}</span></div><button class="socialize-btn" data-socialize="${esc(p.id)}" ${b?"disabled":""}>${b?"…":isPrivateAccount(p)?"Request":"Socialize"}</button></div>`}).join("");
+}
+/* One delegated handler for People actions; used by The Compass and by the sidebar suggestions. */
+function handlePeopleClick(e){
+ const t=e.target.closest("[data-people-tab],[data-socialize],[data-accept],[data-decline],[data-cancel],[data-unsocialize],[data-block],[data-unblock],[data-retry-people],[data-retry-graph]");
+ if(!t)return false;
+ if(t.disabled)return true;
+ const d=t.dataset;
+ if("peopleTab" in d){peopleSubTab=d.peopleTab;renderPeople();return true}
+ if("retryPeople" in d){loadPeopleProfiles(peopleSearchQuery);return true}
+ if("retryGraph" in d){loadSocialGraph();return true}
+ if("socialize" in d){handleSocializeClick(d.socialize);return true}
+ const act=(key,rpc,id,msg,busyKey)=>requireAuth(()=>runSocialAction(busyKey||id,rpc,id,msg));
+ const g=socialGraph;
+ if("accept" in d){if(g.incoming.some(r=>r.id===d.accept))act("accept","accept",d.accept,"Request accepted.")}
+ else if("decline" in d){if(g.incoming.some(r=>r.id===d.decline))act("decline","decline",d.decline,"Request declined.")}
+ else if("cancel" in d){if(g.outgoingById.has(d.cancel))act("cancel","cancel",d.cancel,"Request cancelled.")}
+ else if("unsocialize" in d){if(g.following.has(d.unsocialize))act("unsocialize","unsocialize",d.unsocialize,"Unsocialized.")}
+ else if("block" in d)requireAuth(()=>handleBlockClick(d.block));
+ else if("unblock" in d){if(g.blocked.has(d.unblock))act("unblock","unblock",d.unblock,"Account unblocked.","unblock-"+d.unblock)}
+ return true;
+}
+$("suggestList").addEventListener("click",handlePeopleClick);
+
+function renderCompass(){
+  const root=$("compassContent");
+  document.querySelectorAll("[data-compass-tab]").forEach(b=>b.classList.toggle("active",b.dataset.compassTab===compassTab));
+  if(selectedTopicId!==null){renderTopicDetail();return}
+  if(compassTab==="topics"){
+    root.innerHTML=`<div class="compass-heading"><h2>Explore topics</h2><p>Find communities and conversations around what matters to you.</p></div><div class="compass-grid">${compassTopics.map(t=>`<button class="compass-topic-card" data-open-topic="${t.id}"><span class="compass-topic-icon">${t.icon}</span><span class="compass-topic-copy"><strong>${esc(t.name)}</strong><span>${esc(t.desc)}</span></span></button>`).join("")}</div>`;
+  }else if(compassTab==="people"){
+    renderPeople();
+  }else{
+    const score=p=>p.approvals+p.amplifications+p.responses;
+    let arr=postsFrom(feedIds);
+    if(compassTab==="news")arr=[];
+    else arr=[...arr].sort((a,b)=>score(b)-score(a));
+    if(compassTab==="trending")arr=arr.slice(0,3);
+    root.innerHTML=`<div class="compass-heading"><h2>${compassTab==="news"?"News":compassTab==="trending"?"Trending":"Popular publications"}</h2><p>${compassTab==="news"?"Current-affairs publications will appear here.":"Publications receiving the most attention."}</p></div>${arr.map(postCard).join("")||'<div class="empty-state">No publications yet.</div>'}`;
+  }
+}
+function renderTopicDetail(){const root=$("compassContent"),t=compassTopics.find(x=>x.id===selectedTopicId);root.innerHTML=`<button class="compass-back" data-compass-back>← All topics</button><section class="topic-detail-head"><div class="topic-detail-title"><h2>${esc(t.name)}</h2><p>${esc(t.desc)}</p></div><div class="topic-detail-bottom"><div class="topic-detail-count"><strong>${t.icon}</strong>Topic</div><button class="socialize-btn ${socializedTopics.has(t.id)?"socializing":""}" data-topic-socialize="${t.id}">${socializedTopics.has(t.id)?"Socializing":"Socialize"}</button></div></section><div class="topic-filters"><button data-topic-filter="for-you" class="${topicFilter==="for-you"?"active":""}">For You</button><button data-topic-filter="latest" class="${topicFilter==="latest"?"active":""}">Latest</button><button data-topic-filter="popular" class="${topicFilter==="popular"?"active":""}">Popular</button></div><div class="empty-state">Publications are not tagged by topic yet.</div>`}
+$("compassExplorer").addEventListener("click",e=>{
+  if(handlePeopleClick(e))return;
+  let b=e.target.closest("[data-compass-tab]");
+  if(b){compassTab=b.dataset.compassTab;selectedTopicId=null;renderCompass();if(compassTab==="people")ensurePeopleData();return}
+  b=e.target.closest("[data-open-topic]");if(b){selectedTopicId=+b.dataset.openTopic;topicFilter="for-you";renderCompass();return}
+  if(e.target.closest("[data-compass-back]")){selectedTopicId=null;renderCompass();return}
+  b=e.target.closest("[data-topic-filter]");if(b){topicFilter=b.dataset.topicFilter;renderTopicDetail();return}
+  b=e.target.closest("[data-topic-socialize]");if(b){const id=+b.dataset.topicSocialize;requireAuth(()=>{socializedTopics.has(id)?socializedTopics.delete(id):socializedTopics.add(id);renderTopicDetail()});return}
+});
+
+
+
+/* ---------- Wiring ---------- */
+document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>setView(b.dataset.view)));
+document.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click",()=>{activeFilter=b.dataset.filter;document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x===b));renderPosts()}));
+$("publishBtn").onclick=async()=>{const text=$("composerText").value.trim();if(!text){toast("Write a publication first.");return}if(!currentUser){openAuth("login",()=>$("composerText").focus());return}if(publishing)return;publishing=true;setAccountUI();try{const {error}=await supabaseClient.from("publications").insert({author_id:currentUser.id,content:text,audience:"public"});if(error)throw error;$("composerText").value="";activeFilter="for-you";document.querySelectorAll("[data-filter]").forEach(b=>b.classList.toggle("active",b.dataset.filter==="for-you"));setView("pulse");await loadPublications();toast("Your publication is live.")}catch(e){console.error("Publication creation error:",e);toast("Could not publish: "+errMsg(e))}finally{publishing=false;setAccountUI()}};
+$("searchInput").addEventListener("input",renderPosts);$("searchToggle").onclick=()=>{$("searchInput").focus();$("searchInput").scrollIntoView({behavior:"smooth",block:"center"})};$("notifyBtn").onclick=()=>setView("signal");
+document.querySelectorAll(".tool-chip").forEach(b=>b.onclick=()=>toast(b.dataset.tool+" attachments are not part of this phase."));
+$("accountButton").onclick=()=>currentUser?setView("space"):openAuth("login");
+$("closeAuth").onclick=closeAuth;$("authSubmit").onclick=handleAuthSubmit;$("authSwitch").onclick=()=>openAuth(authMode==="signup"?"login":"signup",pendingAction);$("forgotPassword").onclick=()=>openAuth("reset");$("skipInterests").onclick=()=>$("interestModal").classList.remove("open");$("saveInterests").onclick=saveInterests;
+$("authModal").addEventListener("click",e=>{if(e.target===$("authModal"))closeAuth()});
+$("authModal").addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.tagName==="INPUT")handleAuthSubmit()});
+
+async function init(){
+ if(!supabaseClient){feedLoading=false;toast("Supabase could not load. Check your connection.");renderPosts();return}
+ setAccountUI();
+ supabaseClient.auth.onAuthStateChange((event,session)=>{
+  /* Deferred so Supabase calls never run inside the auth callback itself. */
+  setTimeout(()=>{
+   if(event==="PASSWORD_RECOVERY")openAuth("update");
+   if(event==="SIGNED_OUT"){applySession(null);return}
+   if(session?.user)applySession(session.user);
+  },0);
+ });
+ try{const {data:{session}}=await supabaseClient.auth.getSession();if(session)await applySession(session.user)}catch(e){console.error("Session error:",e)}
+ if(location.hash.includes("type=recovery"))openAuth("update");
+ renderPosts();
+ await loadPublications();
+}
+init();
+
+</script>
+</body></html>
