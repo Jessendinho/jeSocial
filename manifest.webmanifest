@@ -1,0 +1,25 @@
+{
+  "name": "jeSocial",
+  "short_name": "jeSocial",
+  "description": "The world, in your conversation.",
+  "start_url": "./jesocial-prototype.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#123b2c",
+  "background_color": "#f4f2ea",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
