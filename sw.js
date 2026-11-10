@@ -1,23 +1,51 @@
-const CACHE='jesocial-v1';
-const ASSETS=[
- './','./index.html','./jesocial-prototype.html',
- './manifest.webmanifest','./offline.html',
- './icons/icon-192.png','./icons/icon-512.png',
- './icons/icon-192-maskable.png','./icons/icon-512-maskable.png'
+
+const CACHE = 'jesocial-v2';
+
+const ASSETS = [
+  './',
+  './index.html',
+  './jesocial-prototype.html',
+  './manifest.webmanifest',
+  './offline.html',
+  './icon-192.png',
+  './icon-512.png'
 ];
-self.addEventListener('install',e=>{
- e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting()));
+
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE)
+      .then(cache => cache.addAll(ASSETS))
+      .then(() => self.skipWaiting())
+  );
 });
-self.addEventListener('activate',e=>{
- e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys()
+      .then(keys => Promise.all(
+        keys
+          .filter(key => key.startsWith('jesocial-') && key !== CACHE)
+          .map(key => caches.delete(key))
+      ))
+      .then(() => self.clients.claim())
+  );
 });
-self.addEventListener('fetch',e=>{
- const req=e.request;
- if(req.method!=='GET') return;
- if(req.url.includes('supabase')) return;
- if(req.mode==='navigate'){
-   e.respondWith(fetch(req).catch(()=>caches.match('./offline.html')));
-   return;
- }
- e.respondWith(caches.match(req).then(r=>r||fetch(req)));
+
+self.addEventListener('fetch', event => {
+  const request = event.request;
+
+  if (request.method !== 'GET') return;
+  if (request.url.includes('supabase')) return;
+
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request).catch(() => caches.match('./offline.html'))
+    );
+    return;
+  }
+
+  event.respondWith(
+    caches.match(request).then(response => response || fetch(request))
+  );
 });
+                      
