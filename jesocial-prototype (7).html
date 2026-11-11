@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#123b2c">
+<meta name="description" content="The world, in your conversation.">
+<meta name="application-name" content="jeSocial">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="jeSocial">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<title>jeSocial — The world, in your conversation</title>
+<style>
+
+:root{--green:#123b2c;--gold:#e8b84b;--cream:#f4f2ea;--ink:#17251e;--muted:#68736b;--paper:#fffefa;--line:#e4e4d9;--soft:#e7efe8;--red:#b94b42;--shadow:0 8px 24px #182b2010}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,textarea{font:inherit}button{cursor:pointer}#app{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;background:var(--green);color:white}.topbar-inner{max-width:1240px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:18px}.brand{display:flex;align-items:center;gap:10px;min-width:190px}.brand-mark{width:38px;height:38px;border-radius:12px;background:var(--gold);color:var(--green);display:grid;place-items:center;font-weight:900}.brand-name{font-size:21px;font-weight:850}.brand-name span{color:var(--gold)}.tagline{font-size:10px;color:#ffffffa8}.searchbox{flex:1;max-width:470px}.searchbox input{width:100%;padding:10px 15px;border-radius:30px;border:1px solid #ffffff33;background:#ffffff12;color:white}.searchbox input::placeholder{color:#ffffff99}.top-actions{margin-left:auto;display:flex;align-items:center;gap:8px}.icon-btn{position:relative;border:1px solid #ffffff33;background:#ffffff12;color:white;border-radius:50%;width:38px;height:38px}.signal-badge{position:absolute;right:-4px;top:-5px;min-width:17px;height:17px;padding:0 4px;border-radius:10px;background:var(--gold);color:var(--green);font-size:9px;font-weight:900;display:none;align-items:center;justify-content:center;border:2px solid var(--green)}.signal-badge.visible{display:flex}.avatar{width:36px;height:36px;border-radius:50%;background:#d6e3d5;color:var(--green);display:grid;place-items:center;font-weight:800;font-size:11px;overflow:hidden}.layout{max-width:1240px;margin:auto;padding:24px 20px 50px;display:grid;grid-template-columns:210px minmax(0,1fr) 260px;gap:22px}.sidebar,.right-col{position:sticky;top:82px;align-self:start}.side-card,.panel,.post,.composer{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.side-card{padding:14px 10px}.side-label{font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase;padding:8px}.nav-item{width:100%;border:0;background:none;text-align:left;padding:12px;border-radius:10px;color:#526057;font-size:13px;font-weight:750}.nav-item.active{background:var(--soft);color:var(--green)}.nav-icon{display:inline-block;width:25px}.side-bottom{border-top:1px solid var(--line);margin-top:12px;padding:12px;font-size:10px;color:var(--muted)}.main{min-width:0}.welcome{display:flex;justify-content:space-between;align-items:end;gap:10px;margin-bottom:16px}.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#9a7625;font-weight:900}h1{font-size:27px;letter-spacing:-1px;margin:5px 0}.welcome p{font-size:12px;color:var(--muted);margin:0}.date-pill{font-size:10px;color:var(--muted);white-space:nowrap}.feed-tabs,.compass-tabs,.topic-filters,.space-tabs{display:flex;gap:5px;overflow:auto;border-bottom:1px solid var(--line);margin-bottom:14px}.feed-tabs button,.compass-tabs button,.topic-filters button,.space-tabs button{border:0;background:none;padding:11px 12px;color:var(--muted);font-size:11px;font-weight:800;white-space:nowrap;border-bottom:2px solid transparent}.feed-tabs button.active,.compass-tabs button.active,.topic-filters button.active,.space-tabs button.active{color:var(--green);border-color:var(--gold)}.composer{padding:14px;margin-bottom:14px}.composer-top{display:flex;gap:10px}.composer-avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--soft);color:var(--green);font-weight:800;overflow:hidden;flex-shrink:0}.composer textarea{flex:1;min-height:48px;border:0;outline:0;resize:vertical;background:transparent}.composer-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:10px;margin-top:8px}.tool-chip{border:0;border-radius:20px;padding:7px 9px;background:#f3f3ed;color:#526057;font-size:10px}.primary-btn{border:0;border-radius:24px;background:var(--green);color:white;padding:9px 16px;font-size:11px;font-weight:800;min-height:38px}.primary-btn:disabled{opacity:.6}.feed-list{display:grid;gap:12px}.post{padding:15px}.post-head{display:flex;align-items:center;gap:10px}.post-avatar,.mini-avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:white;font-size:11px;font-weight:850;flex-shrink:0}.post-person{flex:1;min-width:0}.post-person strong{display:block;font-size:12px}.post-person span{display:block;font-size:10px;color:var(--muted);margin-top:3px}.post-menu{border:0;background:none;color:var(--muted)}.source-tag{display:inline-block;margin-top:11px;padding:5px 8px;background:var(--soft);color:var(--green);font-size:9px;font-weight:900;text-transform:uppercase;border-radius:5px}.post-copy{font-size:13px;line-height:1.65;color:#344139;white-space:pre-wrap;word-break:break-word}.post-art{min-height:135px;border-radius:12px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;color:white}.art-kicker,.art-foot{font-size:9px;opacity:.8}.art-title{font-size:23px;font-weight:900;white-space:pre-line}.post-stats{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid var(--line);font-size:10px;color:var(--muted)}.post-actions{display:flex;justify-content:space-between;gap:4px;padding-top:8px;border-top:1px solid var(--line)}.action-btn{flex:1;min-width:0;min-height:48px;border:0;background:none;color:#667169;border-radius:10px;padding:5px 2px;font-size:10px;font-weight:750;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}.action-btn .ai{font-size:14px;line-height:1}.action-btn .ac{font-size:10px;font-weight:850;min-height:12px}.action-btn.approved,.action-btn.on{background:var(--soft);color:var(--green)}.action-btn.disapproved{background:#fbece9;color:var(--red)}.action-btn:focus-visible,.primary-btn:focus-visible,.secondary-btn:focus-visible{outline:2px solid var(--gold);outline-offset:1px}.right-col{display:grid;gap:13px}.panel{padding:15px}.panel-title{font-size:12px;font-weight:850;margin-bottom:10px}.topic,.follow-row{display:flex;align-items:center;gap:9px;padding:9px 0;border-top:1px solid #f0f0e9}.topic-num{background:#f7ebcb;color:#89671d;border-radius:7px;padding:7px;font-size:10px}.topic-info,.follow-info{flex:1;min-width:0}.topic-info strong,.follow-info strong{display:block;font-size:10px}.topic-info span,.follow-info span{display:block;color:var(--muted);font-size:9px;margin-top:3px}.socialize-btn{border:1px solid #cbd8cc;background:white;color:var(--green);border-radius:20px;padding:6px 9px;font-size:9px;font-weight:800}.socialize-btn.socializing{background:var(--soft)}.note{background:var(--green);color:white;border-radius:16px;padding:17px}.note small{color:var(--gold);font-size:9px;text-transform:uppercase}.note h3{font-size:17px}.note p{font-size:10px;color:#ffffffb8;line-height:1.5}.compass-explorer{display:none}.compass-explorer.visible{display:block}.compass-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.compass-topic-card{display:flex;align-items:center;gap:10px;text-align:left;padding:12px;border:1px solid var(--line);border-radius:13px;background:var(--paper);color:var(--ink)}.compass-topic-icon{font-size:20px}.compass-topic-copy strong,.compass-topic-copy span{display:block}.compass-topic-copy strong{font-size:11px}.compass-topic-copy span{font-size:9px;color:var(--muted);margin-top:4px}.compass-heading h2{font-size:18px;margin:5px 0}.compass-heading p{font-size:11px;color:var(--muted)}.compass-person{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:12px;margin:8px 0;background:white}.topic-detail-head{background:var(--green);color:white;border-radius:15px;padding:16px;margin:12px 0}.topic-detail-title h2{font-size:19px;margin:0 0 5px}.topic-detail-title p{font-size:10px;color:#ffffffbd}.topic-detail-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #ffffff33;padding-top:12px;margin-top:12px}.topic-detail-count{font-size:10px}.topic-detail-count strong{display:block;color:var(--gold);font-size:16px}.compass-back{border:0;background:none;color:var(--green);font-size:11px;font-weight:800;min-height:40px}.empty-state{text-align:center;padding:30px;background:white;border:1px dashed var(--line);border-radius:14px;color:var(--muted);font-size:12px}.mobile-nav{display:none}.toast{position:fixed;z-index:50;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:white;border-radius:25px;padding:11px 16px;font-size:11px;display:none;max-width:92vw;text-align:center}.toast.show{display:block}.modal-backdrop{display:none;position:fixed;inset:0;z-index:40;background:#0c181177;align-items:center;justify-content:center;padding:16px}.modal-backdrop.open{display:flex}.modal{background:var(--paper);border-radius:17px;padding:20px;width:min(460px,100%);max-height:90vh;overflow:auto}.modal h2{font-size:19px;margin:0 0 7px}.modal p{font-size:11px;color:var(--muted);line-height:1.5}.modal input,.modal textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;margin:5px 0;background:white;color:var(--ink)}.modal textarea{min-height:100px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}.secondary-btn{border:1px solid var(--line);background:white;border-radius:20px;padding:9px 14px;font-size:11px;min-height:38px}.secondary-btn:disabled{opacity:.6}.auth-switch{font-size:11px;color:var(--green);font-weight:800;border:0;background:none;padding:8px 0}.interest-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0}.interest-option{display:flex;gap:7px;align-items:center;padding:8px;border:1px solid var(--line);border-radius:9px;font-size:10px;background:white}.interest-option input{width:auto;margin:0}.account-strip{display:flex;align-items:center;gap:9px;margin-left:6px}.account-strip button{border:0;background:none;color:white;font-size:10px;min-height:36px}.profile-box{padding:16px;background:white;border:1px solid var(--line);border-radius:14px;margin-bottom:12px}.profile-box label{display:block;font-size:10px;color:var(--muted);margin-top:9px}.profile-box input,.profile-box textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;margin-top:4px}
+/* Phase 4 additions */
+.av{border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:850;object-fit:cover;flex-shrink:0;background:var(--green);overflow:hidden}
+.post-person time{display:inline}
+.thread{display:grid;gap:8px;margin:12px 0;max-height:42vh;overflow:auto}.thread-item{display:flex;gap:9px;padding:9px;border:1px solid var(--line);border-radius:11px;background:#fff}.thread-item .ti-body{min-width:0;flex:1}.thread-item strong{font-size:11px}.thread-item time{font-size:9px;color:var(--muted);margin-left:5px}.modal .thread-item p{margin:3px 0 0;font-size:12px;line-height:1.5;color:var(--ink);white-space:pre-wrap;word-break:break-word}.thread-ref{font-size:11px;color:var(--muted);border-left:3px solid var(--gold);padding-left:9px;margin:6px 0;word-break:break-word}
+.space-head{display:grid;gap:12px;margin-bottom:0}.space-top{display:flex;gap:14px;align-items:center}.space-id{min-width:0}.space-id h2{font-size:18px;margin:0;word-break:break-word}.space-id .handle{font-size:11px;color:var(--muted)}.space-id .bio{font-size:12px;line-height:1.5;margin:6px 0 0;color:#344139;word-break:break-word;white-space:pre-wrap}.space-social-stats{display:flex;gap:0;align-items:stretch;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0;margin:2px 0}.space-social-stat{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:42px;border:0;background:transparent;color:var(--ink);padding:6px 8px;border-radius:9px}.space-social-stat+ .space-social-stat{border-left:1px solid var(--line);border-radius:0 9px 9px 0}.space-social-stat strong{font-size:17px;color:var(--green);font-weight:900}.space-social-stat span{font-size:11px;color:var(--muted);font-weight:750}.space-social-stat:disabled{cursor:default;opacity:.7}.space-social-stat:not(:disabled){cursor:pointer}.space-social-stat:not(:disabled):active{background:var(--soft)}.space-btns{display:flex;flex-wrap:wrap;gap:8px}.space-btns button{min-height:40px}.edit-details summary{cursor:pointer;font-size:12px;font-weight:800;color:var(--green);padding:8px 0;min-height:40px}.edit-details .primary-btn{margin-top:12px}.danger{color:var(--red)}
+
+/* The Signal */
+.signal-workspace{display:none}.signal-workspace.visible{display:block}
+.signal-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 0 12px;border-bottom:1px solid var(--line)}
+.signal-unread{font-size:11px;color:var(--muted)}.signal-unread strong{color:var(--green);font-size:17px;margin-right:4px}
+.signal-mark-all{border:0;background:none;color:var(--green);font-size:10px;font-weight:850;padding:9px 4px;min-height:38px}
+.signal-tabs{display:flex;gap:5px;overflow:auto;border-bottom:1px solid var(--line);margin:0 0 13px}
+.signal-tabs button{border:0;background:none;padding:11px 12px;color:var(--muted);font-size:11px;font-weight:800;white-space:nowrap;border-bottom:2px solid transparent}
+.signal-tabs button.active{color:var(--green);border-color:var(--gold)}
+.signal-list{display:grid;gap:8px}.signal-item{display:flex;gap:11px;align-items:flex-start;padding:13px;border:1px solid var(--line);border-radius:13px;background:var(--paper);text-align:left;color:var(--ink);width:100%;box-shadow:var(--shadow)}
+.signal-item.unread{background:#f5f8f2;border-color:#c9d8c9}.signal-item:active{transform:translateY(1px)}
+.signal-avatar{flex-shrink:0}.signal-copy{min-width:0;flex:1}.signal-copy strong{font-size:11px;line-height:1.4}.signal-copy p{font-size:11px;line-height:1.5;color:#48554c;margin:3px 0 5px;overflow-wrap:anywhere}.signal-copy time{font-size:9px;color:var(--muted)}
+.signal-unread-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);margin:5px 1px 0 0;flex-shrink:0}.signal-empty{text-align:center;padding:36px 18px;background:var(--paper);border:1px dashed var(--line);border-radius:14px;color:var(--muted);font-size:12px;line-height:1.6}
+.signal-login{margin-top:12px}
+
+@media(max-width:980px){.layout{grid-template-columns:185px minmax(0,1fr)}.right-col{display:none}}@media(max-width:680px){.topbar-inner{padding:9px 12px;gap:8px}.brand{min-width:0}.brand-mark{width:34px;height:34px}.brand-name{font-size:18px}.tagline,.searchbox,.top-actions .icon-btn:first-child{display:none}.layout{display:block;padding:18px 11px 85px}.sidebar{display:none}.welcome{align-items:flex-start}h1{font-size:24px}.date-pill{font-size:9px}.compass-grid{grid-template-columns:1fr}.mobile-nav{display:flex;position:fixed;z-index:25;bottom:0;left:0;right:0;padding:8px 5px calc(8px + env(safe-area-inset-bottom));background:#fffefaed;border-top:1px solid var(--line);justify-content:space-around}.mobile-nav button{border:0;background:none;color:#778078;font-size:9px;display:flex;flex-direction:column;align-items:center;gap:3px;min-height:44px}.mobile-nav button span{font-size:18px}.mobile-nav button.active{color:var(--green)}.post{padding:12px}.action-btn{font-size:9px;padding:5px 1px}.toast{bottom:80px}.space-top{gap:11px}}
+
+
+.idea-composer{display:none;padding:20px;margin-bottom:18px}
+.studio-intro h2{font-size:21px;margin:5px 0;color:var(--green)}
+.studio-intro p{font-size:12px;line-height:1.55;color:var(--muted);margin:0 0 18px}
+.composer-label{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:11px;font-weight:850;color:var(--ink);margin:14px 0 6px}
+.composer-label span{font-size:9px;font-weight:650;color:var(--muted)}
+.idea-select,.idea-title{width:100%;min-height:44px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:white;color:var(--ink);outline:0}
+.idea-select:focus,.idea-title:focus,.idea-body:focus{border-color:var(--green);box-shadow:0 0 0 3px #123b2c12}
+.idea-body{display:block;width:100%;min-height:190px;border:1px solid var(--line);border-radius:10px;padding:13px;resize:vertical;line-height:1.65;background:white;color:var(--ink);outline:0}
+.idea-composer-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px solid var(--line);padding-top:13px;margin-top:12px}
+#ideaCharCount{font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums}
+.idea-audience-note{font-size:10px;color:var(--muted);margin:12px 0 0}
+.post-byline{font-size:10px;color:var(--muted);margin-top:3px}
+.post-category{display:inline-flex;align-items:center;margin:12px 0 7px;padding:5px 9px;border-radius:6px;background:var(--soft);color:var(--green);font-size:9px;font-weight:850}
+.post-title{font-size:16px;line-height:1.35;margin:3px 0 7px;color:var(--ink);font-weight:850;letter-spacing:-.2px}
+.post-copy{margin:0 0 4px}
+@media(max-width:680px){.idea-composer{padding:15px}.idea-body{min-height:170px}.composer-label{margin-top:12px}}
+/* Kenya-first publisher news */
+.news-list{display:grid;gap:11px}
+.news-card{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:15px;box-shadow:var(--shadow)}
+.news-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}
+.news-publisher{display:flex;align-items:center;gap:8px;min-width:0}
+.news-source-mark{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:var(--soft);color:var(--green);font-size:10px;font-weight:900;flex-shrink:0}
+.news-publisher strong{display:block;font-size:11px;color:var(--ink)}
+.news-publisher time{display:block;font-size:9px;color:var(--muted);margin-top:3px}
+.news-topic{font-size:9px;color:#89671d;background:#f7ebcb;border-radius:20px;padding:5px 8px;white-space:nowrap;font-weight:850}
+.news-title{font-size:15px;line-height:1.4;letter-spacing:-.2px;margin:0 0 12px;color:var(--ink);font-weight:850}
+.news-open{display:inline-flex;align-items:center;gap:6px;border:1px solid #cbd8cc;background:white;color:var(--green);border-radius:22px;padding:8px 12px;font-size:10px;font-weight:850;text-decoration:none;min-height:36px}
+.news-open:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.news-section-note{font-size:10px;color:var(--muted);margin:0 0 12px;line-height:1.5}
+.news-source-status{font-size:10px;color:var(--muted);padding:9px 2px}
+.news-load-btn{margin-top:10px}
+
+.compass-people-tabs{display:flex;gap:5px;overflow:auto;border-bottom:1px solid var(--line);margin:12px 0}
+.compass-people-tabs button{border:0;background:none;padding:10px 12px;color:var(--muted);font-size:11px;font-weight:800;white-space:nowrap;border-bottom:2px solid transparent}
+.compass-people-tabs button.active{color:var(--green);border-color:var(--gold)}
+.people-search{margin:10px 0}
+.people-search input{width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:24px;background:white;outline:0}
+.people-search input:focus{border-color:var(--green)}
+.compass-person{display:flex;align-items:center;gap:10px;padding:10px 12px;background:white;border:1px solid var(--line);border-radius:12px;margin-bottom:8px}
+.compass-person .person-avatar{flex-shrink:0}
+.people-section-title{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;color:var(--green);margin:18px 0 8px}
+
+.compass-person{flex-wrap:wrap}.compass-person .follow-info{min-width:120px}.person-actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-left:auto}.person-actions .secondary-btn,.person-actions .primary-btn,.person-actions .socialize-btn{min-height:36px;font-size:10px}.socialize-btn{min-height:34px}.socialize-btn:disabled{opacity:.7;cursor:default}.badge-mutual{font-size:10px;font-weight:800;color:var(--green);background:var(--soft);border-radius:12px;padding:4px 8px;display:inline-block}.suggest-empty{font-size:10px;color:var(--muted);padding:8px 0}.follow-row .av{flex-shrink:0}
+
+/* Compass Trending */
+.trending-list{display:grid;gap:9px}
+.trending-row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:15px 16px;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:13px;color:var(--ink);box-shadow:var(--shadow);min-height:60px}
+.trending-row:hover{background:#fbfaf3;border-color:#d9d9c9;border-left-color:var(--gold)}
+.trending-row:active{transform:translateY(1px)}
+.trending-row:focus-visible,.trending-back:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.trending-copy{flex:1;min-width:0;display:block}
+.trending-name{display:block;font-size:15px;font-weight:850;letter-spacing:-.2px;line-height:1.35;color:var(--green);overflow-wrap:anywhere}
+.trending-cat{display:block;margin-top:4px;font-size:10.5px;color:var(--muted);font-weight:650}
+.trending-chev{color:var(--muted);font-size:20px;line-height:1;flex-shrink:0}
+.trending-back{border:0;background:none;color:var(--green);font-size:11px;font-weight:800;min-height:40px;padding:0}
+.trending-detail-head{background:var(--green);color:white;border-radius:15px;padding:16px;margin:8px 0 14px}
+.trending-detail-head h2{font-size:19px;margin:0;overflow-wrap:anywhere}
+.trending-detail-head span{display:block;margin-top:5px;font-size:10px;color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:.5px}
+
+/* === jeSocial PWA Branded Launch Screen === */
+#jes-launch-screen{position:fixed;inset:0;z-index:99999;background:#123b2c;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:24px;transition:opacity .45s ease, visibility .45s ease}
+#jes-launch-screen.jes-hidden{opacity:0;visibility:hidden;pointer-events:none}
+#jes-launch-screen .jes-icon-wrap{width:118px;height:118px;border-radius:26px;background:#f4f2ea;display:grid;place-items:center;box-shadow:0 12px 32px #00000033, 0 0 0 2px #e8b84b33;overflow:hidden}
+#jes-launch-screen .jes-icon-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+#jes-launch-screen .jes-app-name{margin-top:20px;font-size:28px;font-weight:900;letter-spacing:-.02em;color:#fffefa;line-height:1}
+#jes-launch-screen .jes-app-name span{color:#e8b84b}
+#jes-launch-screen .jes-tagline{margin-top:10px;font-size:13px;font-weight:500;letter-spacing:.02em;color:#ffffffc8;text-align:center;max-width:280px;line-height:1.4}
+#jes-launch-screen .jes-accent-line{margin-top:22px;width:42px;height:3px;border-radius:99px;background:linear-gradient(90deg,#e8b84b,#f6d27a);opacity:.95}
+@media (prefers-reduced-motion:reduce){#jes-launch-screen{transition:none}}
+
+
+/* === My Space: personal digital home === */
+.space-home{display:grid;gap:14px}
+.space-hero{position:relative;overflow:hidden;border-radius:22px;padding:22px 18px 18px;color:#fff;background:radial-gradient(120% 90% at 100% 0%,#2a6a4c 0%,transparent 55%),linear-gradient(155deg,#0d2e22 0%,#123b2c 55%,#1a4d39 100%);box-shadow:0 14px 34px #123b2c38;border:1px solid #ffffff14}
+.space-hero::before{content:"";position:absolute;inset:0;opacity:.13;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23e8b84b' stroke-width='1.2'%3E%3Cpath d='M28 4l24 24-24 24L4 28z'/%3E%3Cpath d='M28 16l12 12-12 12-12-12z'/%3E%3C/g%3E%3C/svg%3E");background-size:56px 56px;-webkit-mask-image:linear-gradient(200deg,#000 0%,transparent 62%);mask-image:linear-gradient(200deg,#000 0%,transparent 62%)}
+.space-hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.8}
+.space-hero-inner{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px}
+.space-hello{font-size:10px;letter-spacing:1.6px;text-transform:uppercase;font-weight:900;color:var(--gold)}
+.space-avatar-wrap{position:relative;margin:6px 0 4px;padding:4px;border-radius:50%;background:linear-gradient(145deg,var(--gold),#f6d27a 50%,#b98a2c);box-shadow:0 8px 22px #00000040}
+.space-avatar-wrap .av{border:3px solid #123b2c}
+.space-cam{position:absolute;right:-2px;bottom:-2px;width:40px;height:40px;border-radius:50%;border:3px solid #123b2c;background:var(--gold);color:var(--green);display:grid;place-items:center;font-size:16px;padding:0;box-shadow:0 4px 10px #0004}
+.space-cam:disabled{opacity:.6}
+.space-cam:focus-visible,.space-edit-summary:focus-visible,.space-stat-panel:focus-visible,.space-tabs button:focus-visible,.account-row:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.space-hero h2{font-size:22px;letter-spacing:-.5px;margin:0;word-break:break-word}
+.space-hero .handle{font-size:12px;color:#ffffffb8;font-weight:650}
+.space-hero .bio{font-size:12.5px;line-height:1.6;color:#ffffffd6;margin:6px 0 0;max-width:420px;white-space:pre-wrap;word-break:break-word}
+.space-hero .bio-empty{font-size:11.5px;color:#ffffff80;margin:6px 0 0}
+.space-community{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.space-stat-panel{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;border:1px solid var(--line);border-radius:18px;background:var(--paper);padding:14px 14px 13px;min-height:84px;color:var(--ink);box-shadow:var(--shadow);transition:transform .15s,border-color .15s}
+.space-stat-panel::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(var(--gold),#b98a2c)}
+.space-stat-panel:not(:disabled):hover{border-color:#d3c48f}
+.space-stat-panel:not(:disabled):active{transform:scale(.98);background:var(--soft)}
+.space-stat-panel:disabled{opacity:.7;cursor:default}
+.space-stat-panel strong{font-size:28px;line-height:1.1;letter-spacing:-1px;color:var(--green);font-weight:900;font-variant-numeric:tabular-nums}
+.space-stat-panel span.lbl{font-size:11px;font-weight:850;color:var(--ink)}
+.space-stat-panel span.go{position:absolute;right:12px;top:12px;color:var(--muted);font-size:18px}
+.space-edit{background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+.space-edit-summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:14px 16px;min-height:52px;font-size:13px;font-weight:850;color:var(--green)}
+.space-edit-summary::-webkit-details-marker{display:none}
+.space-edit-summary .chev{margin-left:auto;transition:transform .2s;color:var(--muted)}
+.space-edit[open] .space-edit-summary .chev{transform:rotate(90deg)}
+.space-edit[open] .space-edit-summary{border-bottom:1px solid var(--line);background:#f8f7ef}
+.space-edit-body{padding:14px 16px 16px;display:grid;gap:4px}
+.space-edit-body label{display:block;font-size:10.5px;font-weight:800;color:var(--muted);margin-top:8px}
+.space-edit-body input,.space-edit-body textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;margin-top:5px;background:#fff;color:var(--ink);font-size:14px;outline:0}
+.space-edit-body input:focus,.space-edit-body textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px #123b2c12}
+.space-pic-row{display:flex;flex-wrap:wrap;gap:8px;padding-bottom:6px}
+.space-pic-row button{min-height:42px}
+.space-edit-body .primary-btn{margin-top:14px;width:100%;min-height:46px;font-size:12px}
+.space-home .space-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;margin:4px 0 0;border:1px solid var(--line);border-radius:16px;background:#ebe9dd;overflow:visible}
+.space-home .space-tabs button{display:flex;align-items:center;justify-content:center;gap:7px;min-height:46px;padding:8px 10px;border:0;border-radius:12px;font-size:12px;font-weight:850;color:#5d6a61;background:transparent;transition:background .2s,color .2s,box-shadow .2s}
+.space-home .space-tabs button.active{background:var(--green);color:#fff;box-shadow:0 6px 14px #123b2c33}
+.space-home .space-tabs button.active .ti{color:var(--gold)}
+.space-account{background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;margin-top:6px}
+.space-account-title{font-size:10px;letter-spacing:1.3px;text-transform:uppercase;font-weight:900;color:#9a7625;padding:14px 16px 6px}
+.account-row{display:flex;align-items:center;gap:12px;width:100%;min-height:52px;padding:12px 16px;border:0;border-top:1px solid #f0f0e9;background:none;color:var(--ink);font-size:13px;font-weight:750;text-align:left}
+.account-row .ai-ic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--soft);color:var(--green);font-size:14px;flex-shrink:0}
+.account-row .chev{margin-left:auto;color:var(--muted)}
+.account-row:active{background:var(--soft)}
+.account-row.logout{color:var(--red)}
+.account-row.logout .ai-ic{background:#fbece9;color:var(--red)}
+.space-logout-confirm{display:none;padding:12px 16px 16px;border-top:1px solid #f0f0e9;background:#fdf6f4}
+.space-logout-confirm.open{display:block}
+.space-logout-confirm p{font-size:12px;color:#6b3b35;margin:0 0 10px}
+.space-logout-confirm .row{display:flex;gap:8px}
+.space-logout-confirm button{min-height:44px;flex:1}
+.space-logout-confirm .primary-btn{background:var(--red)}
+@media(max-width:680px){.space-hero{border-radius:20px;padding:20px 14px 16px}.space-stat-panel strong{font-size:26px}}
+@media(min-width:681px){.space-hero{padding:28px 26px 22px}.space-hero-inner{flex-direction:row;text-align:left;align-items:center;gap:20px}.space-hero-text{flex:1;min-width:0}.space-avatar-wrap{margin:0}}
+@media(prefers-reduced-motion:reduce){.space-stat-panel,.space-edit-summary .chev,.space-home .space-tabs button{transition:none}}
+
+/* === jeSocial Brand Header Upgrade === */
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand-icon{width:42px;height:42px;border-radius:12px;object-fit:cover;display:block;flex-shrink:0;box-shadow:0 2px 8px #00000018, 0 0 0 1px #e8b84b22;background:#123b2c}
+.brand-name{font-size:20px;letter-spacing:-.3px;line-height:1}
+@media(max-width:680px){.brand-icon{width:38px;height:38px;border-radius:10px}}
+
+/* === jeSocial Signature Navigation — Premium === */
+.mobile-nav{
+  background:#123B2C !important;
+  border-top:1px solid #1e4a3a !important;
+  box-shadow:0 -8px 24px #00000022;
+  opacity:1 !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+.mobile-nav button{
+  color:#F4F2EA;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.2px;
+  gap:4px;
+  flex:1;
+  padding:4px 2px;
+  min-height:56px;
+  position:relative;
+  transition:color .18s ease;
+}
+.mobile-nav button .m-icon{
+  width:26px;height:26px;display:grid;place-items:center;border-radius:9px;transition:background .18s ease, transform .18s ease;
+}
+.mobile-nav button .m-icon svg{width:22px;height:22px;display:block}
+.mobile-nav button .m-label{line-height:1;opacity:.92}
+.mobile-nav button.active{color:#E8B84B}
+.mobile-nav button.active .m-icon{background:#E8B84B1A;box-shadow:inset 0 0 0 1px #E8B84B2A}
+.mobile-nav button.active::after{
+  content:"";position:absolute;bottom:2px;left:50%;transform:translateX(-50%);
+  width:18px;height:3px;border-radius:99px;background:#E8B84B;
+}
+.mobile-nav button:active .m-icon{transform:scale(.92)}
+
+/* Desktop sidebar - same visual language */
+.sidebar .nav-item{
+  font-size:13px;font-weight:700;
+}
+.sidebar .nav-item .nav-icon{
+  width:26px;height:26px;display:grid;place-items:center;border-radius:8px;transition:background .18s, color .18s;
+}
+.sidebar .nav-item .nav-icon svg{width:18px;height:18px;display:block}
+.sidebar .nav-item{color:#5d6a61}
+.sidebar .nav-item.active{color:#123B2C;background:#f4f2ea;border-color:#e8b84b33}
+.sidebar .nav-item.active .nav-icon{background:#123B2C;color:#E8B84B}
+
+</style>
+</head>
+<body>
+
+<div id="jes-launch-screen" aria-hidden="true">
+  <div class="jes-icon-wrap"><img src="./icon-512.png" alt="jeSocial icon"></div>
+  <div class="jes-app-name">je<span>Social</span></div>
+  <div class="jes-tagline">The world, in your conversation.</div>
+  <div class="jes-accent-line"></div>
+</div>
+
+<div id="app">
+<header class="topbar"><div class="topbar-inner">
+  <div class="brand"><img class="brand-icon" src="data:image/jpeg;base64,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" alt="jeSocial brand icon"><div><div class="brand-name">je<span>Social</span></div><div class="tagline">The world, in your conversation.</div></div></div>
+  <label class="searchbox"><input id="searchInput" type="search" placeholder="Search publications, people and topics"></label>
+  <div class="top-actions"><button class="icon-btn" id="searchToggle" aria-label="Search">⌕</button><button class="icon-btn" id="notifyBtn" aria-label="The Signal">♧<span class="signal-badge" id="signalBadge" aria-label="Unread notifications"></span></button><div class="avatar" id="headerAvatar">GU</div><div class="account-strip"><button id="accountButton">Log in</button></div></div>
+</div></header>
+<div class="layout">
+<aside class="sidebar"><div class="side-card"><div class="side-label">Your space</div>
+<button class="nav-item active" data-view="pulse"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 20H19.5"/><path d="M4 20L7.5 10"/><path d="M20 20L16.5 10"/><path d="M12 3V20"/><path d="M9 9a3 3 0 0 1 6 0"/><path d="M6.5 9a6.5 6.5 0 0 1 11 0"/></svg></span>The Pulse</button><button class="nav-item" data-view="compass"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z"/></svg></span>The Compass</button><button class="nav-item" data-view="studio"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7a1.5 1.5 0 0 0-3-3l-7 7-1.5 4.5 4.5-1.5Z"/><path d="M8.5 11.5 12 8"/></svg></span>The Studio</button><button class="nav-item" data-view="signal"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 6 5 6 10H0s6-3 6-10"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span>The Signal</button><button class="nav-item" data-view="space"><span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></span>My Space</button><div class="side-bottom"><strong>jeSocial preview</strong><br>Public browsing is open. An account is needed to participate.</div></div></aside>
+<main class="main">
+<div class="welcome"><div><div class="eyebrow" id="sectionEyebrow">A wider view</div><h1 id="sectionTitle">The Pulse</h1><p id="sectionSubtitle">What matters, from voices across the world.</p></div><div class="date-pill">✦ Africa-first. Open to the world.</div></div>
+<section class="compass-explorer" id="compassExplorer"><div class="compass-tabs"><button data-compass-tab="trending">Trending</button><button data-compass-tab="news">News</button><button data-compass-tab="people">People</button><button class="active" data-compass-tab="topics">Topics</button></div><div id="compassContent"></div></section>
+<div class="feed-tabs" id="mainFeedTabs" role="tablist"><button class="active" data-filter="for-you">For You</button><button data-filter="socializing">Socializing</button><button data-filter="news">News</button></div>
+<section class="composer idea-composer" id="ideaComposer" aria-labelledby="ideaComposerTitle">
+ <div class="studio-intro"><div class="eyebrow">Your voice. Your perspective.</div><h2 id="ideaComposerTitle">Publish an Idea</h2><p>Share something meaningful with the jeSocial community. Every Idea has one home in The Compass.</p></div>
+ <label class="composer-label" for="ideaCategory">Choose its topic <span>Required · one category</span></label>
+ <select id="ideaCategory" class="idea-select" required><option value="">Select a category</option></select>
+ <label class="composer-label" for="ideaTitle">Give it a title <span>Optional</span></label>
+ <input id="ideaTitle" class="idea-title" type="text" maxlength="120" placeholder="A clear title helps people understand your Idea">
+ <label class="composer-label" for="composerText">Your Idea <span>Required</span></label>
+ <textarea id="composerText" class="idea-body" maxlength="10000" placeholder="What would you like the world to think about? Share your perspective…" required></textarea>
+ <div class="idea-composer-foot"><span id="ideaCharCount">0 / 10,000</span><button class="primary-btn" id="publishBtn">Publish an Idea</button></div>
+ <p class="idea-audience-note">🌍 Public · Your Idea can appear in The Pulse and its selected topic in The Compass.</p>
+</section>
+<section class="feed-list" id="feedList"></section>
+<section class="signal-workspace" id="signalWorkspace" aria-label="The Signal">
+ <div class="signal-toolbar"><div class="signal-unread"><strong id="signalUnreadCount">0</strong><span id="signalUnreadLabel">unread updates</span></div><button class="signal-mark-all" id="signalMarkAll" type="button">Mark all as read</button></div>
+ <div class="signal-tabs" id="signalTabs" role="tablist" aria-label="Notification categories">
+  <button type="button" class="active" data-signal-filter="all">All</button><button type="button" data-signal-filter="social">Social</button><button type="button" data-signal-filter="publications">Publications</button><button type="button" data-signal-filter="mentions">Mentions</button><button type="button" data-signal-filter="system">System</button>
+ </div>
+ <div class="signal-list" id="signalList"><div class="signal-empty">Your Signal is getting ready…</div></div>
+</section>
+</main>
+<aside class="right-col"><section class="panel"><div class="panel-title">Topics to explore</div><div class="topic"><div class="topic-num">01</div><div class="topic-info"><strong>Africa's digital future</strong><span>Explore in The Compass</span></div></div><div class="topic"><div class="topic-num">02</div><div class="topic-info"><strong>Business &amp; ownership</strong><span>Explore in The Compass</span></div></div><div class="topic"><div class="topic-num">03</div><div class="topic-info"><strong>Culture without borders</strong><span>Explore in The Compass</span></div></div></section>
+<section class="panel"><div class="panel-title">People you may want to socialize with</div><div id="suggestList"><div class="suggest-empty">Loading…</div></div></section>
+<section class="note"><small>A note from jeSocial</small><h3>Many voices.<br>One shared world.</h3><p>A space for meaningful news, everyday perspectives and conversations that move us forward.</p></section></aside>
+</div>
+<nav class="mobile-nav"><button class="active" data-view="pulse"><span class="m-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 20H19.5"/><path d="M4 20L7.5 10"/><path d="M20 20L16.5 10"/><path d="M12 3V20"/><path d="M9 9a3 3 0 0 1 6 0"/><path d="M6.5 9a6.5 6.5 0 0 1 11 0"/></svg></span><span class="m-label">Pulse</span></button><button data-view="compass"><span class="m-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z"/></svg></span><span class="m-label">Compass</span></button><button data-view="studio"><span class="m-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7a1.5 1.5 0 0 0-3-3l-7 7-1.5 4.5 4.5-1.5Z"/><path d="M8.5 11.5 12 8"/></svg></span><span class="m-label">Studio</span></button><button data-view="signal"><span class="m-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 6 5 6 10H0s6-3 6-10"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span><span class="m-label">Signal</span></button><button data-view="space"><span class="m-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></span><span class="m-label">My Space</span></button></nav>
+<div class="toast" id="toast" role="status"></div>
+
+<div class="modal-backdrop" id="responseModal" role="dialog" aria-modal="true" aria-labelledby="threadTitle"><div class="modal"><h2 id="threadTitle">Responses</h2><div class="thread-ref" id="threadRef"></div><div class="thread" id="responseList"></div><textarea id="responseText" maxlength="1000" placeholder="Write your response…"></textarea><div class="modal-actions"><button class="secondary-btn" id="cancelResponse">Close</button><button class="primary-btn" id="sendResponse">Send response</button></div></div></div>
+
+<div class="modal-backdrop" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle"><div class="modal"><h2 id="authTitle">Join jeSocial</h2><p id="authIntro">Create an account to publish, respond and socialize.</p><div id="authFields"></div><div id="authError" style="color:#b94b42;font-size:11px" role="alert"></div><div class="modal-actions"><button class="secondary-btn" id="closeAuth">Cancel</button><button class="primary-btn" id="authSubmit">Continue</button></div><button class="auth-switch" id="authSwitch">Already have an account? Log in</button><button class="auth-switch" id="forgotPassword">Forgot password?</button></div></div>
+<div class="modal-backdrop" id="interestModal" role="dialog" aria-modal="true"><div class="modal"><h2>Choose your interests</h2><p>Select as many topics as you like. You can change them later in My Space.</p><div id="interestChoices" class="interest-grid"></div><div class="modal-actions"><button class="secondary-btn" id="skipInterests">Do this later</button><button class="primary-btn" id="saveInterests">Save interests</button></div></div></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* jeSocial Phase 4 — browser client uses publishable key only. */
+const SUPABASE_URL="https://ytliijxsfrfscvkkpemn.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY="sb_publishable_t9QRqkA955Njl9Ow4iYOqA_wYKiUJxi";
+const supabaseClient=window.supabase?.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+
+const TOPICS=["News & Current Affairs","Politics & Governance","Business & Entrepreneurship","Finance & Economics","Technology & Innovation","Science & Research","Sports","Entertainment","Music","Education & Careers","Health & Wellness","Agriculture & Environment","Culture & Society","Lifestyle & Travel","Religion & Spirituality"];
+function populateIdeaCategories(){
+ const select=$("ideaCategory");
+ if(select)select.innerHTML='<option value="">Select a category</option>'+TOPICS.map(t=>`<option value="${esc(t)}">${esc(t)}</option>`).join("");
+}
+
+const PUB_COLS="id,author_id,title,category,content,audience,created_at,deleted_at";
+const AVATAR_TYPES={"image/jpeg":"jpg","image/png":"png","image/webp":"webp"};
+const AVATAR_MAX=5*1024*1024;
+const AVATAR_PALETTE=["#B16C4E","#597C91","#8B7650","#6B8064","#7A5C8E","#4F7F7A","#9A6A3A","#5E6E9B"];
+const AVATAR_MARKER="/storage/v1/object/public/avatars/";
+
+/* ---------- State ---------- */
+let currentUser=null,currentProfile=null,authMode="signup",pendingAction=null,appliedUserId=null,applyPromise=null;
+const store=new Map();          // publication id (string) -> publication + engagement
+const topicLoaded=new Set(); let topicRequest=0;
+const profileCache=new Map();   // user id (string) -> {id,username,display_name,avatar_url}
+const busy=new Set();           // in-flight action keys
+let feedIds=[],myIds=[],vaultOrder=[],vaultSet=new Set();
+let socFeedIds=[],socFeedLoading=false,socFeedError=null,socFeedReq=0,socFeedKey="";
+let feedLoading=true,feedError=null,publishing=false,feedRequest=0;
+let spaceTab="mine",spaceLoading=false,spaceError=null,spaceRequest=0,threadId=null,sendingResponse=false,avatarBusy=false;
+const VIEW_STORAGE_KEY="jesocial_active_view";
+let activeFilter="for-you",activeView="pulse",compassTab="topics",selectedTopicId=null,topicFilter="for-you";
+/* Trending subjects are NOT categories: they have their own state, separate from selectedTopicId. */
+let trendingSubjects=[],trendingLoading=false,trendingError=null,trendingLoadedAt=0,trendingReq=0;
+let selectedTrendingSubject=null,subjectIds=[],subjectLoading=false,subjectError=null,subjectReq=0;
+const TRENDING_REFRESH_MS=2*60*1000;
+let signalItems=[],signalFilter="all",signalLoading=false,signalUnread=0,signalRequest=0,signalError=null;
+const NEWS_API_URL="https://jesocial-news-api.jessegitonga04.workers.dev/news";
+let newsArticles=[],newsSources=[],newsLoading=false,newsLoadedAt=0,newsError=null,newsRequest=0;
+const NEWS_REFRESH_MS=5*60*1000;
+
+function getRememberedView(){
+ try{const saved=sessionStorage.getItem(VIEW_STORAGE_KEY);return ["pulse","compass","studio","signal","space"].includes(saved)?saved:"pulse"}catch(_){return "pulse"}
+}
+function rememberView(view){try{sessionStorage.setItem(VIEW_STORAGE_KEY,view)}catch(_){}}
+
+const socializedTopics=new Set();
+/* ---- jeSocial Socialize Network - Correct Implementation ---- */
+let peopleSubTab="discover"; // discover | requests | socializing | socializers | blocked
+let peopleSearchQuery="";
+let peopleProfilesCache=[];
+let peopleLoading=false,peopleError=null,peopleSearchDebounce=null;
+let socialGraph={following:new Set(),followers:new Set(),outgoingByTarget:new Map(),outgoingById:new Map(),incoming:[],blocked:new Set(),privacyMap:new Map()};
+let socialGraphLoading=false,socialGraphError=null;
+let peopleActionBusy=new Set();
+const compassTopics=[
+["News & Current Affairs","Stories and developments shaping our world.","📰",12800],["Politics & Governance","Leadership, public policy and accountability.","🏛️",9400],["Business & Entrepreneurship","Companies, founders, markets and ideas.","💼",8400],["Finance & Economics","Money, markets, economies and ownership.","📊",7900],["Technology & Innovation","Digital tools, emerging technology and builders.","💡",12800],["Science & Research","Discoveries, evidence and new knowledge.","🔬",3600],["Sports","Sporting stories, teams and communities.","⚽",11200],["Entertainment","Film, television, creators and popular culture.","🎬",6800],["Music","Artists, sounds, scenes and the music business.","🎵",6200],["Education & Careers","Learning, skills, work and opportunity.","🎓",5100],["Health & Wellness","Health information, wellbeing and care.","🌿",4900],["Agriculture & Environment","Food systems, farming, climate and nature.","🌱",5700],["Culture & Society","Identity, communities, traditions and change.","🌍",6100],["Lifestyle & Travel","Places, everyday living and experiences.","🧭",4300],["Religion & Spirituality","Faith, belief and spiritual perspectives.","🕊️",3900]
+].map((x,i)=>({id:i+1,name:x[0],desc:x[1],icon:x[2],count:x[3]}));
+
+/* ---------- Helpers ---------- */
+const $=id=>document.getElementById(id),feedList=$("feedList");
+function toast(s){$("toast").textContent=s;$("toast").classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>$("toast").classList.remove("show"),2800)}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function count(n){return Number(n).toLocaleString("en-US")}
+function errMsg(e){return e?.message||"Please try again."}
+function relTime(iso){
+ const t=new Date(iso).getTime();if(isNaN(t))return"";
+ const s=Math.floor((Date.now()-t)/1000);
+ if(s<45)return"Just now";
+ const m=Math.floor(s/60);if(m<60)return m<=1?"1 min ago":m+" mins ago";
+ const h=Math.floor(s/3600);if(h<24)return h===1?"1 hr ago":h+" hrs ago";
+ const d=Math.floor(s/86400);if(d===1)return"Yesterday";if(d<7)return d+" days ago";
+ return new Date(t).toLocaleDateString(undefined,{day:"numeric",month:"short",year:"numeric"});
+}
+function exactTime(iso){const d=new Date(iso);return isNaN(d)?"":d.toLocaleString(undefined,{dateStyle:"medium",timeStyle:"short"})}
+function refreshTimes(){document.querySelectorAll("time[data-ts]").forEach(el=>{const v=relTime(el.dataset.ts);if(el.textContent!==v)el.textContent=v})}
+setInterval(refreshTimes,30000);
+
+/* ---------- Avatars ---------- */
+function initialsOf(p){
+ const n=(p?.display_name||"").trim();
+ if(n){const parts=n.split(/\s+/);return((parts[0][0]||"")+(parts[1]?parts[1][0]:(parts[0][1]||""))).toUpperCase()}
+ return(p?.username||"JS").slice(0,2).toUpperCase();
+}
+function colorOf(p){const k=String(p?.id||p?.username||"");let h=0;for(let i=0;i<k.length;i++)h=(h*31+k.charCodeAt(i))>>>0;return AVATAR_PALETTE[h%AVATAR_PALETTE.length]}
+function avatarHTML(p,size){
+ const s=size||38,style=`width:${s}px;height:${s}px;font-size:${Math.max(10,Math.round(s*.32))}px`,init=initialsOf(p),col=colorOf(p);
+ if(p?.avatar_url)return`<img class="av av-img" src="${esc(p.avatar_url)}" alt="" loading="lazy" style="${style}" data-initials="${esc(init)}" data-color="${col}">`;
+ return`<div class="av" style="${style};background:${col}">${esc(init)}</div>`;
+}
+document.addEventListener("error",e=>{const t=e.target;if(t&&t.tagName==="IMG"&&t.classList.contains("av-img")){const d=document.createElement("div");d.className="av";d.style.cssText=t.style.cssText+";background:"+t.dataset.color;d.textContent=t.dataset.initials;t.replaceWith(d)}},true);
+function setAvatarEl(el,profile){el.innerHTML=profile?avatarHTML(profile,36):"GU"}
+
+/* ---------- Account UI ---------- */
+function accountProfile(){if(!currentUser)return null;return{id:currentUser.id,...(currentProfile||{}),display_name:currentProfile?.display_name||currentUser.email?.split("@")[0]||"Member"}}
+function setAccountUI(){
+ const p=accountProfile();setAvatarEl($("headerAvatar"),p);if($("composerAvatar"))setAvatarEl($("composerAvatar"),p);
+ $("accountButton").textContent=currentUser?"Account":"Log in";
+ $("publishBtn").disabled=!currentUser||publishing;$("publishBtn").style.opacity=(!currentUser||publishing)?".65":"1";
+ renderSuggestions();
+}
+
+/* ---------- Authentication ---------- */
+function openAuth(mode="signup",action=null){authMode=mode;pendingAction=action;$("authError").textContent="";$("authTitle").textContent=mode==="signup"?"Create your jeSocial account":mode==="login"?"Welcome back":mode==="reset"?"Reset your password":"Update your password";$("authIntro").textContent=mode==="signup"?"Create an account to participate in the community.":mode==="login"?"Log in to continue.":mode==="reset"?"We'll email you a password reset link.":"Choose a new password.";const fields=$("authFields");fields.innerHTML="";const add=(id,label,type="text",auto="")=>{const l=document.createElement("label");l.style.cssText="display:block;font-size:10px;color:#68736b;margin-top:7px";l.textContent=label;const i=document.createElement("input");i.id=id;i.type=type;i.autocomplete=auto;i.required=true;i.placeholder=label;fields.append(l,i)};
+if(mode==="signup"){add("authDisplay","Display name","text","name");add("authUsername","Username","text","username");add("authEmail","Email","email","email");add("authPassword","Password","password","new-password");add("authConfirm","Confirm password","password","new-password")}
+if(mode==="login"){add("authEmail","Email","email","email");add("authPassword","Password","password","current-password")}
+if(mode==="reset"){add("authEmail","Email","email","email")}
+if(mode==="update"){add("authPassword","New password","password","new-password");add("authConfirm","Confirm new password","password","new-password")}
+$("authSubmit").textContent=mode==="signup"?"Create account":mode==="login"?"Log in":mode==="reset"?"Send reset link":"Update password";
+$("authSwitch").style.display=mode==="signup"||mode==="login"?"block":"none";$("authSwitch").textContent=mode==="signup"?"Already have an account? Log in":"Need an account? Sign up";$("forgotPassword").style.display=mode==="login"?"block":"none";$("authModal").classList.add("open")}
+function closeAuth(){$("authModal").classList.remove("open")}
+function requireAuth(action){if(currentUser){action();return true}openAuth("login",action);return false}
+function runPendingAction(){const fn=pendingAction;pendingAction=null;if(fn)fn()}
+
+async function fetchProfile(){
+ if(!currentUser)return;
+ const [profileResult,detailsResult]=await Promise.all([
+  supabaseClient.from("profiles").select("id,username,display_name,avatar_url").eq("id",currentUser.id).maybeSingle(),
+  supabaseClient.from("profile_details").select("bio").eq("user_id",currentUser.id).maybeSingle()
+ ]);
+ if(profileResult.error){console.error("Profile loading error:",profileResult.error);toast("Could not load your profile.");return}
+ if(detailsResult.error){console.error("Profile details loading error:",detailsResult.error);toast("Could not load your profile details.");return}
+ currentProfile={id:currentUser.id,...(profileResult.data||{}),bio:detailsResult.data?.bio||""};
+ if(profileResult.data)profileCache.set(currentUser.id,{...profileResult.data});
+ setAccountUI();
+}
+
+/* Applies a session once per user; concurrent callers share the same promise. */
+function applySession(user){
+ if(!user){
+  appliedUserId=null;applyPromise=null;currentUser=null;currentProfile=null;vaultOrder=[];vaultSet=new Set();myIds=[];signalRequest++;signalItems=[];signalLoading=false;signalError=null;updateSignalBadge(0);resetSocialState();resetTrending();
+  store.forEach(p=>{p.myReaction=null;p.myAmp=false});
+  setAccountUI();
+  if(activeView==="space")setView("pulse");else rerenderCurrent();
+  return Promise.resolve();
+ }
+ if(appliedUserId&&appliedUserId!==user.id){resetSocialState();resetTrending()}
+ currentUser=user;
+ if(appliedUserId===user.id&&applyPromise)return applyPromise;
+ appliedUserId=user.id;
+ applyPromise=(async()=>{
+  await fetchProfile();
+  loadSocialGraph().catch(()=>{});
+  loadPeopleProfiles("").catch(()=>{});
+  loadSignalUnread().catch(()=>{});
+  await Promise.all([fetchVaultOrder(),refreshEngagement([...store.keys()])]);
+  setAccountUI();rerenderCurrent();
+ })().catch(e=>{console.error("Session setup error:",e)});
+ return applyPromise;
+}
+
+async function handleAuthSubmit(){const val=id=>$(id)?.value.trim()||"",email=val("authEmail"),password=val("authPassword");$("authError").textContent="";
+try{
+if(authMode==="signup"){const display_name=val("authDisplay"),username=val("authUsername").replace(/^@/,"");if(!display_name||!username||!email||!password||!val("authConfirm"))throw Error("Complete all fields.");if(!/^[a-zA-Z0-9_]{3,24}$/.test(username))throw Error("Username must be 3–24 characters: letters, numbers or underscores.");if(password.length<8)throw Error("Use a password with at least 8 characters.");if(password!==val("authConfirm"))throw Error("Passwords do not match.");const {data,error}=await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo:location.origin+location.pathname,data:{username,display_name}}});if(error)throw error;closeAuth();toast(data.session?"Account created.":"Check your email to confirm your account.");if(data.user&&data.session){await applySession(data.user);interestsMarkup([]);$("interestModal").classList.add("open")}}
+else if(authMode==="login"){const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error)throw error;await applySession(data.user);closeAuth();toast("You're logged in.");runPendingAction()}
+else if(authMode==="reset"){if(!email)throw Error("Enter your email address.");const {error}=await supabaseClient.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});if(error)throw error;closeAuth();toast("Password reset link sent. Check your email.")}
+else if(authMode==="update"){if(password.length<8)throw Error("Use at least 8 characters.");if(password!==val("authConfirm"))throw Error("Passwords do not match.");const {error}=await supabaseClient.auth.updateUser({password});if(error)throw error;closeAuth();toast("Password updated.")}
+}catch(e){$("authError").textContent=e.message||"Something went wrong. Please try again."}}
+async function logout(){const {error}=await supabaseClient.auth.signOut();if(error){toast(error.message);return}await applySession(null);toast("You have logged out.")}
+
+/* ---------- Interests ---------- */
+function interestsMarkup(existing=[]){$("interestChoices").innerHTML=TOPICS.map(t=>`<label class="interest-option"><input type="checkbox" value="${esc(t)}" ${existing.includes(t)?"checked":""}> ${esc(t)}</label>`).join("")}
+async function loadInterests(){if(!currentUser)return[];const {data,error}=await supabaseClient.from("user_interests").select("topic").eq("user_id",currentUser.id);if(error){console.error(error);return[]}return(data||[]).map(x=>x.topic)}
+async function saveInterests(){if(!currentUser)return;const topics=[...$("interestChoices").querySelectorAll("input:checked")].map(x=>x.value);try{const {error:delError}=await supabaseClient.from("user_interests").delete().eq("user_id",currentUser.id);if(delError)throw delError;if(topics.length){const {error}=await supabaseClient.from("user_interests").insert(topics.map(topic=>({user_id:currentUser.id,topic})));if(error)throw error}$("interestModal").classList.remove("open");toast("Your interests have been saved.")}catch(e){toast("Could not save interests: "+e.message)}}
+async function editInterests(){const existing=await loadInterests();interestsMarkup(existing);$("interestModal").classList.add("open")}
+
+/* ---------- Data layer: profiles, engagement, vault ---------- */
+async function ensureProfiles(ids,force){
+ const need=[...new Set(ids.filter(Boolean))].filter(id=>force||!profileCache.has(id));
+ if(!need.length)return;
+ const {data,error}=await supabaseClient.from("profiles").select("id,username,display_name,avatar_url").in("id",need);
+ if(error){console.error("Profile lookup error:",error);return}
+ (data||[]).forEach(p=>profileCache.set(p.id,p));
+}
+let engagementWarned=false;
+async function refreshEngagement(ids){
+ ids=[...new Set(ids)].filter(id=>store.has(id));if(!ids.length)return;
+ const uid=currentUser?.id||null;
+ const [r,a,c]=await Promise.all([
+  supabaseClient.from("publication_reactions").select("publication_id,user_id,reaction_type").in("publication_id",ids),
+  supabaseClient.from("publication_amplifications").select("publication_id,user_id").in("publication_id",ids),
+  supabaseClient.from("responses").select("publication_id,author_id").in("publication_id",ids)
+ ]);
+ let failed=false;
+ if(r.error){failed=true;console.error("Reactions error:",r.error)}else{
+  const m=new Map(ids.map(id=>[id,{approvals:0,disapprovals:0,mine:null}]));
+  (r.data||[]).forEach(x=>{const e=m.get(x.publication_id);if(!e)return;if(x.reaction_type==="approval")e.approvals++;else if(x.reaction_type==="disapproval")e.disapprovals++;if(uid&&x.user_id===uid)e.mine=x.reaction_type});
+  m.forEach((e,id)=>{const p=store.get(id);p.approvals=e.approvals;p.disapprovals=e.disapprovals;p.myReaction=e.mine})}
+ if(a.error){failed=true;console.error("Amplifications error:",a.error)}else{
+  const m=new Map(ids.map(id=>[id,{n:0,mine:false}]));
+  (a.data||[]).forEach(x=>{const e=m.get(x.publication_id);if(!e)return;e.n++;if(uid&&x.user_id===uid)e.mine=true});
+  m.forEach((e,id)=>{const p=store.get(id);p.amplifications=e.n;p.myAmp=e.mine})}
+ if(c.error){failed=true;console.error("Responses error:",c.error)}else{
+  const m=new Map(ids.map(id=>[id,0]));
+  (c.data||[]).forEach(x=>{if(m.has(x.publication_id))m.set(x.publication_id,m.get(x.publication_id)+1)});
+  m.forEach((n,id)=>{store.get(id).responses=n})}
+ if(failed&&!engagementWarned){engagementWarned=true;toast("Some engagement counts could not be loaded.")}
+}
+async function fetchVaultOrder(){
+ if(!currentUser){vaultOrder=[];vaultSet=new Set();return}
+ const {data,error}=await supabaseClient.from("vault_items").select("publication_id,created_at").eq("user_id",currentUser.id).order("created_at",{ascending:false}).limit(200);
+ if(error){console.error("Vault loading error:",error);toast("Could not load your Vault.");return}
+ vaultOrder=(data||[]).map(x=>x.publication_id);vaultSet=new Set(vaultOrder);
+}
+async function ingest(rows){
+ if(!rows.length)return;
+ rows.forEach(r=>{const prev=store.get(r.id)||{approvals:0,disapprovals:0,responses:0,amplifications:0,myReaction:null,myAmp:false,myResponded:false};store.set(r.id,Object.assign(prev,r))});
+ await Promise.all([ensureProfiles(rows.map(r=>r.author_id),true),refreshEngagement(rows.map(r=>r.id))]);
+}
+
+/* ---------- Kenya-first publisher news ---------- */
+function newsTopic(title, fallback="Kenya"){
+ const t=String(title||"").toLowerCase();
+ const rules=[
+  ["Sports",/football|soccer|premier league|afcon|fifa|sport|athletics|rugby|cricket| Harambee Stars/i],
+  ["Business",/business|company|companies|market|bank|banking|economy|economic|shilling|tax|revenue|investment|manufactur|entrepreneur|trade|finance|stock/i],
+  ["Politics",/president|parliament|senate|governor|mp\b|politic|election|government|cabinet|minister|county assembly|court|judiciary|bill\b/i],
+  ["Technology",/technology|tech\b|digital|artificial intelligence|\bai\b|cyber|internet|software|mobile|innovation|startup/i],
+  ["Education",/school|university|education|student|exam|kcse|knec|scholarship|teacher|lecturer/i],
+  ["Health",/health|hospital|medical|doctor|disease|medicine|patient|sha\b|shif\b/i],
+  ["Agriculture",/farmer|farming|agriculture|crop|livestock|maize|tea leaves|drought|climate|environment/i],
+  ["Entertainment",/music|artist|celebrity|film|movie|actor|actress|entertainment|singer|concert/i]
+ ];
+ for(const [label,re] of rules)if(re.test(t))return label;
+ return fallback||"Kenya";
+}
+function newsCard(article){
+ const publisher=esc(article.publisher||"Kenyan publisher");
+ const initials=publisher.split(/\s+/).filter(Boolean).slice(0,2).map(x=>x[0]).join("").toUpperCase()||"N";
+ const stamp=article.publishedAt||"";
+ const topic=newsTopic(article.title,article.category);
+ const safeUrl=String(article.url||"");
+ let validUrl=false;try{const u=new URL(safeUrl);validUrl=u.protocol==="https:"||u.protocol==="http:"}catch(_){ }
+ if(!validUrl)return"";
+ return `<article class="news-card"><div class="news-card-top"><div class="news-publisher"><span class="news-source-mark">${esc(initials)}</span><span><strong>${publisher}</strong><time ${stamp?`data-ts="${esc(stamp)}" datetime="${esc(stamp)}" title="${esc(exactTime(stamp))}"`:""}>${stamp?esc(relTime(stamp)):"Publication date unavailable"}</time></span></div><span class="news-topic">${esc(topic)}</span></div><h3 class="news-title">${esc(article.title||"")}</h3><a class="news-open" href="${esc(safeUrl)}" target="_blank" rel="noopener noreferrer">Read at ${publisher} ↗</a></article>`;
+}
+async function loadNews(force=false){
+ if(newsLoading)return;
+ if(!force&&newsLoadedAt&&Date.now()-newsLoadedAt<NEWS_REFRESH_MS){renderNewsForCurrentView();return}
+ newsLoading=true;newsError=null;const request=++newsRequest;
+ renderNewsForCurrentView();
+ try{
+  const response=await fetch(NEWS_API_URL,{method:"GET",headers:{"Accept":"application/json"},cache:"no-store"});
+  if(!response.ok)throw new Error(`News service returned HTTP ${response.status}`);
+  const data=await response.json();
+  if(!data||data.ok!==true||!Array.isArray(data.articles))throw new Error("News service returned an unexpected response");
+  if(request!==newsRequest)return;
+  newsArticles=data.articles.filter(a=>a&&a.title&&a.url).sort((a,b)=>{
+   const ta=Date.parse(a.publishedAt||"")||0,tb=Date.parse(b.publishedAt||"")||0;return tb-ta;
+  });
+  newsSources=Array.isArray(data.sources)?data.sources:[];
+  newsLoadedAt=Date.now();
+ }catch(e){if(request!==newsRequest)return;newsError=e;console.error("jeSocial news loading error:",e)}
+ finally{if(request===newsRequest){newsLoading=false;renderNewsForCurrentView()}}
+}
+function newsStatusText(){
+ if(newsLoading)return"Loading the latest Kenyan headlines…";
+ if(newsError)return`News could not be loaded. ${esc(errMsg(newsError))}`;
+ const ok=newsSources.filter(s=>s.status==="ok").length;
+ return `${ok} Kenyan publisher${ok===1?"":"s"} connected · Headlines link to their original publishers.`;
+}
+function newsListHTML(items){
+ const cards=items.map(newsCard).filter(Boolean).join("");
+ return cards||'<div class="empty-state">No publisher headlines are available right now. Try refreshing shortly.</div>';
+}
+function renderNewsPulse(){
+ const q=$("searchInput").value.trim().toLowerCase();
+ const items=q?newsArticles.filter(a=>`${a.publisher||""} ${a.title||""} ${newsTopic(a.title,a.category)}`.toLowerCase().includes(q)):newsArticles;
+ const status=newsStatusText();
+ feedList.innerHTML=`<div class="news-section-note">Kenyan news from independent publishers. ${status}</div>${newsLoading&&!newsArticles.length?'<div class="empty-state">Loading Kenyan headlines…</div>':newsError&&!newsArticles.length?`<div class="empty-state">${status}<br><button class="secondary-btn news-load-btn" id="retryNewsPulse">Try again</button></div>`:`<section class="news-list">${newsListHTML(items)}</section>${newsLoadedAt?'<div class="news-source-status">Updated '+esc(relTime(new Date(newsLoadedAt).toISOString()))+' · Refreshes every five minutes.</div>':''}`}`;
+ const retry=$("retryNewsPulse");if(retry)retry.onclick=()=>loadNews(true);
+}
+function renderNewsCompass(){
+ const root=$("compassContent");
+ const status=newsStatusText();
+ root.innerHTML=`<div class="compass-heading"><h2>Kenyan news</h2><p>Current affairs and reporting from Kenyan publishers, brought together in one place.</p></div><p class="news-section-note">${status}</p>${newsLoading&&!newsArticles.length?'<div class="empty-state">Loading Kenyan headlines…</div>':newsError&&!newsArticles.length?`<div class="empty-state">${status}<br><button class="secondary-btn news-load-btn" id="retryNewsCompass">Try again</button></div>`:`<section class="news-list">${newsListHTML(newsArticles)}</section>${newsLoadedAt?'<div class="news-source-status">Updated '+esc(relTime(new Date(newsLoadedAt).toISOString()))+' · Refreshes every five minutes.</div>':''}`}`;
+ const retry=$("retryNewsCompass");if(retry)retry.onclick=()=>loadNews(true);
+}
+function renderNewsForCurrentView(){
+ if(activeView==="pulse"&&activeFilter==="news")renderNewsPulse();
+ else if(activeView==="compass"&&compassTab==="news"&&selectedTopicId===null)renderNewsCompass();
+}
+
+/* ---------- Rendering: publications ---------- */
+function actBtn(act,id,icon,label,n,cls,pressed){return`<button class="action-btn ${cls}" data-act="${act}" data-id="${esc(id)}" aria-pressed="${pressed?"true":"false"}"><span class="ai">${icon}</span><span>${label}</span><span class="ac">${n===null?"":count(n)}</span></button>`}
+function postCard(p){
+ const a=profileCache.get(p.author_id)||{id:p.author_id},name=a.display_name||a.username||"jeSocial member",ts=p.created_at||"";
+ const saved=vaultSet.has(p.id),category=TOPICS.includes(p.category)?p.category:"";
+ return`<article class="post" data-post="${esc(p.id)}"><div class="post-head">${avatarHTML(a,40)}<div class="post-person"><strong>By ${esc(name)}</strong><div class="post-byline">${a.username?"@"+esc(a.username)+" · ":""}<time class="rel" data-ts="${esc(ts)}" datetime="${esc(ts)}" title="${esc(exactTime(ts))}">${esc(relTime(ts))}</time></div></div></div>${category?`<div class="post-category">${esc(category)}</div>`:""}${p.title?`<h3 class="post-title">${esc(p.title)}</h3>`:""}<p class="post-copy">${esc(p.content)}</p><div class="post-actions">${actBtn("approve",p.id,"▲",p.myReaction==="approval"?"Approvals":"Approve",p.approvals,p.myReaction==="approval"?"approved":"",p.myReaction==="approval")}${actBtn("disapprove",p.id,"▼",p.myReaction==="disapproval"?"Disapprovals":"Disapprove",p.disapprovals,p.myReaction==="disapproval"?"disapproved":"",p.myReaction==="disapproval")}${actBtn("response",p.id,"✎",p.myResponded?"Responses":"Respond",p.responses,"",p.myResponded)}${actBtn("amplify",p.id,"↗",p.myAmp?"Amplifications":"Amplify",p.amplifications,p.myAmp?"on":"",p.myAmp)}${actBtn("vault",p.id,"◈",saved?"Saved":"Vault",null,saved?"on":"",saved)}</div></article>`;
+}
+function updateCards(id){
+ const p=store.get(id);if(!p)return;
+ document.querySelectorAll(`[data-post="${CSS.escape(id)}"]`).forEach(el=>{const t=document.createElement("template");t.innerHTML=postCard(p).trim();el.replaceWith(t.content.firstElementChild)});
+}
+function postsFrom(ids){return ids.map(id=>store.get(id)).filter(Boolean)}
+function rerenderCurrent(){if(activeView==="compass")renderCompass();else if(activeView==="space")renderSpaceList();else if(activeView==="signal")loadNotifications();else renderPosts()}
+
+async function loadPublications(){
+ if(!supabaseClient)return;const request=++feedRequest;feedLoading=true;feedError=null;
+ if(!feedIds.length&&activeView!=="space"&&activeView!=="compass")renderPosts();
+ try{
+  const {data,error}=await supabaseClient.from("publications").select(PUB_COLS).is("deleted_at",null).eq("audience","public").order("created_at",{ascending:false}).limit(30);
+  if(error)throw error;
+  const rows=data||[];await ingest(rows);
+  if(request!==feedRequest)return;
+  feedIds=rows.map(r=>r.id);
+ }catch(e){if(request!==feedRequest)return;feedError=e;console.error("Publication feed error:",e);if(feedIds.length)toast("Could not refresh publications.")}
+ finally{if(request===feedRequest){feedLoading=false;rerenderCurrent()}}
+}
+function renderPosts(){
+ if(activeView==="compass"||activeView==="space")return;
+ if(activeFilter==="socializing"){renderSocializingFeed();ensureSocializingFeed();return}
+ if(activeFilter==="news"){
+  renderNewsPulse();
+  if(!newsLoading&&(!newsLoadedAt||Date.now()-newsLoadedAt>=NEWS_REFRESH_MS))loadNews();
+  return;
+ }
+ if(feedLoading&&!feedIds.length){feedList.innerHTML='<div class="empty-state">Loading publications…</div>';return}
+ if(feedError&&!feedIds.length){feedList.innerHTML=`<div class="empty-state">We couldn't load publications. ${esc(errMsg(feedError))}<br><button class="secondary-btn" id="retryFeed" style="margin-top:10px">Try again</button></div>`;$("retryFeed").onclick=loadPublications;return}
+ const q=$("searchInput").value.trim().toLowerCase();
+ let visible=postsFrom(feedIds);
+ if(q)visible=visible.filter(p=>{const a=profileCache.get(p.author_id)||{};return`${a.display_name||""} ${a.username||""} ${p.content}`.toLowerCase().includes(q)});
+ const empty=q?"No publications match your search.":"No publications yet. Be the first to share a perspective.";
+ feedList.innerHTML=visible.length?visible.map(postCard).join(""):`<div class="empty-state">${empty}</div>`;
+}
+
+/* ---------- The Pulse: Socializing feed ---------- */
+/* Publications authored by accounts in socialGraph.following, fetched directly from the publications table. */
+function socFeedSignature(){return currentUser?currentUser.id+"|"+[...socialGraph.following].sort().join(","):""}
+function renderSocializingFeed(){
+ if(activeView!=="pulse"||activeFilter!=="socializing")return;
+ const box=(msg,btn)=>{feedList.innerHTML=`<div class="empty-state">${msg}${btn?`<br><button class="${btn[2]||"secondary-btn"}" id="${btn[0]}" style="margin-top:10px">${btn[1]}</button>`:""}</div>`};
+ if(!currentUser){box("Log in to see publications from the people you are Socializing with.",["socLogin","Log in","primary-btn"]);$("socLogin").onclick=()=>openAuth("login");return}
+ if(!socialLoadedAt){
+  if(socialGraphError&&!socialGraphLoading){box("Could not load your Socialize network. "+esc(errMsg(socialGraphError)),["retrySocGraph","Try again"]);$("retrySocGraph").onclick=()=>loadSocialGraph();return}
+  box("Loading your Socializing feed…");return;
+ }
+ if(!socialGraph.following.size){box("You are not Socializing with anyone yet. Find people in The Compass and their publications will appear here.");return}
+ const ids=socFeedIds.filter(id=>{const p=store.get(id);return p&&socialGraph.following.has(p.author_id)});
+ if(socFeedLoading&&!ids.length){box("Loading publications from people you Socialize with…");return}
+ if(socFeedError&&!ids.length){box("We couldn't load this feed. "+esc(errMsg(socFeedError)),["retrySocFeed","Try again"]);$("retrySocFeed").onclick=()=>ensureSocializingFeed(true);return}
+ const q=$("searchInput").value.trim().toLowerCase();
+ let visible=postsFrom(ids);
+ if(q)visible=visible.filter(p=>{const a=profileCache.get(p.author_id)||{};return`${a.display_name||""} ${a.username||""} ${p.title||""} ${p.content}`.toLowerCase().includes(q)});
+ if(!visible.length){box(q?"No publications match your search.":"The people you are Socializing with have not published anything yet.");return}
+ feedList.innerHTML=visible.map(postCard).join("");
+}
+async function ensureSocializingFeed(force){
+ if(!currentUser||!supabaseClient||!socialLoadedAt||socialGraphLoading)return;
+ const sig=socFeedSignature();
+ if(!force&&sig===socFeedKey)return; // already loaded or in flight for this exact relationship set
+ const ids=[...socialGraph.following];
+ socFeedKey=sig;const req=++socFeedReq,epoch=socialEpoch,uid=currentUser.id;
+ socFeedError=null;
+ if(!ids.length){socFeedIds=[];socFeedLoading=false;renderSocializingFeed();return}
+ socFeedLoading=true;renderSocializingFeed();
+ const stale=()=>req!==socFeedReq||epoch!==socialEpoch||currentUser?.id!==uid;
+ try{
+  const {data,error}=await supabaseClient.from("publications").select(PUB_COLS).in("author_id",ids).is("deleted_at",null).eq("audience","public").order("created_at",{ascending:false}).limit(30);
+  if(error)throw error;
+  const rows=data||[];await ingest(rows);
+  if(stale())return;
+  socFeedIds=rows.map(r=>r.id);
+ }catch(e){
+  if(stale())return;
+  socFeedError=e;socFeedKey="";console.error("Socializing feed error:",e);
+ }finally{
+  if(!stale()){socFeedLoading=false;renderSocializingFeed()}
+ }
+}
+
+/* ---------- Publication actions ---------- */
+function setReaction(p,next){
+ if(p.myReaction==="approval")p.approvals=Math.max(0,p.approvals-1);
+ if(p.myReaction==="disapproval")p.disapprovals=Math.max(0,p.disapprovals-1);
+ if(next==="approval")p.approvals++;if(next==="disapproval")p.disapprovals++;
+ p.myReaction=next;
+}
+async function toggleReaction(id,type){
+ const p=store.get(id);if(!p||!currentUser)return;const key="react:"+id;if(busy.has(key))return;busy.add(key);
+ const old=p.myReaction,next=old===type?null:type;
+ setReaction(p,next);updateCards(id);
+ try{
+  if(next===null){const {error}=await supabaseClient.from("publication_reactions").delete().eq("publication_id",id).eq("user_id",currentUser.id);if(error)throw error}
+  else{const {error}=await supabaseClient.from("publication_reactions").upsert({publication_id:id,user_id:currentUser.id,reaction_type:next,updated_at:new Date().toISOString()},{onConflict:"publication_id,user_id"});if(error)throw error}
+  await refreshEngagement([id]);updateCards(id);
+ }catch(e){console.error("Reaction error:",e);setReaction(p,old);updateCards(id);toast("Could not update your reaction. "+errMsg(e))}
+ finally{busy.delete(key)}
+}
+function setSimple(p,kind,on){
+ if(kind==="amp"){p.myAmp=on;p.amplifications=Math.max(0,p.amplifications+(on?1:-1))}
+ else if(on){vaultSet.add(p.id);vaultOrder=[p.id,...vaultOrder.filter(x=>x!==p.id)]}
+ else{vaultSet.delete(p.id);vaultOrder=vaultOrder.filter(x=>x!==p.id)}
+}
+function afterSimple(id,kind){updateCards(id);if(kind==="vault"&&activeView==="space"&&spaceTab==="vault")renderSpaceList()}
+async function toggleSimple(id,kind){
+ const p=store.get(id);if(!p||!currentUser)return;const key=kind+":"+id;if(busy.has(key))return;busy.add(key);
+ const table=kind==="amp"?"publication_amplifications":"vault_items",was=kind==="amp"?p.myAmp:vaultSet.has(id),next=!was;
+ setSimple(p,kind,next);afterSimple(id,kind);
+ try{
+  if(next){const {error}=await supabaseClient.from(table).insert({publication_id:id,user_id:currentUser.id});if(error&&error.code!=="23505")throw error}
+  else{const {error}=await supabaseClient.from(table).delete().eq("publication_id",id).eq("user_id",currentUser.id);if(error)throw error}
+  if(kind==="amp"){await refreshEngagement([id]);updateCards(id)}
+  else toast(next?"Saved to The Vault.":"Removed from The Vault.");
+ }catch(e){console.error(kind+" error:",e);setSimple(p,kind,was);afterSimple(id,kind);toast("Could not update. "+errMsg(e))}
+ finally{busy.delete(key)}
+}
+/* One delegated handler serves The Pulse, The Compass and My Space. */
+document.addEventListener("click",e=>{
+ const b=e.target.closest("[data-act]");if(!b)return;
+ const id=b.dataset.id,act=b.dataset.act;
+ if(act==="response"){openThread(id);return}
+ requireAuth(()=>{
+  if(act==="approve")toggleReaction(id,"approval");
+  else if(act==="disapprove")toggleReaction(id,"disapproval");
+  else if(act==="amplify")toggleSimple(id,"amp");
+  else if(act==="vault")toggleSimple(id,"vault");
+ });
+});
+
+/* ---------- Responses ---------- */
+function renderThread(items,state){
+ const el=$("responseList");
+ if(state==="loading"){el.innerHTML='<div class="empty-state">Loading responses…</div>';return}
+ if(state==="error"){el.innerHTML='<div class="empty-state">Could not load responses. <button class="secondary-btn" id="retryThread">Try again</button></div>';$("retryThread").onclick=()=>loadThread(threadId);return}
+ el.innerHTML=items.length?items.map(r=>{const a=profileCache.get(r.author_id)||{id:r.author_id},n=a.display_name||a.username||"jeSocial member";return`<div class="thread-item">${avatarHTML(a,30)}<div class="ti-body"><strong>${esc(n)}</strong><time data-ts="${esc(r.created_at)}" datetime="${esc(r.created_at)}" title="${esc(exactTime(r.created_at))}">${esc(relTime(r.created_at))}</time><p>${esc(r.content)}</p></div></div>`}).join(""):'<div class="empty-state">No responses yet. Start the conversation.</div>';
+}
+async function loadThread(id){
+ renderThread([],"loading");
+ try{
+  const {data,error}=await supabaseClient.from("responses").select("id,publication_id,author_id,content,created_at").eq("publication_id",id).order("created_at",{ascending:true}).limit(200);
+  if(error)throw error;if(threadId!==id)return;
+  const rows=data||[];await ensureProfiles(rows.map(r=>r.author_id),false);if(threadId!==id)return;
+  renderThread(rows);const p=store.get(id);if(p&&p.responses!==rows.length&&rows.length<200){p.responses=rows.length;updateCards(id)}
+ }catch(e){console.error("Thread error:",e);if(threadId===id)renderThread([],"error")}
+}
+function openThread(id){
+ const p=store.get(id);if(!p)return;threadId=id;
+ $("threadRef").textContent=p.content.length>140?p.content.slice(0,140)+"…":p.content;
+ $("responseText").value="";$("responseModal").classList.add("open");loadThread(id);
+}
+async function submitResponse(){
+ const id=threadId,text=$("responseText").value.trim();
+ if(!id||!text||sendingResponse||!currentUser)return;
+ sendingResponse=true;$("sendResponse").disabled=true;
+ try{
+  const {error}=await supabaseClient.from("responses").insert({publication_id:id,author_id:currentUser.id,content:text});
+  if(error)throw error;
+  $("responseText").value="";
+  await ensureProfiles([currentUser.id],false);
+  await refreshEngagement([id]);updateCards(id);
+  if(threadId===id)await loadThread(id);
+  toast("Response added.");
+ }catch(e){console.error("Response error:",e);toast("Could not send your response. "+errMsg(e))}
+ finally{sendingResponse=false;$("sendResponse").disabled=false}
+}
+$("sendResponse").onclick=()=>{if(!$("responseText").value.trim()){toast("Write a response first.");return}requireAuth(submitResponse)};
+$("cancelResponse").onclick=()=>{$("responseModal").classList.remove("open");threadId=null};
+$("responseModal").addEventListener("click",e=>{if(e.target===$("responseModal")){$("responseModal").classList.remove("open");threadId=null}});
+
+/* ---------- Profile & avatar ---------- */
+async function updateProfile(){
+ if(!currentUser){toast("Please log in first.");return}
+ const display_name=$("profileDisplay").value.trim(),username=$("profileUsername").value.trim().replace(/^@/,""),bio=$("profileBio").value.trim();
+ if(!display_name||!username){toast("Display name and username are required.");return}
+ if(!/^[a-zA-Z0-9_]{3,24}$/.test(username)){toast("Username must be 3–24 letters, numbers or underscores.");return}
+ const {error:profileError}=await supabaseClient.from("profiles").update({display_name,username,updated_at:new Date().toISOString()}).eq("id",currentUser.id);
+ if(profileError){toast(profileError.code==="23505"?"That username is already taken.":"Could not update profile: "+profileError.message);return}
+ const {error:detailsError}=await supabaseClient.from("profile_details").upsert({user_id:currentUser.id,bio,updated_at:new Date().toISOString()},{onConflict:"user_id"});
+ await fetchProfile();
+  loadSocialGraph().catch(()=>{});
+  loadPeopleProfiles("").catch(()=>{});
+  loadSignalUnread().catch(()=>{});renderSpace();
+ if(detailsError){toast("Your name and username were saved, but your bio was not: "+detailsError.message);return}
+ toast("Profile updated.");
+}
+function avatarPathFromUrl(url){if(!url)return null;const i=url.indexOf(AVATAR_MARKER);if(i<0)return null;try{return decodeURIComponent(url.slice(i+AVATAR_MARKER.length).split("?")[0])}catch(_){return null}}
+async function removeAvatarFile(url){const path=avatarPathFromUrl(url);if(!path)return;const {error}=await supabaseClient.storage.from("avatars").remove([path]);if(error)console.warn("Could not delete old avatar file:",error)}
+function setAvatarBusy(on,label){avatarBusy=on;["changePic","removePic","avatarCamera"].forEach(id=>{const b=$(id);if(b)b.disabled=on});const c=$("changePic");if(c&&label)c.textContent=label}
+function applyAvatarUrl(url){
+ currentProfile={...currentProfile,avatar_url:url};
+ const cached=profileCache.get(currentUser.id)||{id:currentUser.id,username:currentProfile.username,display_name:currentProfile.display_name};
+ profileCache.set(currentUser.id,{...cached,avatar_url:url});
+ setAccountUI();renderSpace();
+}
+async function uploadAvatar(file){
+ if(!currentUser||avatarBusy)return;
+ const ext=AVATAR_TYPES[file.type];
+ if(!ext){toast("Please choose a JPEG, PNG or WebP image.");return}
+ if(file.size>AVATAR_MAX){toast("That image is larger than 5 MB.");return}
+ setAvatarBusy(true,"Uploading…");
+ const oldUrl=currentProfile?.avatar_url||null,path=`${currentUser.id}/avatar-${Date.now()}.${ext}`;
+ try{
+  const {error:upErr}=await supabaseClient.storage.from("avatars").upload(path,file,{contentType:file.type,cacheControl:"3600",upsert:false});
+  if(upErr)throw upErr;
+  const {data:pub}=supabaseClient.storage.from("avatars").getPublicUrl(path);
+  const {error:dbErr}=await supabaseClient.from("profiles").update({avatar_url:pub.publicUrl,updated_at:new Date().toISOString()}).eq("id",currentUser.id);
+  if(dbErr){await supabaseClient.storage.from("avatars").remove([path]);throw dbErr}
+  applyAvatarUrl(pub.publicUrl);
+  if(oldUrl&&oldUrl!==pub.publicUrl)removeAvatarFile(oldUrl);
+  toast("Profile picture updated.");
+ }catch(e){console.error("Avatar upload error:",e);toast("Could not upload picture. Your current picture is unchanged. "+errMsg(e));setAvatarBusy(false,currentProfile?.avatar_url?"Change picture":"Upload picture")}
+ finally{avatarBusy=false}
+}
+async function removeAvatar(){
+ if(!currentUser||avatarBusy||!currentProfile?.avatar_url)return;
+ setAvatarBusy(true);const oldUrl=currentProfile.avatar_url;
+ try{
+  const {error}=await supabaseClient.from("profiles").update({avatar_url:null,updated_at:new Date().toISOString()}).eq("id",currentUser.id);
+  if(error)throw error;
+  applyAvatarUrl(null);removeAvatarFile(oldUrl);toast("Profile picture removed.");
+ }catch(e){console.error("Avatar removal error:",e);toast("Could not remove picture. "+errMsg(e));setAvatarBusy(false)}
+ finally{avatarBusy=false}
+}
+
+/* ---------- My Space ---------- */
+function updateSpaceSocialCounts(){
+ const followingEl=$("spaceSocializingCount"),followersEl=$("spaceSocializersCount");
+ if(!followingEl||!followersEl)return;
+ const ready=!!socialLoadedAt;
+ const failed=!!socialGraphError&&!socialGraphLoading&&!ready;
+ followingEl.textContent=ready?count(socialGraph.following.size):failed?"—":"…";
+ followersEl.textContent=ready?count(socialGraph.followers.size):failed?"—":"…";
+ [followingEl,followersEl].forEach(el=>{el.closest("button").disabled=!ready;el.closest("button").setAttribute("aria-disabled",ready?"false":"true")});
+}
+function renderSpace(){
+ if(!currentUser){feedList.innerHTML='<div class="empty-state">Log in to view your profile, publications and The Vault.<br><button class="primary-btn" id="spaceLogin" style="margin-top:10px">Log in</button></div>';$("spaceLogin").onclick=()=>openAuth("login",()=>setView("space"));return}
+ const p=accountProfile();
+ feedList.innerHTML=`<div class="space-home">
+<section class="space-hero" aria-label="Your profile"><div class="space-hero-inner"><div class="space-avatar-wrap">${avatarHTML(p,96)}<button type="button" class="space-cam" id="avatarCamera" aria-label="${p.avatar_url?"Change profile picture":"Upload profile picture"}">&#128247;</button></div><div class="space-hero-text"><div class="space-hello">Your space</div><h2>${esc(p.display_name||"")}</h2>${p.username?`<div class="handle">@${esc(p.username)}</div>`:""}${p.bio?`<p class="bio">${esc(p.bio)}</p>`:`<p class="bio-empty">Add a bio in Edit profile.</p>`}</div></div></section>
+<div class="space-community" aria-label="Socialize network"><button type="button" class="space-stat-panel" data-space-social-tab="socializers" aria-label="View your Socializers"><span class="go" aria-hidden="true">&rsaquo;</span><strong id="spaceSocializersCount">…</strong><span class="lbl">Socializers</span></button><button type="button" class="space-stat-panel" data-space-social-tab="socializing" aria-label="View who you are Socializing with"><span class="go" aria-hidden="true">&rsaquo;</span><strong id="spaceSocializingCount">…</strong><span class="lbl">Socializing</span></button></div>
+<details class="space-edit"><summary class="space-edit-summary"><span aria-hidden="true">&#9998;</span>Edit profile<span class="chev" aria-hidden="true">&rsaquo;</span></summary><div class="space-edit-body"><div class="space-pic-row"><button class="secondary-btn" id="changePic">${p.avatar_url?"Change picture":"Upload picture"}</button>${p.avatar_url?'<button class="secondary-btn danger" id="removePic">Remove picture</button>':""}<input type="file" id="avatarFile" accept="image/jpeg,image/png,image/webp" hidden></div><label>Display name<input id="profileDisplay" value="${esc(currentProfile?.display_name||"")}" autocomplete="name"></label><label>Username<input id="profileUsername" value="${esc(currentProfile?.username||"")}" autocapitalize="none" autocomplete="username"></label><label>Bio<textarea id="profileBio" rows="3">${esc(currentProfile?.bio||"")}</textarea></label><button class="primary-btn" id="saveProfile">Save profile</button></div></details>
+<div class="space-tabs" role="tablist" aria-label="Your collection"><button type="button" data-space-tab="mine" class="${spaceTab==="mine"?"active":""}"><span class="ti" aria-hidden="true">&#10022;</span>My Publications</button><button type="button" data-space-tab="vault" class="${spaceTab==="vault"?"active":""}"><span class="ti" aria-hidden="true">&#9672;</span>The Vault</button></div>
+<div id="spaceList" class="feed-list"></div>
+<section class="space-account" aria-label="Account"><div class="space-account-title">Account</div><button type="button" class="account-row" id="editInterestsBtn"><span class="ai-ic" aria-hidden="true">&#9734;</span>Edit interests<span class="chev" aria-hidden="true">&rsaquo;</span></button><button type="button" class="account-row logout" id="logoutBtn" aria-expanded="false"><span class="ai-ic" aria-hidden="true">&#10162;</span>Log out</button><div class="space-logout-confirm" id="logoutConfirm"><p>Log out of jeSocial on this device?</p><div class="row"><button type="button" class="secondary-btn" id="logoutCancel">Stay logged in</button><button type="button" class="primary-btn" id="logoutConfirmBtn">Yes, log out</button></div></div></section>
+</div>`;
+ $("changePic").onclick=()=>$("avatarFile").click();
+ $("avatarCamera").onclick=()=>{if(!avatarBusy)$("avatarFile").click()};
+ $("avatarFile").onchange=e=>{const f=e.target.files[0];e.target.value="";if(f)uploadAvatar(f)};
+ if($("removePic"))$("removePic").onclick=removeAvatar;
+ $("saveProfile").onclick=updateProfile;$("editInterestsBtn").onclick=editInterests;
+ const lc=$("logoutConfirm"),lb=$("logoutBtn");lb.onclick=()=>{const o=!lc.classList.contains("open");lc.classList.toggle("open",o);lb.setAttribute("aria-expanded",o)};$("logoutCancel").onclick=()=>{lc.classList.remove("open");lb.setAttribute("aria-expanded","false")};$("logoutConfirmBtn").onclick=logout;
+ feedList.querySelectorAll("[data-space-social-tab]").forEach(b=>b.onclick=()=>{compassTab="people";peopleSubTab=b.dataset.spaceSocialTab;setView("compass")});
+ updateSpaceSocialCounts();
+ feedList.querySelectorAll("[data-space-tab]").forEach(b=>b.onclick=()=>{spaceTab=b.dataset.spaceTab;feedList.querySelectorAll("[data-space-tab]").forEach(x=>x.classList.toggle("active",x===b));renderSpaceList()});
+ renderSpaceList();
+}
+function renderSpaceList(){
+ const el=$("spaceList");if(!el||activeView!=="space"||!currentUser)return;
+ if(spaceLoading&&!(spaceTab==="mine"?myIds:vaultOrder).length){el.innerHTML='<div class="empty-state">Loading…</div>';return}
+ if(spaceError){el.innerHTML=`<div class="empty-state">Could not load this section. ${esc(errMsg(spaceError))}<br><button class="secondary-btn" id="retrySpace" style="margin-top:10px">Try again</button></div>`;$("retrySpace").onclick=loadSpaceData;return}
+ const list=postsFrom(spaceTab==="mine"?myIds:vaultOrder);
+ el.innerHTML=list.length?list.map(postCard).join(""):`<div class="empty-state">${spaceTab==="mine"?"You have not published anything yet. Share a perspective from The Studio.":"Your Vault is empty. Tap Vault on any publication to keep it here. Only you can see it."}</div>`;
+}
+async function loadSpaceData(){
+ if(!currentUser)return;const request=++spaceRequest;spaceLoading=true;spaceError=null;renderSpaceList();
+ try{
+  const uid=currentUser.id;
+  await fetchVaultOrder();
+  const vaultIds=vaultOrder.slice(0,100);
+  const [mine,vault]=await Promise.all([
+   supabaseClient.from("publications").select(PUB_COLS).eq("author_id",uid).is("deleted_at",null).order("created_at",{ascending:false}).limit(50),
+   vaultIds.length?supabaseClient.from("publications").select(PUB_COLS).in("id",vaultIds).is("deleted_at",null):Promise.resolve({data:[],error:null})
+  ]);
+  if(mine.error)throw mine.error;if(vault.error)throw vault.error;
+  const rows=[...(mine.data||[]),...(vault.data||[])];
+  await ingest([...new Map(rows.map(r=>[r.id,r])).values()]);
+  if(request!==spaceRequest)return;
+  myIds=(mine.data||[]).map(r=>r.id);
+ }catch(e){if(request!==spaceRequest)return;spaceError=e;console.error("My Space error:",e)}
+ finally{if(request===spaceRequest){spaceLoading=false;renderSpaceList()}}
+}
+
+/* ---------- The Signal: private account notifications ---------- */
+const SIGNAL_GROUP={
+ social:new Set(["social_request","social_request_accepted","socialize_received"]),
+ publications:new Set(["approval","disapproval","response","amplification"]),
+ mentions:new Set(["mention_publication","mention_response"]),
+ system:new Set(["system","security"])
+};
+function signalGroup(type){for(const [group,types] of Object.entries(SIGNAL_GROUP))if(types.has(type))return group;return "system"}
+function updateSignalBadge(n){
+ signalUnread=Math.max(0,Number(n)||0);
+ const badge=$("signalBadge");if(badge){badge.textContent=signalUnread>99?"99+":String(signalUnread);badge.classList.toggle("visible",signalUnread>0);badge.setAttribute("aria-label",signalUnread+" unread notifications")}
+ const countEl=$("signalUnreadCount"),labelEl=$("signalUnreadLabel");
+ if(countEl)countEl.textContent=count(signalUnread);
+ if(labelEl)labelEl.textContent=signalUnread===1?"unread update":"unread updates";
+}
+async function loadSignalUnread(){
+ if(!currentUser||!supabaseClient){updateSignalBadge(0);return}
+ const {count:n,error}=await supabaseClient.from("notifications").select("id",{count:"exact",head:true}).eq("recipient_id",currentUser.id).is("read_at",null);
+ if(error){console.warn("Signal unread count unavailable:",error.message);return}
+ updateSignalBadge(n||0);
+}
+function renderSignal(){
+ const list=$("signalList");if(!list)return;
+ document.querySelectorAll("[data-signal-filter]").forEach(b=>b.classList.toggle("active",b.dataset.signalFilter===signalFilter));
+ updateSignalBadge(signalItems.filter(x=>!x.read_at).length);
+ $("signalMarkAll").disabled=!currentUser||!signalUnread;
+ if(!currentUser){list.innerHTML='<div class="signal-empty">Log in to see requests, publication activity and updates from your community.<br><button class="primary-btn signal-login" id="signalLoginBtn" type="button">Log in</button></div>';$("signalLoginBtn").onclick=()=>openAuth("login",()=>setView("signal"));return}
+ if(signalError){list.innerHTML=`<div class="signal-empty">The Signal could not load. ${esc(errMsg(signalError))}<br><small>Check that the jeSocial Signal database setup has been applied in Supabase.</small><br><button class="secondary-btn" id="signalRetryBtn" type="button" style="margin-top:10px">Try again</button></div>`;$("signalRetryBtn").onclick=loadNotifications;return}
+ if(signalLoading&&!signalItems.length){list.innerHTML='<div class="signal-empty">Loading your Signal…</div>';return}
+ const visible=signalFilter==="all"?signalItems:signalItems.filter(n=>signalGroup(n.event_type)===signalFilter);
+ if(!visible.length){const msg=signalItems.length?"There are no updates in this category yet.":"Your Signal is quiet for now. When someone Socializes with you or interacts with your Ideas, updates will appear here.";list.innerHTML=`<div class="signal-empty">${msg}</div>`;return}
+ list.innerHTML=visible.map(n=>{
+  const actor=n.actor_id?profileCache.get(n.actor_id):null;
+  const name=actor?(actor.display_name||actor.username||"A jeSocial member"):"jeSocial";
+  const body=n.body||n.title||"There is an update for your account.";
+  const label=signalGroup(n.event_type);
+  const icon=label==="social"?"↗":label==="publications"?"✦":label==="mentions"?"@":"⌁";
+  const avatar=actor?avatarHTML(actor,40):`<div class="av" style="width:40px;height:40px;background:var(--green)">${icon}</div>`;
+  return `<button class="signal-item ${n.read_at?"":"unread"}" type="button" data-signal-open="${esc(n.id)}"><span class="signal-avatar">${avatar}</span><span class="signal-copy"><strong>${esc(name)}</strong><p>${esc(body)}</p><time datetime="${esc(n.created_at)}" data-ts="${esc(n.created_at)}" title="${esc(exactTime(n.created_at))}">${esc(relTime(n.created_at))}</time></span>${n.read_at?"":'<span class="signal-unread-dot" aria-label="Unread"></span>'}</button>`;
+ }).join("");
+}
+async function loadNotifications(){
+ if(!currentUser||!supabaseClient){signalItems=[];signalLoading=false;signalError=null;renderSignal();updateSignalBadge(0);return}
+ const req=++signalRequest;signalError=null;signalLoading=true;renderSignal();
+ try{
+  const {data,error}=await supabaseClient.from("notifications").select("id,recipient_id,actor_id,event_type,title,body,publication_id,response_id,metadata,created_at,read_at").eq("recipient_id",currentUser.id).order("created_at",{ascending:false}).limit(100);
+  if(error)throw error;if(req!==signalRequest)return;
+  signalItems=data||[];signalError=null;
+  await ensureProfiles(signalItems.map(n=>n.actor_id).filter(Boolean),false);
+  if(req!==signalRequest)return;
+  updateSignalBadge(signalItems.filter(n=>!n.read_at).length);
+ }catch(e){
+  if(req!==signalRequest)return;
+  console.error("Signal loading error:",e);signalError=e;
+ }finally{if(req===signalRequest){signalLoading=false;renderSignal()}}
+}
+async function markSignalRead(id){
+ const item=signalItems.find(n=>n.id===id);if(!item||item.read_at||!currentUser)return true;
+ const stamp=new Date().toISOString();
+ const {error}=await supabaseClient.from("notifications").update({read_at:stamp}).eq("id",id).eq("recipient_id",currentUser.id);
+ if(error){console.error("Mark notification read error:",error);toast("Could not update this notification.");return false}
+ item.read_at=stamp;updateSignalBadge(signalItems.filter(n=>!n.read_at).length);return true;
+}
+async function markAllSignalRead(){
+ if(!currentUser||!signalUnread)return;
+ const stamp=new Date().toISOString();const {error}=await supabaseClient.from("notifications").update({read_at:stamp}).eq("recipient_id",currentUser.id).is("read_at",null);
+ if(error){console.error("Mark all notifications read error:",error);toast("Could not mark updates as read.");return}
+ signalItems.forEach(n=>{if(!n.read_at)n.read_at=stamp});updateSignalBadge(0);renderSignal();toast("All updates marked as read.");
+}
+async function openSignalItem(id){
+ const n=signalItems.find(x=>x.id===id);if(!n)return;
+ if(!await markSignalRead(id))return;
+ if(n.publication_id){
+  let p=store.get(n.publication_id);
+  if(!p){
+   const {data,error}=await supabaseClient.from("publications").select(PUB_COLS).eq("id",n.publication_id).is("deleted_at",null).maybeSingle();
+   if(error){console.error("Signal publication lookup error:",error);toast("This publication is no longer available.");return}
+   if(data){await ingest([data]);p=store.get(data.id);if(p&&!feedIds.includes(p.id))feedIds=[p.id,...feedIds]}
+  }
+  if(p){setView("pulse");renderPosts();requestAnimationFrame(()=>{const el=document.querySelector(`[data-post="${CSS.escape(String(n.publication_id))}"]`);if(el){el.scrollIntoView({behavior:"smooth",block:"center"});el.style.outline="2px solid var(--gold)";setTimeout(()=>el.style.outline="",1800)}});return}
+ }
+ if(signalGroup(n.event_type)==="social"){
+  compassTab="people";selectedTopicId=null;
+  peopleSubTab=n.event_type==="social_request"?"requests":n.event_type==="social_request_accepted"?"socializing":"socializers";
+  setView("compass");ensurePeopleData();renderCompass();return;
+ }
+ renderSignal();
+}
+$("signalTabs").addEventListener("click",e=>{const b=e.target.closest("[data-signal-filter]");if(!b)return;signalFilter=b.dataset.signalFilter;renderSignal()});
+$("signalList").addEventListener("click",e=>{const b=e.target.closest("[data-signal-open]");if(b)openSignalItem(b.dataset.signalOpen)});
+$("signalMarkAll").onclick=markAllSignalRead;
+setInterval(()=>{if(currentUser)loadSignalUnread()},60000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden&&currentUser)loadSignalUnread()});
+
+/* ---------- Views & The Compass ---------- */
+function setView(view){
+ activeView=view;rememberView(view);
+ document.querySelectorAll("[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===view));
+ const titles={pulse:["A wider view","The Pulse","What matters, from voices across the world."],compass:["Find your direction","The Compass","Explore Ideas in the topics that matter."],studio:["Your voice. Your perspective.","The Studio","Publish an Idea and give it one clear home in The Compass."],signal:["Stay informed","The Signal","Updates and activity from across the community."],space:["Your corner of the world","My Space","Your profile, publications and The Vault."]};
+ const t=titles[view];$("sectionEyebrow").textContent=t[0];$("sectionTitle").textContent=t[1];$("sectionSubtitle").textContent=t[2];
+ const c=view==="compass",signal=view==="signal",hideTabs=c||view==="space"||signal||view==="studio";
+ $("compassExplorer").classList.toggle("visible",c);$("mainFeedTabs").style.display=hideTabs?"none":"flex";
+ $("ideaComposer").style.display=view==="studio"?"block":"none";feedList.style.display=(c||signal||view==="studio")?"none":"grid";$("signalWorkspace").classList.toggle("visible",signal);
+ if(c){selectedTopicId=null;clearTrendingSelection();renderCompass();if(compassTab==="people")ensurePeopleData()}
+ else if(view==="space"){renderSpace();loadSpaceData();if(!socialGraphLoading&&Date.now()-socialLoadedAt>15000)loadSocialGraph()}
+ else if(signal)loadNotifications();
+ else if(view!=="studio")renderPosts();
+ if(view==="studio"&&!currentUser)toast("Log in to publish an Idea. You can prepare it here first.");
+}
+
+/* ---------- Socialize Network ---------- */
+/* Every relationship / request / block change goes through an existing authorised RPC. No direct writes to protected tables.
+   Signatures below were verified against the Supabase function definitions.
+   bool:true = the function returns boolean; false means no row was deleted/changed (nothing matched). */
+const SOCIAL_RPC={
+ send:{fn:"send_social_request",arg:"p_target_id"},
+ accept:{fn:"accept_social_request",arg:"p_request_id"},
+ block:{fn:"block_account",arg:"p_target_id"},
+ decline:{fn:"decline_social_request",arg:"p_request_id",bool:true},
+ cancel:{fn:"cancel_social_request",arg:"p_request_id",bool:true},
+ unsocialize:{fn:"unsocialize",arg:"p_target_id",bool:true},
+ unblock:{fn:"unblock_account",arg:"p_target_id",bool:true}
+};
+let socialEpoch=0,socialGraphReq=0,peopleListReq=0,socialLoadedAt=0,peopleLoadedAt=0,privacyWarned=false;
+let suggestionPool=[];
+const privacyMap=new Map(); // user id -> true when user_settings.is_private_account is true
+function newGraph(){return{following:new Set(),followers:new Set(),outgoingByTarget:new Map(),outgoingById:new Map(),incoming:[],blocked:new Set()}}
+
+/* Clears everything user-specific. Called on logout and when a different account signs in. */
+function resetSocialState(){
+ socialEpoch++;socialGraphReq++;peopleListReq++;
+ socialGraph=newGraph();privacyMap.clear();peopleProfilesCache=[];suggestionPool=[];
+ peopleSearchQuery="";peopleSubTab="discover";peopleLoading=false;peopleError=null;
+ socialGraphLoading=false;socialGraphError=null;socialLoadedAt=0;peopleLoadedAt=0;
+ peopleActionBusy=new Set();clearTimeout(peopleSearchDebounce);
+ socFeedReq++;socFeedIds=[];socFeedLoading=false;socFeedError=null;socFeedKey="";
+}
+function personLabel(p){return p?.display_name||p?.username||"jeSocial member"}
+function nameOf(id){return personLabel(profileCache.get(id)||peopleProfilesCache.find(p=>p.id===id))}
+function isPrivateAccount(p){return !!p&&privacyMap.get(p.id)===true}
+function getPersonActionState(id){
+ if(socialGraph.blocked.has(id))return"blocked";
+ if(socialGraph.following.has(id))return"socializing";
+ if(socialGraph.outgoingByTarget.has(id))return"requested";
+ return"none";
+}
+function refreshPeopleUI(){
+ if(activeView==="compass"&&compassTab==="people"&&selectedTopicId===null)renderPeople();
+ updateSpaceSocialCounts();
+ renderSuggestions();
+ if(activeView==="pulse"&&activeFilter==="socializing"){renderSocializingFeed();ensureSocializingFeed()}
+}
+function sanitizeSearch(s){return String(s||"").trim().slice(0,40).replace(/[%,()"\\*]/g," ").replace(/\s+/g," ").trim()}
+function socialErr(key,e){return"Could not complete that: "+errMsg(e)}
+
+/* ---------- Data loading ---------- */
+async function loadPrivacyMap(ids,epoch){
+ const clean=[...new Set((ids||[]).filter(Boolean))];if(!clean.length)return;
+ const {data,error}=await supabaseClient.from("user_settings").select("user_id,is_private_account").in("user_id",clean);
+ if(epoch!==socialEpoch)return;
+ if(error){console.error("Privacy lookup error:",error);if(!privacyWarned){privacyWarned=true;toast("Could not read account privacy settings: "+errMsg(error))}return}
+ (data||[]).forEach(r=>privacyMap.set(r.user_id,r.is_private_account===true));
+}
+async function loadSocialGraph(){
+ if(!currentUser)return false;
+ const epoch=socialEpoch,req=++socialGraphReq,uid=currentUser.id;
+ socialGraphLoading=true;socialGraphError=null;refreshPeopleUI();
+ try{
+  const [outRes,inRes,relRes,blockRes]=await Promise.all([
+   supabaseClient.from("social_requests").select("id,requester_id,target_id,created_at").eq("requester_id",uid),
+   supabaseClient.from("social_requests").select("id,requester_id,target_id,created_at").eq("target_id",uid),
+   supabaseClient.from("social_relationships").select("id,follower_id,followed_id,created_at").or(`follower_id.eq.${uid},followed_id.eq.${uid}`),
+   supabaseClient.from("blocks").select("id,blocker_id,blocked_id,created_at").eq("blocker_id",uid)
+  ]);
+  for(const r of [outRes,inRes,relRes,blockRes])if(r.error)throw r.error;
+  const g=newGraph();
+  (outRes.data||[]).forEach(r=>{g.outgoingByTarget.set(r.target_id,r);g.outgoingById.set(r.id,r)});
+  g.incoming=[...(inRes.data||[])].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+  (relRes.data||[]).forEach(r=>{if(r.follower_id===uid)g.following.add(r.followed_id);if(r.followed_id===uid)g.followers.add(r.follower_id)});
+  (blockRes.data||[]).forEach(r=>{if(r.blocked_id)g.blocked.add(r.blocked_id)});
+  const ids=[...g.following,...g.followers,...g.outgoingByTarget.keys(),...g.incoming.map(r=>r.requester_id),...g.blocked];
+  await Promise.all([loadPrivacyMap(ids,epoch),ensureProfiles(ids,false)]);
+  if(epoch!==socialEpoch||req!==socialGraphReq)return false; // logged out / newer load in flight
+  socialGraph=g;socialLoadedAt=Date.now();
+  return true;
+ }catch(e){
+  if(epoch===socialEpoch&&req===socialGraphReq){console.error("Social graph error:",e);socialGraphError=e;toast("Could not load your Socialize data: "+errMsg(e))}
+  return false;
+ }finally{
+  if(epoch===socialEpoch&&req===socialGraphReq){socialGraphLoading=false;refreshPeopleUI()}
+ }
+}
+async function loadPeopleProfiles(search){
+ if(!currentUser){peopleProfilesCache=[];peopleLoading=false;refreshPeopleUI();return}
+ const epoch=socialEpoch,req=++peopleListReq,s=sanitizeSearch(search);
+ peopleLoading=true;peopleError=null;refreshPeopleUI();
+ try{
+  let q=supabaseClient.from("profiles").select("id,username,display_name,avatar_url").neq("id",currentUser.id).order("username",{ascending:true}).limit(60);
+  if(s)q=q.or(`username.ilike.%${s}%,display_name.ilike.%${s}%`);
+  const {data,error}=await q;
+  if(error)throw error;
+  const rows=(data||[]).filter(p=>p.id!==currentUser.id);
+  await loadPrivacyMap(rows.map(p=>p.id),epoch);
+  if(epoch!==socialEpoch||req!==peopleListReq)return;
+  rows.forEach(p=>profileCache.set(p.id,p));
+  peopleProfilesCache=rows;peopleLoadedAt=Date.now();
+  if(!s)suggestionPool=rows;
+ }catch(e){
+  if(epoch===socialEpoch&&req===peopleListReq){console.error("People load error:",e);peopleError=e}
+ }finally{
+  if(epoch===socialEpoch&&req===peopleListReq){peopleLoading=false;refreshPeopleUI()}
+ }
+}
+/* Refreshes data when the People area is opened, without repeating queries that just ran. */
+function ensurePeopleData(){
+ if(!currentUser)return;
+ if(!socialGraphLoading&&Date.now()-socialLoadedAt>15000)loadSocialGraph();
+ if(!peopleLoading&&(!peopleLoadedAt||Date.now()-peopleLoadedAt>60000))loadPeopleProfiles(peopleSearchQuery);
+}
+
+/* ---------- Actions (RPC only) ---------- */
+async function runSocialAction(busyKey,rpcKey,id,okMsg){
+ if(!currentUser||peopleActionBusy.has(busyKey))return false;
+ const epoch=socialEpoch,d=SOCIAL_RPC[rpcKey];let noop=false;
+ peopleActionBusy.add(busyKey);refreshPeopleUI();
+ try{
+  const {data,error}=await supabaseClient.rpc(d.fn,{[d.arg]:id});
+  if(error)throw error;
+  if(d.bool&&data===false)noop=true; // function ran but matched nothing
+ }catch(e){
+  console.error(d.fn+" failed:",e);
+  if(epoch===socialEpoch){peopleActionBusy.delete(busyKey);toast(socialErr(rpcKey,e));refreshPeopleUI()}
+  return false;
+ }
+ await loadSocialGraph(); // re-read the real state from Supabase
+ if(epoch===socialEpoch){peopleActionBusy.delete(busyKey);if(noop)toast("Nothing was changed. It may already have been removed; your lists have been refreshed.");else if(okMsg)toast(okMsg);refreshPeopleUI()}
+ return !noop;
+}
+async function handleSocializeClick(targetId){
+ if(!currentUser){openAuth("login",()=>handleSocializeClick(targetId));return}
+ if(getPersonActionState(targetId)!=="none")return; // no duplicate requests or relationships
+ const ok=await runSocialAction(targetId,"send",targetId,null);
+ if(!ok)return;
+ const st=getPersonActionState(targetId),n=nameOf(targetId);
+ if(st==="socializing")toast("You are now Socializing with "+n+".");
+ else if(st==="requested")toast("Request sent to "+n+". It stays pending until they approve.");
+ else toast("The request was accepted by the server, but the new state could not be confirmed. Please refresh.");
+}
+function handleBlockClick(id){
+ if(!confirm("Block "+nameOf(id)+"? Existing Socialize relationships and pending requests with them will be handled by the server."))return;
+ runSocialAction("block-"+id,"block",id,"Account blocked.");
+}
+
+/* ---------- Rendering: People ---------- */
+function personRow(p,sub,actions){
+ return`<div class="compass-person"><div class="person-avatar">${avatarHTML(p,38)}</div><div class="follow-info"><strong>${esc(personLabel(p))}</strong><span>${sub}</span></div><div class="person-actions">${actions}</div></div>`;
+}
+function handleOf(p){return p.username?"@"+esc(p.username):""}
+function stateBox(msg,btnAttr,btnLabel){return`<div class="empty-state">${msg}${btnAttr?`<br><button class="secondary-btn" ${btnAttr} style="margin-top:10px">${btnLabel||"Try again"}</button>`:""}</div>`}
+function ensurePeopleShell(root){
+ if(root.querySelector("#peopleShell"))return;
+ root.innerHTML=`<div id="peopleShell"><div class="compass-heading"><h2>People</h2><p>Build your Socialize network. Public accounts connect immediately; private accounts must approve your request.</p></div><div class="compass-people-tabs" id="peopleTabs"></div><div class="people-search" id="peopleSearchWrap"><input id="peopleSearchInput" type="search" placeholder="Search members by name or username" autocomplete="off" spellcheck="false" aria-label="Search members"></div><div id="peopleBody"></div></div>`;
+ const inp=$("peopleSearchInput");inp.value=peopleSearchQuery;
+ /* Created once per shell; the input element is never re-rendered, so it keeps focus while typing. */
+ inp.addEventListener("input",e=>{
+  peopleSearchQuery=e.target.value;
+  clearTimeout(peopleSearchDebounce);
+  peopleSearchDebounce=setTimeout(()=>loadPeopleProfiles(peopleSearchQuery),350);
+ });
+}
+function renderPeople(){
+ const root=$("compassContent");
+ if(!root||activeView!=="compass"||compassTab!=="people"||selectedTopicId!==null)return;
+ if(!currentUser){
+  root.innerHTML=`<div class="compass-heading"><h2>People to discover</h2><p>Meet voices sharing perspectives from different communities.</p></div><div class="empty-state">Log in to discover people and build your Socialize network.<br><button class="primary-btn" id="peopleLoginBtn" style="margin-top:10px">Log in</button></div>`;
+  $("peopleLoginBtn").onclick=()=>openAuth("login",()=>{compassTab="people";setView("compass")});
+  return;
+ }
+ ensurePeopleShell(root);
+ const g=socialGraph;
+ const tabs=[["discover","Discover",0],["requests","Requests",g.incoming.length+g.outgoingByTarget.size],["socializing","Socializing",g.following.size],["socializers","Socializers",g.followers.size],["blocked","Blocked",g.blocked.size]];
+ $("peopleTabs").innerHTML=tabs.map(([id,label,n])=>`<button data-people-tab="${id}" class="${peopleSubTab===id?"active":""}">${label}${n?` (${n})`:""}</button>`).join("");
+ $("peopleSearchWrap").style.display=peopleSubTab==="discover"?"block":"none";
+ const body=$("peopleBody"),firstLoad=socialGraphLoading&&!socialLoadedAt;
+ if(peopleSubTab==="discover")body.innerHTML=discoverHTML();
+ else if(socialGraphError&&!socialLoadedAt)body.innerHTML=stateBox("Could not load your Socialize data. "+esc(errMsg(socialGraphError)),"data-retry-graph");
+ else if(firstLoad)body.innerHTML=stateBox("Loading…");
+ else if(peopleSubTab==="requests")body.innerHTML=requestsHTML();
+ else if(peopleSubTab==="socializing")body.innerHTML=socializingHTML();
+ else if(peopleSubTab==="socializers")body.innerHTML=socializersHTML();
+ else body.innerHTML=blockedHTML();
+}
+function discoverHTML(){
+ if(peopleError&&!peopleProfilesCache.length)return stateBox("Could not load people. "+esc(errMsg(peopleError)),"data-retry-people");
+ if(peopleLoading&&!peopleProfilesCache.length)return stateBox("Loading people…");
+ if(!peopleProfilesCache.length)return stateBox(peopleSearchQuery.trim()?"No members match your search.":"No other members yet.");
+ return peopleProfilesCache.map(p=>{
+  const st=getPersonActionState(p.id),priv=isPrivateAccount(p),b=peopleActionBusy.has(p.id);
+  let label=priv?"Request":"Socialize",cls="",dis=b;
+  if(st==="blocked"){label="Blocked";dis=true}
+  else if(st==="socializing"){label="Socializing";cls="socializing";dis=true}
+  else if(st==="requested"){label="Requested";dis=true}
+  const sub=[handleOf(p),priv?"🔒 Private":"",socialGraph.followers.has(p.id)?"Socializing with you":""].filter(Boolean).join(" · ");
+  const blockBtn=st==="blocked"?"":`<button class="secondary-btn" data-block="${esc(p.id)}" ${peopleActionBusy.has("block-"+p.id)?"disabled":""}>${peopleActionBusy.has("block-"+p.id)?"…":"Block"}</button>`;
+  return personRow(p,sub,`<button class="socialize-btn ${cls}" data-socialize="${esc(p.id)}" ${dis?"disabled":""}>${b?"…":esc(label)}</button>${blockBtn}`);
+ }).join("");
+}
+function requestsHTML(){
+ const g=socialGraph;
+ const out=[...g.outgoingByTarget.values()].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+ const time=r=>`<time data-ts="${esc(r.created_at)}" datetime="${esc(r.created_at)}" title="${esc(exactTime(r.created_at))}">${esc(relTime(r.created_at))}</time>`;
+ let h=`<div class="people-section-title">Incoming requests</div>`;
+ h+=g.incoming.length?g.incoming.map(r=>{
+  const p=profileCache.get(r.requester_id)||{id:r.requester_id},b=peopleActionBusy.has(r.id);
+  return personRow(p,`${handleOf(p)}${p.username?" · ":""}${time(r)}`,`<button class="primary-btn" data-accept="${esc(r.id)}" ${b?"disabled":""}>${b?"…":"Accept"}</button><button class="secondary-btn" data-decline="${esc(r.id)}" ${b?"disabled":""}>Decline</button>`);
+ }).join(""):stateBox("No incoming requests.");
+ h+=`<div class="people-section-title">Outgoing requests</div>`;
+ h+=out.length?out.map(r=>{
+  const p=profileCache.get(r.target_id)||{id:r.target_id},b=peopleActionBusy.has(r.id);
+  return personRow(p,`${handleOf(p)}${p.username?" · ":""}${time(r)}`,`<button class="secondary-btn" data-cancel="${esc(r.id)}" ${b?"disabled":""}>${b?"…":"Cancel"}</button>`);
+ }).join(""):stateBox("No outgoing requests.");
+ return h;
+}
+function sortedIds(set){return[...set].sort((a,b)=>nameOf(a).localeCompare(nameOf(b)))}
+function socializingHTML(){
+ const ids=sortedIds(socialGraph.following);
+ if(!ids.length)return stateBox("You are not Socializing with anyone yet. Use Discover to find people.");
+ return ids.map(id=>{
+  const p=profileCache.get(id)||{id},mutual=socialGraph.followers.has(id);
+  return personRow(p,`${handleOf(p)}${mutual?`${p.username?" · ":""}<span class="badge-mutual">Mutual ✓</span>`:""}`,`<button class="secondary-btn" data-unsocialize="${esc(id)}" ${peopleActionBusy.has(id)?"disabled":""}>${peopleActionBusy.has(id)?"…":"Unsocialize"}</button><button class="secondary-btn" data-block="${esc(id)}" ${peopleActionBusy.has("block-"+id)?"disabled":""}>Block</button>`);
+ }).join("");
+}
+function socializersHTML(){
+ const ids=sortedIds(socialGraph.followers);
+ if(!ids.length)return stateBox("No one is Socializing with you yet.");
+ return ids.map(id=>{
+  const p=profileCache.get(id)||{id},st=getPersonActionState(id),b=peopleActionBusy.has(id),priv=isPrivateAccount(p);
+  let action="";
+  if(st==="socializing")action=`<span class="badge-mutual">Mutual ✓</span>`;
+  else if(st==="requested")action=`<button class="socialize-btn" disabled>Requested</button>`;
+  else if(st==="none")action=`<button class="socialize-btn" data-socialize="${esc(id)}" ${b?"disabled":""}>${b?"…":priv?"Request back":"Socialize back"}</button>`;
+  const blk=st==="blocked"?"":`<button class="secondary-btn" data-block="${esc(id)}" ${peopleActionBusy.has("block-"+id)?"disabled":""}>Block</button>`;
+  return personRow(p,handleOf(p),action+blk);
+ }).join("");
+}
+function blockedHTML(){
+ const ids=sortedIds(socialGraph.blocked);
+ if(!ids.length)return stateBox("You have not blocked any accounts.");
+ return ids.map(id=>{
+  const p=profileCache.get(id)||{id},b=peopleActionBusy.has("unblock-"+id);
+  return personRow(p,handleOf(p),`<button class="secondary-btn" data-unblock="${esc(id)}" ${b?"disabled":""}>${b?"…":"Unblock"}</button>`);
+ }).join("");
+}
+function renderSuggestions(){
+ const el=$("suggestList");if(!el)return;
+ if(!currentUser){el.innerHTML='<div class="suggest-empty">Log in to discover members and build your Socialize network.</div>';return}
+ const list=suggestionPool.filter(p=>getPersonActionState(p.id)==="none").slice(0,3);
+ if(!list.length){el.innerHTML=`<div class="suggest-empty">${peopleLoading&&!suggestionPool.length?"Loading members…":"No new members to suggest right now."}</div>`;return}
+ el.innerHTML=list.map(p=>{const b=peopleActionBusy.has(p.id);return`<div class="follow-row">${avatarHTML(p,36)}<div class="follow-info"><strong>${esc(personLabel(p))}</strong><span>${handleOf(p)}</span></div><button class="socialize-btn" data-socialize="${esc(p.id)}" ${b?"disabled":""}>${b?"…":isPrivateAccount(p)?"Request":"Socialize"}</button></div>`}).join("");
+}
+/* One delegated handler for People actions; used by The Compass and by the sidebar suggestions. */
+function handlePeopleClick(e){
+ const t=e.target.closest("[data-people-tab],[data-socialize],[data-accept],[data-decline],[data-cancel],[data-unsocialize],[data-block],[data-unblock],[data-retry-people],[data-retry-graph]");
+ if(!t)return false;
+ if(t.disabled)return true;
+ const d=t.dataset;
+ if("peopleTab" in d){peopleSubTab=d.peopleTab;renderPeople();return true}
+ if("retryPeople" in d){loadPeopleProfiles(peopleSearchQuery);return true}
+ if("retryGraph" in d){loadSocialGraph();return true}
+ if("socialize" in d){handleSocializeClick(d.socialize);return true}
+ const act=(key,rpc,id,msg,busyKey)=>requireAuth(()=>runSocialAction(busyKey||id,rpc,id,msg));
+ const g=socialGraph;
+ if("accept" in d){if(g.incoming.some(r=>r.id===d.accept))act("accept","accept",d.accept,"Request accepted.")}
+ else if("decline" in d){if(g.incoming.some(r=>r.id===d.decline))act("decline","decline",d.decline,"Request declined.")}
+ else if("cancel" in d){if(g.outgoingById.has(d.cancel))act("cancel","cancel",d.cancel,"Request cancelled.")}
+ else if("unsocialize" in d){if(g.following.has(d.unsocialize))act("unsocialize","unsocialize",d.unsocialize,"Unsocialized.")}
+ else if("block" in d)requireAuth(()=>handleBlockClick(d.block));
+ else if("unblock" in d){if(g.blocked.has(d.unblock))act("unblock","unblock",d.unblock,"Account unblocked.","unblock-"+d.unblock)}
+ return true;
+}
+$("suggestList").addEventListener("click",handlePeopleClick);
+
+function renderCompass(){
+  const root=$("compassContent");
+  document.querySelectorAll("[data-compass-tab]").forEach(b=>b.classList.toggle("active",b.dataset.compassTab===compassTab));
+  if(selectedTopicId!==null){renderTopicDetail();return}
+  if(compassTab==="topics"){
+    root.innerHTML=`<div class="compass-heading"><h2>Explore topics</h2><p>Find communities and conversations around what matters to you.</p></div><div class="compass-grid">${compassTopics.map(t=>`<button class="compass-topic-card" data-open-topic="${t.id}"><span class="compass-topic-icon">${t.icon}</span><span class="compass-topic-copy"><strong>${esc(t.name)}</strong><span>${esc(t.desc)}</span></span></button>`).join("")}</div>`;
+  }else if(compassTab==="people"){
+    renderPeople();
+  }else if(compassTab==="news"){
+    renderNewsCompass();
+    if(!newsLoading&&(!newsLoadedAt||Date.now()-newsLoadedAt>=NEWS_REFRESH_MS))loadNews();
+  }else if(compassTab==="trending"){
+    if(selectedTrendingSubject)renderTrendingDetail();
+    else{renderTrending();ensureTrending()}
+  }
+}
+/* ---------- The Compass: Trending subjects (Kenya) ---------- */
+function trendingVisible(){return activeView==="compass"&&compassTab==="trending"&&selectedTopicId===null}
+function clearTrendingSelection(){selectedTrendingSubject=null;subjectReq++;subjectLoading=false;subjectError=null;subjectIds=[]}
+function resetTrending(){
+ trendingReq++;trendingSubjects=[];trendingLoading=false;trendingError=null;trendingLoadedAt=0;
+ clearTrendingSelection();
+}
+function renderTrendingIfVisible(){
+ if(!trendingVisible())return;
+ if(selectedTrendingSubject)renderTrendingDetail();else renderTrending();
+}
+function ensureTrending(){
+ if(!currentUser||trendingLoading||trendingError)return;
+ if(!trendingLoadedAt||Date.now()-trendingLoadedAt>TRENDING_REFRESH_MS)loadTrending();
+}
+async function loadTrending(){
+ if(!currentUser||!supabaseClient||trendingLoading)return;
+ const req=++trendingReq,uid=currentUser.id,stale=()=>req!==trendingReq||currentUser?.id!==uid;
+ trendingLoading=true;trendingError=null;renderTrendingIfVisible();
+ try{
+  const {data,error}=await supabaseClient.rpc("get_kenya_trending_subjects");
+  if(error)throw error;
+  if(stale())return;
+  trendingSubjects=(Array.isArray(data)?data:[]).filter(s=>s&&s.subject_id&&s.subject_name).slice(0,10);
+  trendingLoadedAt=Date.now();
+ }catch(e){
+  if(stale())return;
+  console.error("Trending subjects error:",e);trendingError=e;
+ }finally{
+  if(!stale()){trendingLoading=false;renderTrendingIfVisible()}
+ }
+}
+function renderTrending(){
+ const root=$("compassContent");if(!root)return;
+ const head='<div class="compass-heading"><h2>Trending</h2><p>The subjects Kenya is talking about right now.</p></div>';
+ if(!currentUser){
+  root.innerHTML=head+'<div class="empty-state">Log in to see what is trending. Trending is available to signed-in members.<br><button class="primary-btn" data-trending-login style="margin-top:10px">Log in</button></div>';
+  return;
+ }
+ if(trendingError&&!trendingSubjects.length){
+  root.innerHTML=head+`<div class="empty-state">Could not load Trending. ${esc(errMsg(trendingError))}<br><button class="secondary-btn" data-trending-retry style="margin-top:10px">Try again</button></div>`;
+  return;
+ }
+ if(!trendingLoadedAt){root.innerHTML=head+'<div class="empty-state">Loading Trending…</div>';return}
+ if(!trendingSubjects.length){root.innerHTML=head+'<div class="empty-state">Nothing is trending yet. Check back soon.</div>';return}
+ root.innerHTML=head+'<div class="trending-list">'+trendingSubjects.map(s=>`<button type="button" class="trending-row" data-trending-subject="${esc(s.subject_id)}"><span class="trending-copy"><strong class="trending-name">${esc(s.subject_name)}</strong>${s.subject_category?`<span class="trending-cat">${esc(s.subject_category)}</span>`:""}</span><span class="trending-chev" aria-hidden="true">›</span></button>`).join("")+'</div>';
+}
+function openTrendingSubject(id){
+ const s=trendingSubjects.find(x=>String(x.subject_id)===String(id));if(!s)return;
+ selectedTrendingSubject={id:s.subject_id,name:s.subject_name,category:s.subject_category||""};
+ loadSubjectIdeas();
+}
+async function loadSubjectIdeas(){
+ const sub=selectedTrendingSubject;if(!sub||!currentUser||!supabaseClient)return;
+ const req=++subjectReq,uid=currentUser.id,stale=()=>req!==subjectReq||selectedTrendingSubject!==sub||currentUser?.id!==uid;
+ subjectIds=[];subjectLoading=true;subjectError=null;renderTrendingDetail();
+ try{
+  const {data,error}=await supabaseClient.rpc("get_trending_subject_publications",{p_subject_id:sub.id});
+  if(error)throw error;
+  const rows=(Array.isArray(data)?data:[]).filter(r=>r&&r.id&&!r.deleted_at);
+  await ingest(rows); /* same contract as every other feed: fills store, profileCache and engagement */
+  if(stale())return;
+  subjectIds=rows.map(r=>r.id);
+ }catch(e){
+  if(stale())return;
+  console.error("Trending subject Ideas error:",e);subjectError=e;
+ }finally{
+  if(!stale()){subjectLoading=false;renderTrendingDetail()}
+ }
+}
+function renderTrendingDetail(){
+ const sub=selectedTrendingSubject;
+ if(!sub||!trendingVisible())return;
+ const root=$("compassContent");
+ let body;
+ if(subjectLoading)body='<div class="empty-state">Loading Ideas…</div>';
+ else if(subjectError)body=`<div class="empty-state">Could not load Ideas for this subject. ${esc(errMsg(subjectError))}<br><button class="secondary-btn" data-subject-retry style="margin-top:10px">Try again</button></div>`;
+ else{const posts=postsFrom(subjectIds);body=posts.length?'<div class="feed-list">'+posts.map(postCard).join("")+'</div>':'<div class="empty-state">No Ideas are available for this subject yet.</div>'}
+ root.innerHTML=`<button type="button" class="trending-back" data-trending-back>← Trending</button><section class="trending-detail-head"><h2>${esc(sub.name)}</h2>${sub.category?`<span>${esc(sub.category)}</span>`:""}</section>${body}`;
+}
+function renderTopicDetail(){
+ const root=$("compassContent"),t=compassTopics.find(x=>x.id===selectedTopicId);
+ if(!t)return;
+ let items=postsFrom(feedIds).filter(p=>p.category===t.name);
+ if(topicFilter==="popular")items.sort((a,b)=>(b.approvals+b.amplifications+b.responses)-(a.approvals+a.amplifications+a.responses));
+ else items.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+ root.innerHTML=`<button class="compass-back" data-compass-back>← All topics</button><section class="topic-detail-head"><div class="topic-detail-title"><h2>${esc(t.name)}</h2><p>${esc(t.desc)}</p></div><div class="topic-detail-bottom"><div class="topic-detail-count"><strong>${t.icon}</strong>Topic</div><button class="socialize-btn ${socializedTopics.has(t.id)?"socializing":""}" data-topic-socialize="${t.id}">${socializedTopics.has(t.id)?"Socializing":"Socialize"}</button></div></section><div class="topic-filters"><button data-topic-filter="for-you" class="${topicFilter==="for-you"?"active":""}">For You</button><button data-topic-filter="latest" class="${topicFilter==="latest"?"active":""}">Latest</button><button data-topic-filter="popular" class="${topicFilter==="popular"?"active":""}">Popular</button></div><div class="feed-list">${items.map(postCard).join("")||'<div class="empty-state">Loading Ideas in this topic…</div>'}</div>`;
+ if(topicLoaded.has(t.name)||!supabaseClient)return;
+ const request=++topicRequest;
+ supabaseClient.from("publications").select(PUB_COLS).is("deleted_at",null).eq("audience","public").eq("category",t.name).order("created_at",{ascending:false}).limit(50)
+ .then(async({data,error})=>{
+  if(error)throw error;
+  await ingest(data||[]);
+  topicLoaded.add(t.name);
+  if(request===topicRequest&&activeView==="compass"&&selectedTopicId===t.id)renderTopicDetail();
+ }).catch(e=>{console.error("Topic publications error:",e);if(request===topicRequest&&selectedTopicId===t.id){root.querySelector(".feed-list").innerHTML='<div class="empty-state">Could not load this topic. Return and try again.</div>'}});
+}
+$("compassExplorer").addEventListener("click",e=>{
+  if(handlePeopleClick(e))return;
+  let b=e.target.closest("[data-trending-subject]");
+  if(b){openTrendingSubject(b.dataset.trendingSubject);return}
+  if(e.target.closest("[data-trending-back]")){clearTrendingSelection();renderCompass();return}
+  if(e.target.closest("[data-trending-retry]")){trendingError=null;loadTrending();return}
+  if(e.target.closest("[data-subject-retry]")){loadSubjectIdeas();return}
+  if(e.target.closest("[data-trending-login]")){openAuth("login",()=>{if(trendingVisible())renderCompass()});return}
+  b=e.target.closest("[data-compass-tab]");
+  if(b){compassTab=b.dataset.compassTab;selectedTopicId=null;clearTrendingSelection();renderCompass();if(compassTab==="people")ensurePeopleData();return}
+  b=e.target.closest("[data-open-topic]");if(b){selectedTopicId=+b.dataset.openTopic;topicFilter="for-you";renderCompass();return}
+  if(e.target.closest("[data-compass-back]")){selectedTopicId=null;renderCompass();return}
+  b=e.target.closest("[data-topic-filter]");if(b){topicFilter=b.dataset.topicFilter;renderTopicDetail();return}
+  b=e.target.closest("[data-topic-socialize]");if(b){const id=+b.dataset.topicSocialize;requireAuth(()=>{socializedTopics.has(id)?socializedTopics.delete(id):socializedTopics.add(id);renderTopicDetail()});return}
+});
+
+
+
+/* ---------- Wiring ---------- */
+document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>setView(b.dataset.view)));
+document.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click",()=>{activeFilter=b.dataset.filter;document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x===b));renderPosts()}));
+$("publishBtn").onclick=async()=>{
+ const text=$("composerText").value.trim(),title=$("ideaTitle").value.trim(),category=$("ideaCategory").value;
+ if(!category){toast("Choose one category for your Idea.");$("ideaCategory").focus();return}
+ if(!text){toast("Write the body of your Idea.");$("composerText").focus();return}
+ if(!currentUser){openAuth("login",()=>$("publishBtn").click());return}
+ if(publishing)return;
+ publishing=true;setAccountUI();
+ try{
+  // Preserve the original working publication write: INSERT only, with no RETURNING/SELECT.
+  // The personal-publication RLS policy requires author_id = auth.uid() and publisher_id IS NULL.
+  const payload={author_id:currentUser.id,publisher_id:null,content:text,title:title||null,category,audience:"public"};
+  const {error}=await supabaseClient.from("publications").insert(payload);
+  if(error)throw error;
+  $("composerText").value="";$("ideaTitle").value="";$("ideaCategory").value="";$("ideaCharCount").textContent="0 / 10,000";
+  activeFilter="for-you";document.querySelectorAll("[data-filter]").forEach(b=>b.classList.toggle("active",b.dataset.filter==="for-you"));
+  setView("pulse");toast("Your Idea has been published.");
+  // Refresh separately: a feed-read problem must not misreport a successful INSERT as a failed publication.
+  loadPublications().catch(e=>console.error("Post-publication feed refresh error:",e));
+ }catch(e){console.error("Idea publication error:",e);toast("Could not publish your Idea: "+errMsg(e))}
+ finally{publishing=false;setAccountUI()}
+};
+$("searchInput").addEventListener("input",renderPosts);$("searchToggle").onclick=()=>{$("searchInput").focus();$("searchInput").scrollIntoView({behavior:"smooth",block:"center"})};$("notifyBtn").onclick=()=>setView("signal");
+$("composerText").addEventListener("input",()=>{$("ideaCharCount").textContent=$("composerText").value.length.toLocaleString("en-US")+" / 10,000"});
+$("accountButton").onclick=()=>currentUser?setView("space"):openAuth("login");
+$("closeAuth").onclick=closeAuth;$("authSubmit").onclick=handleAuthSubmit;$("authSwitch").onclick=()=>openAuth(authMode==="signup"?"login":"signup",pendingAction);$("forgotPassword").onclick=()=>openAuth("reset");$("skipInterests").onclick=()=>$("interestModal").classList.remove("open");$("saveInterests").onclick=saveInterests;
+$("authModal").addEventListener("click",e=>{if(e.target===$("authModal"))closeAuth()});
+$("authModal").addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.tagName==="INPUT")handleAuthSubmit()});
+
+async function init(){
+ populateIdeaCategories();
+ updateSignalBadge(0);
+ if(!supabaseClient){feedLoading=false;toast("Supabase could not load. Check your connection.");renderPosts();return}
+ setAccountUI();
+ supabaseClient.auth.onAuthStateChange((event,session)=>{
+  /* Deferred so Supabase calls never run inside the auth callback itself. */
+  setTimeout(()=>{
+   if(event==="PASSWORD_RECOVERY")openAuth("update");
+   if(event==="SIGNED_OUT"){applySession(null);return}
+   if(session?.user)applySession(session.user);
+  },0);
+ });
+ try{const {data:{session}}=await supabaseClient.auth.getSession();if(session)await applySession(session.user)}catch(e){console.error("Session error:",e)}
+ if(location.hash.includes("type=recovery"))openAuth("update");
+ /* Restore the section the member was viewing before a browser/page refresh. */
+ setView(getRememberedView());
+ await loadPublications();
+}
+init();
+
+</script>
+
+<script>
+// jeSocial PWA Launch Screen + Service Worker Registration — non-blocking, preserves Supabase
+(function(){
+  var launch = document.getElementById('jes-launch-screen');
+  var hideLaunch = function(){
+    if(!launch) return;
+    launch.classList.add('jes-hidden');
+    setTimeout(function(){ if(launch && launch.parentNode) launch.parentNode.removeChild(launch); }, 500);
+  };
+  // Hide conditions: window loaded + max safety timeout 3.5s, no artificial delay
+  var loaded = false;
+  var minVisible = 600; // brief brand moment but not a delay
+  var start = Date.now();
+  function tryHide(){
+    if(!loaded) return;
+    var elapsed = Date.now() - start;
+    if(elapsed < minVisible){
+      setTimeout(hideLaunch, minVisible - elapsed);
+    } else {
+      hideLaunch();
+    }
+  }
+  window.addEventListener('load', function(){ loaded = true; tryHide(); });
+  // Safety: if load already fired or app stalls, hide after 3.5s
+  setTimeout(function(){ loaded = true; hideLaunch(); }, 3500);
+  // Also hide if Supabase init signals ready (hook into init completion if available)
+  // Poll for #app visibility — if main app rendered, hide
+  var check = setInterval(function(){
+    if(document.getElementById('app')){
+      clearInterval(check);
+      loaded = true;
+      tryHide();
+    }
+  }, 100);
+  setTimeout(function(){ clearInterval(check); }, 4000);
+
+  // Register service worker — GitHub Pages project path safe
+  if('serviceWorker' in navigator){
+    var swUrl = './sw.js';
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register(swUrl, {scope: './'}).then(function(reg){
+        // console.log('SW registered', reg.scope);
+      }).catch(function(err){
+        console.warn('SW registration failed', err);
+      });
+    });
+  }
+})();
+</script>
+
+</body></html>
